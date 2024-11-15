@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { CircularProgress, Grid, Typography, Box } from '@mui/material';
+import {  Grid, Typography, Box } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from 'react-router-dom';
-import api from '../services/axios';
-import Navbar from './Navbar';
-import Footer from './Footer';
+import LoadingSpinner from '../common/LoadingSpinner';
+import api from '../../services/axios';
+import Navbar from '../Navbar';
+import Footer from '../Footer';
 
 interface User {
   id: number;
@@ -31,6 +32,7 @@ const Dashboard: React.FC = () => {
         const response = await api.get('/user');
         setUser(response.data);
       } catch (err) {
+        console.error('Error fetching goals:', err);
         setError("Unable to fetch user data");
       } finally {
         setLoading(false);
@@ -69,18 +71,7 @@ const Dashboard: React.FC = () => {
 
   if (loading) {
     return (
-      <Box
-        sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          width: '100%',
-          backgroundColor: 'rgba(255, 255, 255, 0.7)',
-        }}
-      >
-        <CircularProgress />
-      </Box>
+      <LoadingSpinner size={44} color="primary.main" />
     );
   }
 
@@ -89,7 +80,7 @@ const Dashboard: React.FC = () => {
       <Navbar />
       {error && <p>{error}</p>}
       <Box sx={{ textAlign: 'center', padding: '20px' }}>
-        <Typography variant="sm" gutterBottom sx={{ textTransform: 'capitalize' }}>
+        <Typography gutterBottom sx={{ textTransform: 'capitalize' }}>
         👋 Welcome, {user?.name}
         </Typography>
         <Typography variant="h4" sx={{ mb: 4 }} gutterBottom>

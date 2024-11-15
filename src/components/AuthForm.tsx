@@ -138,7 +138,7 @@ const AuthForm: React.FC = () => {
       }));
       console.error('Registration error:', error);
     } finally {
-      setIsLoading(false); // End loading
+      setIsLoading(false);  
     }
   };
 

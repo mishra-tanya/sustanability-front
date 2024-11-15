@@ -1,21 +1,39 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AuthForm from './components/AuthForm';
-import Login from './components/Login';
+import AuthForm from './components/Auth/AuthForm';
+import Login from './components/Auth/LoginForm';
 import PrivateRoutes from './components/PrivateRoutes';
-import Dashboard from './components/Dashboard';
-
+import Dashboard from './components/Goals/Dashboard';
+import Goals from './components/Goals/Goals';
+import TestsGoals from './components/Goals/Testsgoal';
+import Home from './components/Home';
+import QTest from './components/Goals/Tests/QTest';
 
 const App: React.FC = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<h1>Welcome to My React App</h1>} />
+                <Route path="/" element={<Home/>} />
                 <Route path="/register" element={<AuthForm />} />
-                <Route path="/login" element={<Login/>} />
+                <Route path="/login" element={<Login />} />
                 <Route path="/dashboard" element={
                     <PrivateRoutes>
                         <Dashboard />
+                    </PrivateRoutes>
+                } />
+                <Route path="/class/:className" element={
+                    <PrivateRoutes>
+                        <Goals />
+                    </PrivateRoutes>
+                } />
+                <Route path="/class/:className/goal/:goal" element={
+                    <PrivateRoutes>
+                        <TestsGoals/>
+                    </PrivateRoutes>
+                } />
+                <Route path="/class/:className/goal/:goal/:test" element={
+                    <PrivateRoutes>
+                        <QTest/>
                     </PrivateRoutes>
                 } />
             </Routes>

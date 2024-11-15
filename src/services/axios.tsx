@@ -11,4 +11,28 @@ export const getCsrfToken = async () => {
   console.log(api.get('/sanctum/csrf-cookie'));
 };
 
+api.interceptors.request.use(
+  (config) => {
+      const token = localStorage.getItem("authToken");
+      if (token) {
+          config.headers["Authorization"] = `Bearer ${token}`;
+          // console.log("hi");
+      }
+      return config;
+  },
+  (error) => {
+      return Promise.reject(error);
+  }
+);
+
+api.interceptors.response.use(
+  (response) => {
+      if(!response.data.success && response.data.message === 'Authentication Failed'){
+          localStorage.removeItem('token');
+      }
+      return response;
+  }
+  
+);
+
 export default api;

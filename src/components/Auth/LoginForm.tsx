@@ -27,8 +27,10 @@ const Login: React.FC = () => {
         try {
             const response = await loginUser(email, password);
             const { token } = response;
+            const expiryTime = Date.now() + (2 * 60 * 60 * 1000);
+            localStorage.setItem('authTokenExpiry', expiryTime.toString());
             localStorage.setItem("authToken", token);
-            navigate("/dashboard");
+            navigate("/home");
         } catch (e) {
             setError(e.message);
         } finally {

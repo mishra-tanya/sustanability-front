@@ -11,12 +11,12 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick }) => 
     <Box
       sx={{
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        flexDirection: { xs: 'column', sm: 'row' },
+        alignItems: 'flex-center',  
+        justifyContent: 'center', 
         width: '100%',
-        marginTop:'10px' ,
-        marginBottom:'10px'
+        marginTop: '10px',
+        marginBottom: '10px',
+        flexDirection: {xs:'column',md:'row'},  
       }}
     >
       <Button
@@ -24,8 +24,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick }) => 
         color="primary"
         onClick={onLeaderboardClick}
         sx={{
-          marginBottom: { xs: 2, sm: 0 },
-          marginRight: { sm: 2 },
+          margin: 2,
         }}
       >
         See Leadership Board
@@ -34,8 +33,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick }) => 
         variant="contained"
         color="primary"
         sx={{
-          marginBottom: { xs: 2, sm: 0 },
-          marginRight: { sm: 2 },
+          margin: 2,
         }}
       >
         Get Merit Certificate
@@ -44,7 +42,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick }) => 
         variant="contained"
         color="primary"
         sx={{
-          marginBottom: { xs: 2, sm: 0 },
+          margin: 2,
         }}
       >
         Get Participation Certificate

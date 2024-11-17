@@ -47,9 +47,25 @@ const Goals: React.FC = () => {
     return (
         <>
             <Navbar />
-            <Box sx={{ padding: 4 }}>
-                <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold" }}>For Class {className}th</Typography>
-                <ActionButtons onLeaderboardClick={handleDialogOpen} />
+            <Box sx={{ padding: 0 }}>
+               <Box sx={{bgcolor:"#0f2b3c",padding:1}}>
+               <Typography variant="h4" sx={{ textAlign: "center", color:'white',margin:2,fontWeight: "bold" }}>For Class {className}th</Typography>
+               <Typography variant="h6" sx={{ textAlign: "center", color:'white',margin:2,fontWeight: "bold" }}>Total of 17 Goals</Typography>
+
+               <ActionButtons onLeaderboardClick={handleDialogOpen} />
+               </Box>
+                   
+            <Box sx={{ display: 'flex', alignItems: 'center',justifyContent:'center', marginTop: 5 }}>
+              <Typography variant="h5" color="textSecondary">
+                Total Goals 17
+              </Typography>
+            </Box>
+            <Box sx={{ display: 'flex', alignItems: 'center',justifyContent:'center' }}>
+            
+              <Typography variant="caption" color="textSecondary">
+                Each Contains Total 10 Tests
+              </Typography>
+            </Box>
                 <GoalsPageContent goals={goals} onGoalClick={handleGoalClick} />
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2, backgroundColor: '#f0f0f0' }}>
                 </Box>

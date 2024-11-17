@@ -8,6 +8,7 @@ import Goals from './components/Goals/Goals';
 import TestsGoals from './components/Goals/Testsgoal';
 import Home from './components/Home';
 import QTest from './components/Goals/Tests/QTest';
+import DashboardLayoutBasic from './components/Goals/Dashboard/Dashboard';
 
 const App: React.FC = () => {
     return (
@@ -16,7 +17,7 @@ const App: React.FC = () => {
                 <Route path="/" element={<Home/>} />
                 <Route path="/register" element={<AuthForm />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/dashboard" element={
+                <Route path="/home" element={
                     <PrivateRoutes>
                         <Dashboard />
                     </PrivateRoutes>
@@ -36,7 +37,13 @@ const App: React.FC = () => {
                         <QTest/>
                     </PrivateRoutes>
                 } />
+                <Route path="/dashboard" element={
+                    <PrivateRoutes>
+                        <DashboardLayoutBasic/>
+                    </PrivateRoutes>
+                } />
             </Routes>
+            
         </Router>
     );
 };

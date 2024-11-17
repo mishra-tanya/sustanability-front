@@ -5,7 +5,7 @@ import { fetchAuthenticatedUser } from '../../../services/apiService';
 import TestQuestion from './TestQuestions';
 import QNavigation from './QNavigations';
 import LoadingSpinner from '../../common/LoadingSpinner';
-import { Box, Button, Card, Typography } from '@mui/material';
+import { Box, Button, Typography } from '@mui/material';
 import Navbar from '../../Navbar';
 import Footer from '../../Footer';
 
@@ -16,14 +16,18 @@ interface Question {
   option_b: string;
   option_c: string;
   option_d: string;
-  correctAnswer: string;
+  correct_answer: string;
 }
-
+interface Answer {
+  question_id: number;
+  correct_answer: string;
+  user_answer: string;
+}
 const QTest: React.FC = () => {
   const { className, goal, test } = useParams<{ className: string; goal: string; test: string }>();
   const [questions, setQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const [answers, setAnswers] = useState<{ [key: number]: string }>({});
+  const [answers, setAnswers] = useState<Answer[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [userId, setUserId] = useState<string | null>(null);
 
@@ -40,6 +44,7 @@ const QTest: React.FC = () => {
     const fetchQuestions = async () => {
       try {
         const response = await api.get(`/class/${className}/goal/${goal}/${test}`);
+        // console.log(response.data);
         setQuestions(response.data);
       } catch (error) {
         console.error('Error fetching questions:', error);
@@ -53,11 +58,26 @@ const QTest: React.FC = () => {
   }, [className, goal, test]);
 
   const handleAnswerChange = (answer: string) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [questions[currentIndex].id]: answer,
-    }));
+    const question = questions[currentIndex];
+    if (!question) return;
+  
+    const updatedAnswers = [...answers];
+    const questionId = question.id;
+  
+    const existingAnswerIndex = updatedAnswers.findIndex((ans) => ans.question_id === questionId);
+    if (existingAnswerIndex !== -1) {
+      updatedAnswers[existingAnswerIndex].user_answer = answer;
+    } else {
+      updatedAnswers.push({
+        question_id: questionId,
+        correct_answer: question.correct_answer || '', 
+        user_answer: answer,
+      });
+    }
+  
+    setAnswers(updatedAnswers);
   };
+  
 
   const handleSubmit = async () => {
     if (!userId) {
@@ -72,9 +92,10 @@ const QTest: React.FC = () => {
       classId: className,
       answers,
     };
+    // console.log('Payload:', userData);
 
     try {
-      await api.post('/submitAnswers', userData);
+      await api.post('/results', userData);
       alert('Answers submitted successfully!');
     } catch (error) {
       console.error('Error submitting answers:', error);
@@ -89,8 +110,8 @@ const QTest: React.FC = () => {
     <div>
         <Navbar/>
      <Box sx={{p:4}}>
-       <Typography sx={{textAlign:"center",mb:3}} variant="h4"> Class {className} Goal {goal}</Typography>
-        <Card sx={{p:4}}>
+       <Typography sx={{textAlign:"center",mb:3}} variant="h4"><b> Class :</b> {className}  <br /> <b>Goal :</b> {goal} || <b>Test : </b> {test}</Typography>
+        <Box sx={{p:4}}>
         <Box sx={{ display: 'flex', justifyContent: 'right', marginTop: 3 }}>
     <Button onClick={handleSubmit} variant="contained" color="primary">
       Submit Test
@@ -103,7 +124,9 @@ const QTest: React.FC = () => {
         optionB={questions[currentIndex].option_b}
         optionC={questions[currentIndex].option_c}
         optionD={questions[currentIndex].option_d}
-        selectedAnswer={answers[questions[currentIndex].id] || ''}
+        selectedAnswer={
+          answers.find((ans) => ans.question_id === questions[currentIndex].id)?.user_answer || ''
+        }
         onAnswerChange={handleAnswerChange}
       />
       <QNavigation
@@ -113,7 +136,7 @@ const QTest: React.FC = () => {
         onNext={() => setCurrentIndex((prev) => Math.min(questions.length - 1, prev + 1))}
         onJumpTo={setCurrentIndex}
       />
-       </Card>
+       </Box>
      </Box>
      <Footer/>
     </div>

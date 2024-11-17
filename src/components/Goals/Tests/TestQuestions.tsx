@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
-import { Box, FormControl, FormControlLabel, Radio, RadioGroup } from '@mui/material';
+import { Box, FormControl, FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material';
 
 interface TestQuestionProps {
-    i:number;
+  i: number;
   question: string;
   optionA: string;
   optionB: string;
@@ -12,18 +12,131 @@ interface TestQuestionProps {
   onAnswerChange: (answer: string) => void;
 }
 
-const TestQuestion: React.FC<TestQuestionProps> = ({ i,question, optionA, optionB, optionC, optionD, selectedAnswer, onAnswerChange }) => (
+const TestQuestion: React.FC<TestQuestionProps> = ({
+  i,
+  question,
+  optionA,
+  optionB,
+  optionC,
+  optionD,
+  selectedAnswer,
+  onAnswerChange,
+}) => (
   <Box sx={{ marginBottom: 3 }}>
-    <h3>Question {i+1}. {question}</h3>
-    <FormControl component="fieldset">
+    <Box
+      sx={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: '100%',
+        padding: 2,
+        marginBottom: 2,
+        border: '1px solid #ccc',
+        borderRadius: 1,
+        backgroundColor: '#f9f9f9',
+        boxSizing: 'border-box',
+        mt: 4,
+      }}
+    >
+      <Typography variant="h6">
+        <b>Question {i + 1}.</b> <br />
+        {question}
+      </Typography>
+    </Box>
+
+    <FormControl component="fieldset" sx={{ mt: 1, width: '100%' }}>
       <RadioGroup
         value={selectedAnswer}
         onChange={(e: ChangeEvent<HTMLInputElement>) => onAnswerChange(e.target.value)}
+        sx={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', width: '100%' }}
       >
-        <FormControlLabel value="A" control={<Radio />} label={optionA} />
-        <FormControlLabel value="B" control={<Radio />} label={optionB} />
-        <FormControlLabel value="C" control={<Radio />} label={optionC} />
-        <FormControlLabel value="D" control={<Radio />} label={optionD} />
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width:{md: '49%',xs:"100%"}, 
+            padding: 2,
+            marginBottom: 2,
+            border: '1px solid #ccc',
+            borderRadius: 1,
+            backgroundColor: '#f9f9f9',
+            boxSizing: 'border-box',
+          }}
+        >
+          <FormControlLabel
+            value="A"
+            control={<Radio />}
+            label={optionA}
+            sx={{ width: '100%', display: 'flex', justifyContent: 'flex-start' }}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width:{md: '49%',xs:"100%"}, 
+            padding: 2,
+            marginBottom: 2,
+            border: '1px solid #ccc',
+            borderRadius: 1,
+            backgroundColor: '#f9f9f9',
+            boxSizing: 'border-box',
+          }}
+        >
+          <FormControlLabel
+            value="B"
+            control={<Radio />}
+            label={optionB}
+            sx={{ width: '100%', display: 'flex', justifyContent: 'flex-start' }}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width:{md: '49%',xs:"100%"}, 
+            padding: 2,
+            marginBottom: 2,
+            border: '1px solid #ccc',
+            borderRadius: 1,
+            backgroundColor: '#f9f9f9',
+            boxSizing: 'border-box',
+          }}
+        >
+          <FormControlLabel
+            value="C"
+            control={<Radio />}
+            label={optionC}
+            sx={{ width: '100%', display: 'flex', justifyContent: 'flex-start' }}
+          />
+        </Box>
+
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            width:{md: '49%',xs:"100%"}, 
+            padding: 2,
+            marginBottom: 2,
+            border: '1px solid #ccc',
+            borderRadius: 1,
+            backgroundColor: '#f9f9f9',
+            boxSizing: 'border-box',
+          }}
+        >
+          <FormControlLabel
+            value="D"
+            control={<Radio />}
+            label={optionD}
+            sx={{ width: '100%', display: 'flex', justifyContent: 'flex-start' }}
+          />
+        </Box>
       </RadioGroup>
     </FormControl>
   </Box>

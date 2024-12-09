@@ -1,13 +1,10 @@
-// Importing necessary dependencies
 import Footer from './Footer';
 import Navbar from './Navbar';
-// import './styles/home.css';
 import {
   Accordion,
   AccordionSummary,
   AccordionDetails,
   Typography,
-  TextField,
   Button,
   Grid,
   Card,
@@ -15,10 +12,26 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { styled } from '@mui/system';
+import { Box, styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
+import { useState } from 'react';
+import { TextFieldComponent } from './common/InputField';
+import api from '../services/axios';
 
-// Styled components
+interface FormData {
+  name: string;
+  contact_no: string;
+  email: string;
+  subject: string;
+  message: string;
+  error: {
+    name?: string;
+    contact_no?: string;
+    email?: string;
+    subject?: string;
+    message?: string;
+  };
+}
 const HeroSection = styled('div')(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
@@ -43,7 +56,7 @@ const HeroContent = styled('div')(({ theme }) => ({
   },
 }));
 
-const HeroImage = styled('img')(({ theme }) => ({
+const HeroImage = styled('img')(() => ({
   width: '100%',
   maxWidth: '500px',
   transition: 'transform 0.3s ease',
@@ -84,17 +97,77 @@ const ContactFormButton = styled(Button)({
   },
 });
 
-// Main Home component
 function Home() {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    contact_no: '',
+    email: '',
+    subject: '',
+    message: '',
+    error: {},
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+      error: {
+        ...prevFormData.error,
+        [name]: '', 
+      },
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const errors: Partial<FormData['error']> = {};
+    if (!formData.name) errors.name = 'Name is required';
+    if (!formData.contact_no) errors.contact_no = 'Contact number is required';
+    if (!formData.email) {
+        errors.email = 'Email is required';
+    } else {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(formData.email)) {
+            errors.email = 'Invalid email format';
+        }
+    }
+    if (!formData.subject) errors.subject = 'Subject is required';
+    if (!formData.message) errors.message = 'Message is required';
+    
+    if (Object.keys(errors).length > 0) {
+      setFormData((prevFormData) => ({
+        ...prevFormData,
+        error: errors,
+      }));
+      return;
+    }
+
+    try {
+      const response = await api.post('contact', formData);
+      alert(response.data.message);
+      setFormData({
+        name: '',
+        contact_no: '',
+        email: '',
+        subject: '',
+        message: '',
+        error: {},
+      });
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("There was an error sending your message. Please try again.");
+    }
+  };
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
     <div>
-      {/* Navbar */}
       <Navbar />
 
-      {/* Hero Section */}
       <HeroSection>
         <HeroContent>
           <Typography variant={isSmallScreen ? 'h3' : 'h2'}gutterBottom style={{ color: '#2e3b55', fontWeight: '700' }}>
@@ -106,10 +179,9 @@ function Home() {
 
           </Typography>
         </HeroContent>
-        <HeroImage src="im.jpg" alt="Welcome" className="rotating-image"/>
+        <HeroImage src="im.jpg" alt="Welcome"  className="rotating-image"/>
       </HeroSection>
 
-      {/* About Section */}
       <Section>
         <SectionTitle variant="h5">About Us</SectionTitle>
         <Typography variant="body1" style={{ maxWidth: '800px', margin: '0 auto', color: '#757575', lineHeight: '1.6' }}>
@@ -118,7 +190,6 @@ function Home() {
         </Typography>
       </Section>
 
-      {/* Services Section */}
       <Section>
         <SectionTitle variant="h5">Our Services</SectionTitle>
         <Grid container spacing={3} justifyContent="center">
@@ -139,7 +210,6 @@ function Home() {
         </Grid>
       </Section>
 
-      {/* FAQ Section */}
       <Section style={{ backgroundColor: '#F8F8F8',marginTop:"50px",marginBottom:"50px" }}>
         <SectionTitle variant="h5">Frequently Asked Questions</SectionTitle>
         {['What is Service 1?', 'How can I get started?', 'Do you offer customer support?'].map((faq, index) => (
@@ -159,38 +229,75 @@ function Home() {
         ))}
       </Section>
 
-      {/* Contact Us Form */}
       <Section>
         <SectionTitle variant="h5">Contact Us</SectionTitle>
-        <Grid
-      container
-      spacing={isSmallScreen ? 0 : 2}
-      style={{ maxWidth: '1200px', margin: '0 auto' }}
-    >  
-    <Grid item xs={12} sm={4}>
-            <TextField fullWidth label="Name" sx={{marginTop:{xs:'20px',md:'0px'}}} variant="outlined" required />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <TextField fullWidth label="Contact No."sx={{marginTop:{xs:'20px',md:'0px'} }} variant="outlined" required />
-          </Grid>
-          <Grid item xs={12} sm={4}>
-            <TextField fullWidth label="Email"sx={{marginTop:{xs:'20px',md:'0px'} }} variant="outlined" required />
-          </Grid>
-          <Grid item xs={12} sm={12}>
-            <TextField fullWidth label="Subject"sx={{marginTop:{xs:'20px',md:'0px'} }} variant="outlined" required />
-          </Grid>
-          <Grid item xs={12}>
-            <TextField fullWidth label="Message"sx={{marginTop:{xs:'20px',md:'0px'}}} variant="outlined" required multiline rows={4} />
-          </Grid>
-          <Grid item xs={12}>
-            <ContactFormButton variant="contained" sx={{px:3,py:1,marginTop:{xs:'20px',md:'0px'}}} >
-              Send Message
-            </ContactFormButton>
-          </Grid>
+        <Grid container  style={{ maxWidth: '800px', margin: '0 auto' }}>
+          <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <TextFieldComponent
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  label="Name"
+                  error={!!formData.error.name}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <TextFieldComponent
+                  name="contact_no"
+                  value={formData.contact_no}
+                  onChange={handleChange}
+                  label="Contact No."
+                  error={!!formData.error.contact_no}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <TextFieldComponent
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  label="Email"
+                  error={!!formData.error.email}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <TextFieldComponent
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  label="Subject"
+                  error={!!formData.error.subject}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <Box mb={2}>
+                <TextFieldComponent
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  label="Message"
+                  error={!!formData.error.message}
+                />
+              </Box>
+            </Grid>
+            <Grid item xs={12}>
+              <ContactFormButton type="submit" variant="contained" fullWidth>
+                Send Message
+              </ContactFormButton>
+            </Grid>
+          </form>
         </Grid>
       </Section>
 
-      {/* Footer */}
+
       <Footer />
     </div>
   );

@@ -31,8 +31,10 @@ const Login: React.FC = () => {
             localStorage.setItem('authTokenExpiry', expiryTime.toString());
             localStorage.setItem("authToken", token);
             navigate("/home");
-        } catch (e) {
-            setError(e.message);
+        } catch (e: unknown) {
+            if (e instanceof Error) {
+                setError(e.message);
+              }
         } finally {
             setLoading(false);
         }
@@ -61,7 +63,7 @@ const Login: React.FC = () => {
                                 onChange={(e) => setEmail(e.target.value)}
                                 label="Email"
                                 error={error}
-                                required /></Box>
+                                 /></Box>
 
                             <Box mb={2}>
                                 <PasswordField 

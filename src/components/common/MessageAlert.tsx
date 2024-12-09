@@ -2,6 +2,7 @@ import { Alert } from '@mui/material';
 
 interface MessageProps {
   message: string;
+  severity: 'success' | 'error'; 
 }
 
 export const MessageAlert: React.FC<MessageProps> = ({ message }) => (

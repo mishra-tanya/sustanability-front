@@ -9,19 +9,55 @@ import LeaderboardDialog from './common/LeaderBoard';
 import LoadingSpinner from '../common/LoadingSpinner';
 import TestsGoalsPageContent from './TestgoalPage';
 
+interface User {
+    id: number;
+}
+  
 const TestsGoals: React.FC = () => {
     const { className } = useParams<{ className: string }>();
     const { goal } = useParams<{ goal: string }>();
     const navigate = useNavigate();
     const [test, setTests] = useState([]);
+    const [leaderboard, setLeaderboard] = useState([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [openDialog, setOpenDialog] = useState(false);
+    const [user, setUser] = useState<User | null>(null);
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+          try {
+            const response = await api.get('/user');
+            // console.log(response);
+            setUser(response.data);
+          } catch (err) {
+            console.error('Error fetching goals:', err);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchUserData();
+      }, []);
+      
     useEffect(() => {
         const fetchGoals = async () => {
             try {
                 const response = await api.get(`/class/${className}/goal/${goal}`);
-                setTests(response.data);
+                const data = response.data.data;
+                // console.log((data));
+                if (Array.isArray(data.tests)) {
+                    setTests(data.tests);
+                } else {
+                    console.error('Unexpected data format:', data);
+                    setTests([]); 
+                }
+                if (Array.isArray(data.leaderboard)) {
+                    // console.log(data.leaderboard);
+                    setLeaderboard(data.leaderboard); 
+                } else {
+                    console.error('Unexpected data format for leaderboard:', data);
+                    setLeaderboard([]);
+                }
             } catch (error) {
                 console.error('Error fetching tests:', error);
             } finally {
@@ -48,16 +84,26 @@ const TestsGoals: React.FC = () => {
     return (
         <>
             <Navbar />
-            <Box sx={{ padding: 4 }}>
-                <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold" }}>For Class {className}th</Typography>
+            <Box sx={{ bgcolor:"#0f2b3c",p:2 }}>
+                <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold" ,color:'white'}}>For Class {className}th</Typography>
+
                 <ActionButtons onLeaderboardClick={handleDialogOpen} />
-                <TestsGoalsPageContent goals={test} onGoalClick={handleTestClick} />
-                <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2, backgroundColor: '#f0f0f0' }}>
                 </Box>
 
-            </Box>
+                <TestsGoalsPageContent goals={test} onGoalClick={handleTestClick} />
+
             <Footer />
-            <LeaderboardDialog open={openDialog} onClose={handleDialogClose} />
+            {user && (
+                
+                <LeaderboardDialog
+                    open={openDialog}
+                    onClose={handleDialogClose}
+                    leaderboardData={leaderboard}
+                    currentUserId={user.id} 
+                />
+            ) }
+        
+            {/* <LeaderboardDialog open={openDialog} onClose={handleDialogClose} /> */}
         </>
     );
 };

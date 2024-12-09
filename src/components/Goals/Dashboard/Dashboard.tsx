@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { extendTheme, styled } from '@mui/material/styles';
+import { extendTheme,   } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 // import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import BarChartIcon from '@mui/icons-material/BarChart';
@@ -8,13 +8,14 @@ import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider, Navigation, Router } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
-// import Grid from '@mui/material/Grid2';
-import { AddHome, Home, Logout, Person } from '@mui/icons-material';
+// import Grid from '@mui/material/Grid2';AddHome, Home, Logout,
+import {  Person } from '@mui/icons-material';
 // import { Button } from '@mui/material';
 import Dash from './Dash';
 import Profile from './Profile';
 import { Link } from 'react-router-dom';
-import { Box, Typography } from '@mui/material';
+import {  Typography } from '@mui/material';
+import Overall from './Overall';
 // import Login from '../../Auth/LoginForm';
 
 const NAVIGATION: Navigation = [
@@ -109,12 +110,12 @@ function useDemoRouter(initialPath: string): Router {
   return router;
 }
 
-const Skeleton = styled('div')<{ height: number }>(({ theme, height }) => ({
-  backgroundColor: theme.palette.action.hover,
-  borderRadius: theme.shape.borderRadius,
-  height,
-  content: '" "',
-}));
+// const Skeleton = styled('div')<{ height: number }>(({ theme, height }) => ({
+//   backgroundColor: theme.palette.action.hover,
+//   borderRadius: theme.shape.borderRadius,
+//   height,
+//   content: '" "',
+// }));
 
 
 export default function DashboardLayoutBasic(props: any) {
@@ -128,6 +129,13 @@ export default function DashboardLayoutBasic(props: any) {
   React.useEffect(() => {
     setSelectedPage(router.pathname.replace('/', ''));
   }, [router.pathname]);
+
+  const classMapping: Record<string, string> = {
+    "4-5": "4-5",
+    "6-8": "6-8",
+    "9-10": "9-10",
+    "11-12": "11-12",
+  };
   return (
     <AppProvider
       navigation={NAVIGATION}
@@ -140,26 +148,42 @@ export default function DashboardLayoutBasic(props: any) {
       }}
     >
       <DashboardLayout>
-   <Box sx={{bgcolor:'gre'}}>
-   <header>
-          <Link to={'/'}>
-           <Typography sx={{p:2, textDecoration:"none",textAlign:"right"}}>
-            Go back to Home Page
-           </Typography>
-          </Link>
-          
-         
-        </header>
-   </Box>
+   
 
         <PageContainer>
-        
+          <Link to={'/'} >
+          <Typography  >
+          Go back to Home Page 
+          </Typography>
+          </Link>
+          
         {selectedPage === 'dashboard' && (
               <>
-                <Dash/>
+
+                <Overall/>
               </>
             )}
 
+{
+  selectedPage=='4-5' &&(
+    <Dash classId='4-5'/>
+  )
+}
+{
+  selectedPage=='6-8' &&(
+    <Dash classId='6-8'/>
+  )
+}
+{
+  selectedPage=='9-10' &&(
+    <Dash classId='9-10'/>
+  )
+}
+{
+  selectedPage=='11-12' &&(
+    <Dash classId='11-12'/>
+  )
+}
 {selectedPage === 'profile' && (
              <Profile/>
             )}

@@ -9,41 +9,27 @@ import TestsGoals from './components/Goals/Testsgoal';
 import Home from './components/Home';
 import QTest from './components/Goals/Tests/QTest';
 import DashboardLayoutBasic from './components/Goals/Dashboard/Dashboard';
+import Results from './components/Goals/Results/Result';
 
 const App: React.FC = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<Home/>} />
+                {/* publicroutes */}
+                <Route path="/" element={<Home />} />
                 <Route path="/register" element={<AuthForm />} />
                 <Route path="/login" element={<Login />} />
-                <Route path="/home" element={
-                    <PrivateRoutes>
-                        <Dashboard />
-                    </PrivateRoutes>
-                } />
-                <Route path="/class/:className" element={
-                    <PrivateRoutes>
-                        <Goals />
-                    </PrivateRoutes>
-                } />
-                <Route path="/class/:className/goal/:goal" element={
-                    <PrivateRoutes>
-                        <TestsGoals/>
-                    </PrivateRoutes>
-                } />
-                <Route path="/class/:className/goal/:goal/:test" element={
-                    <PrivateRoutes>
-                        <QTest/>
-                    </PrivateRoutes>
-                } />
-                <Route path="/dashboard" element={
-                    <PrivateRoutes>
-                        <DashboardLayoutBasic/>
-                    </PrivateRoutes>
-                } />
+
+                {/* protected  */}
+                <Route element={<PrivateRoutes />}>
+                    <Route path="/home" element={<Dashboard />} />
+                    <Route path="/class/:className" element={<Goals />} />
+                    <Route path="/class/:className/goal/:goal" element={<TestsGoals />} />
+                    <Route path="/class/:className/goal/:goal/:test" element={<QTest />} />
+                    <Route path="/dashboard" element={<DashboardLayoutBasic />} />
+                    <Route path="/results/:classId/:goalId/:testId" element={<Results />} />
+                </Route>
             </Routes>
-            
         </Router>
     );
 };

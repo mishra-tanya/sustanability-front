@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams ,useNavigate} from 'react-router-dom';
 import api from '../../../services/axios';
 import { fetchAuthenticatedUser } from '../../../services/apiService';
 import TestQuestion from './TestQuestions';
@@ -31,6 +31,7 @@ const QTest: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [userId, setUserId] = useState<string | null>(null);
 
+  const navigate = useNavigate();
   useEffect(() => {
     const getUserId = async () => {
       try {
@@ -96,9 +97,12 @@ const QTest: React.FC = () => {
 
     try {
       await api.post('/results', userData);
-      alert('Answers submitted successfully!');
+      navigate(`/results/${className}/${goal}/${test}`); 
     } catch (error) {
       console.error('Error submitting answers:', error);
+    }
+    finally {
+      setLoading(false);
     }
   };
 
@@ -106,11 +110,17 @@ const QTest: React.FC = () => {
     return <LoadingSpinner size={44}/>;
   }
 
+  const answeredQuestionIds = answers.map((answer) => answer.question_id);
+
   return (
     <div>
         <Navbar/>
-     <Box sx={{p:4}}>
-       <Typography sx={{textAlign:"center",mb:3}} variant="h4"><b> Class :</b> {className}  <br /> <b>Goal :</b> {goal} || <b>Test : </b> {test}</Typography>
+     {/* <Box sx={{p:4}}> */}
+      <Box sx={{bgcolor:"#0f2b3c",p:1,textAlign:"center"}}>
+      <Typography sx={{color:"white"}} variant="caption"><b> Class :</b> {className} </Typography>
+      <Typography sx={{textAlign:"center",mb:3,color:"white"}} variant="caption"> <b>Goal :</b> {goal}  <b>Test : </b> {test}</Typography>
+
+      </Box>
         <Box sx={{p:4}}>
         <Box sx={{ display: 'flex', justifyContent: 'right', marginTop: 3 }}>
     <Button onClick={handleSubmit} variant="contained" color="primary">
@@ -135,9 +145,10 @@ const QTest: React.FC = () => {
         onPrevious={() => setCurrentIndex((prev) => Math.max(0, prev - 1))}
         onNext={() => setCurrentIndex((prev) => Math.min(questions.length - 1, prev + 1))}
         onJumpTo={setCurrentIndex}
+        answeredQuestions={answeredQuestionIds}
       />
        </Box>
-     </Box>
+     {/* </Box> */}
      <Footer/>
     </div>
   );

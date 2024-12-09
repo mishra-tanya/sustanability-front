@@ -36,7 +36,7 @@ export default function Navbar() {
   };
   React.useEffect(() => {
     const token = localStorage.getItem('authToken');
-    console.log( localStorage.getItem('authToken'));
+    // console.log( localStorage.getItem('authToken'));
     setIsLoggedIn(!!token);
   }, []);
 
@@ -78,7 +78,7 @@ export default function Navbar() {
       onClose={handleMenuClose}
     >
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
+      <MenuItem onClick={handleMenuClose}>  <Link to="/dashboard" style={{ textDecoration: 'none'  }}>My Account</Link></MenuItem>
       <hr />
       <Box display="flex"justifyContent="center" alignItems="center" >
     

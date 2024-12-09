@@ -1,0 +1,20 @@
+/* Define keyframes for the rotation */
+@keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  
+  /* Apply the rotation animation to the image class */
+  .rotating-image {
+    animation: rotate 10s linear infinite; /* Infinite rotation every 5 seconds */
+    transition: transform 3s ease;
+  }
+  
+  .rotating-image:hover {
+    transform: scale(1.05); /* Slight zoom on hover */
+  }
+  

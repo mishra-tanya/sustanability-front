@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import {  Grid, Typography, Box } from '@mui/material';
+import { Grid, Typography, Box, Avatar } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../common/LoadingSpinner';
 import api from '../../services/axios';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import PersonIcon from '@mui/icons-material/Person';
 
 interface User {
   id: number;
@@ -79,15 +80,40 @@ const Dashboard: React.FC = () => {
     <div>
       <Navbar />
       {error && <p>{error}</p>}
-      <Box sx={{ textAlign: 'center', padding: '20px' }}>
-        <Typography gutterBottom sx={{ textTransform: 'capitalize' }}>
-        👋 Welcome, {user?.name}
-        </Typography>
-        <Typography variant="h4" sx={{ mb: 4 }} gutterBottom>
-          Select Class Group
-        </Typography>
-        <hr />
-        <Grid container spacing={6} justifyContent="center" sx={{ mt: 1 , mb: 10 }}>
+      <Box sx={{ backgroundColor: '#0f2b3c', p: { xs: 2, md: 1 }, pl: { xs: 0, md: 10 } }}>
+  <Grid container spacing={2} alignItems="center" justifyContent={{ xs: 'center', md: 'flex-start' }}>
+    {/* First Column with User Icon */}
+    <Grid item xs={12} md={2} sx={{ display: 'flex', justifyContent: { xs: 'center', md: 'flex-start' } }}>
+      <Avatar sx={{ width: { xs: 200, md: 190 }, height: { xs: 200, md: 190 }, bgcolor: "#243947" }}>
+        <Avatar sx={{ width: { xs: 160, md: 160 }, height: { xs: 160, md: 160 }, bgcolor: "#2f4350" }}>
+          <Avatar sx={{ width: { xs: 120, md: 130 }, height: { xs: 120, md: 130 }, bgcolor: "#263238" }}>
+            <PersonIcon sx={{ fontSize: { xs: 90, md: 110 } }} />
+          </Avatar>
+        </Avatar>
+      </Avatar>
+    </Grid>
+
+    {/* Second Column with User Information */}
+    <Grid item xs={12} md={8} sx={{ textAlign: { xs: 'center', md: 'left' }}}>
+      <Typography variant="h3" gutterBottom sx={{ textTransform: 'capitalize',color: 'white', fontWeight: 'bold', fontSize: '38px', pl:{md:5}  }}>
+        {user?.name}
+      </Typography>
+      <Typography gutterBottom sx={{ color: 'white', fontWeight: 'bold', fontSize: '18px', pl:{md:5}  }}>
+        {user?.email}
+      </Typography>
+      <Typography variant="h6" sx={{  color: 'white', pl:{md:5},fontWeight:"bolder"  }} gutterBottom>
+        Sustainability Olympiad
+      </Typography>
+      <Typography  sx={{ color: 'grey', pl:{md:5},fontWeight:"bolder",fontSize:"15px" }} gutterBottom>
+        Total Four Class Goals
+      </Typography>
+    </Grid>
+  </Grid>
+</Box>
+
+
+      <Box sx={{ textAlign: 'center', p: { xs: 2, md: 3 } }}>
+      <Grid container spacing={6} justifyContent="center" sx={{ mt: 1 , mb: 10 }}>
           {userClasses.map((classInfo) => (
             <Grid item key={classInfo.className}>
               <Box

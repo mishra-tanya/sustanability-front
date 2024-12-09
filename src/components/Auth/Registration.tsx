@@ -1,4 +1,4 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, SelectChangeEvent } from '@mui/material';
 import { registerUser } from '../../services/apiService';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -42,6 +42,13 @@ const RegistrationForm = ({ formState, setFormState, isLoading, setIsLoading }: 
     }));
   };
 
+  const selecthandleChange = (e: SelectChangeEvent<string>) => {
+    setFormState({
+      ...formState,
+      [e.target.name]: e.target.value,
+    });
+  };
+  
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateForm()) return;
@@ -62,12 +69,12 @@ const RegistrationForm = ({ formState, setFormState, isLoading, setIsLoading }: 
 
   return (
     <form onSubmit={handleRegister}>
-      <MessageAlert message={formState.message} />
+      <MessageAlert message={formState.message} severity='success'/>
       <Box mb={2}><TextFieldComponent name="name" value={formState.name} onChange={handleChange} label="Name" error={formState.errors.name} /></Box>
       <Box mb={2}><TextFieldComponent name="country" value={formState.country} onChange={handleChange} label="Country" error={formState.errors.country} /></Box>
       <Box mb={2}><TextFieldComponent name="address" value={formState.address} onChange={handleChange} label="Address" error={formState.errors.address} /></Box>
       <Box mb={2}><TextFieldComponent name="school" value={formState.school} onChange={handleChange} label="School" error={formState.errors.school} /></Box>
-      <Box mb={2}><SelectFieldComponent name="className" value={formState.className} onChange={handleChange} label="Class" error={formState.errors.className} /></Box>
+      <Box mb={2}><SelectFieldComponent name="className" value={formState.className} onChange={selecthandleChange} label="Class" error={formState.errors.className} /></Box>
       <Box mb={2}><TextFieldComponent name="email" value={formState.email} onChange={handleChange} label="Email" error={formState.errors.email} /></Box>
       <Box mb={2}>
         <PasswordField name="password" value={formState.password} onChange={handleChange} label="Password" error={formState.errors.password} showPassword={showPassword} toggleShowPassword={togglePasswordVisibility} />

@@ -1,5 +1,6 @@
 import { TextField, InputAdornment, IconButton } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
+import React, { useState } from 'react';
 
 interface PasswordProps {
   name: string;
@@ -19,26 +20,42 @@ export const PasswordField: React.FC<PasswordProps> = ({
   error,
   showPassword,
   toggleShowPassword,
-}) => (
-  <TextField
-    fullWidth
-    type={showPassword ? 'text' : 'password'}
-    name={name}
-    value={value}
-    onChange={onChange}
-    label={label}
-    variant="outlined"
-    required
-    error={!!error}
-    helperText={error}
-    InputProps={{
-      endAdornment: (
-        <InputAdornment position="end">
-          <IconButton onClick={toggleShowPassword} edge="end">
-            {showPassword ? <VisibilityOff /> : <Visibility />}
-          </IconButton>
-        </InputAdornment>
-      ),
-    }}
-  />
-);
+}) => {
+  const [touched, setTouched] = useState(false); 
+ 
+  const validatePassword = (value: string) => {
+    return value.length < 6 ? "Password must be at least 6 characters" : "";
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange(e);
+    setTouched(true);
+  };
+
+  const validationError = touched ? validatePassword(value) : "";
+
+  return (
+    <TextField
+      fullWidth
+      type={showPassword ? 'text' : 'password'}
+      name={name}
+      value={value}
+      onChange={handleChange}
+      label={label}
+      variant="outlined"
+      required
+      error={!!error || !!validationError}
+      helperText={error || validationError}
+      InputProps={{
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton onClick={toggleShowPassword} edge="end">
+              {showPassword ? <VisibilityOff /> : <Visibility />}
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
+      onBlur={() => setTouched(true)} 
+    />
+  );
+};

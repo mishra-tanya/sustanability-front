@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Box, Card,CardContent } from '@mui/material';
+import { Typography, Box,  } from '@mui/material';
 import GoalCard from './common/GoalCard';  
 
 interface Goal {
@@ -14,9 +14,8 @@ interface GoalsPageContentProps {
 }
 
 const TestsGoalsPageContent: React.FC<GoalsPageContentProps> = ({ goals, onGoalClick }) => (
-  <Card>
-    <CardContent>
-      <Box sx={{ padding: 1 }}>
+  
+      <Box sx={{ padding:{xs:2,md:10} }}>
         <Typography variant="h4" sx={{ textAlign: "center", padding: 2 }} gutterBottom>
           Tests
         </Typography>
@@ -28,8 +27,7 @@ const TestsGoalsPageContent: React.FC<GoalsPageContentProps> = ({ goals, onGoalC
           ))
         )}
       </Box>
-    </CardContent>
-  </Card>
+    
 );
 
 export default TestsGoalsPageContent;

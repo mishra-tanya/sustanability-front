@@ -39,6 +39,7 @@ export const PasswordField: React.FC<PasswordProps> = ({
       fullWidth
       type={showPassword ? 'text' : 'password'}
       name={name}
+      size="small"
       value={value}
       onChange={handleChange}
       label={label}

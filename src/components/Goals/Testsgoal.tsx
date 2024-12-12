@@ -90,8 +90,7 @@ const TestsGoals: React.FC = () => {
                 <ActionButtons onLeaderboardClick={handleDialogOpen} />
                 </Box>
 
-                <TestsGoalsPageContent goals={test} onGoalClick={handleTestClick} />
-
+               <TestsGoalsPageContent goals={test} onGoalClick={handleTestClick} />
             <Footer />
             {user && (
                 

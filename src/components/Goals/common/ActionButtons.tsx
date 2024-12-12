@@ -6,7 +6,7 @@ interface ActionButtonsProps {
   onLeaderboardClick: () => void;
 }
 
-const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick }) => {
+const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick ,}) => {
   const generateCertificatePDF = () => {
     const doc = new jsPDF();
 
@@ -27,7 +27,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick }) => 
 
   return (
     <>
-      {console.log('Action Buttons rendered')}
+      {/* {console.log('Action Buttons rendered')} */}
       <Box
         sx={{
           display: 'flex',

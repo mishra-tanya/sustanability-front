@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid, Typography, Box, Avatar } from '@mui/material';
+import { Grid, Typography, Box, Avatar, Card, CardContent } from '@mui/material';
 import LockIcon from '@mui/icons-material/Lock';
 import { useNavigate } from 'react-router-dom';
 import LoadingSpinner from '../common/LoadingSpinner';
@@ -7,6 +7,7 @@ import api from '../../services/axios';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
 import PersonIcon from '@mui/icons-material/Person';
+import { TypeAnimation } from 'react-type-animation';
 
 interface User {
   id: number;
@@ -96,13 +97,22 @@ const Dashboard: React.FC = () => {
     {/* Second Column with User Information */}
     <Grid item xs={12} md={8} sx={{ textAlign: { xs: 'center', md: 'left' }}}>
       <Typography variant="h3" gutterBottom sx={{ textTransform: 'capitalize',color: 'white', fontWeight: 'bold', fontSize: '38px', pl:{md:5}  }}>
-        {user?.name}
+      <TypeAnimation
+        sequence={[
+          `Welcome, ${user?.name || ''}`,
+          1000,
+        ]}
+        wrapper="span"
+        speed={10}
+        style={{ fontSize: '20px', display: 'inline-block',fontWeight:'bold' }}
+        repeat={2}
+      />
       </Typography>
       <Typography gutterBottom sx={{ color: 'white', fontWeight: 'bold', fontSize: '18px', pl:{md:5}  }}>
         {user?.email}
       </Typography>
       <Typography variant="h6" sx={{  color: 'white', pl:{md:5},fontWeight:"bolder"  }} gutterBottom>
-        Sustainability Olympiad
+        Sustainability Olympiad 
       </Typography>
       <Typography  sx={{ color: 'grey', pl:{md:5},fontWeight:"bolder",fontSize:"15px" }} gutterBottom>
         Total Four Class Goals
@@ -113,45 +123,60 @@ const Dashboard: React.FC = () => {
 
 
       <Box sx={{ textAlign: 'center', p: { xs: 2, md: 3 } }}>
-      <Grid container spacing={6} justifyContent="center" sx={{ mt: 1 , mb: 10 }}>
-          {userClasses.map((classInfo) => (
-            <Grid item key={classInfo.className}>
-              <Box
-                sx={{
-                  position: 'relative',
-                  width: 250,
-                  height: 250,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  borderRadius: '50%',
-                  backgroundColor: classInfo.isUnlocked ? 'green' : 'gray',
-                  cursor: classInfo.isUnlocked ? 'pointer' : 'not-allowed',
-                  boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
-                }}
-                onClick={() => handleClassClick(classInfo.className)}
-              >
-                {classInfo.isUnlocked ? (
-                  <img
-                    src="img.png"  
-                    alt={classInfo.className}
-                    style={{
-                      width: '250px',
-                      height: '250px',
-                      borderRadius:'50%',
-                      objectFit: 'cover',
-                    }}
-                  />
-                ) : (
-                  <LockIcon sx={{ fontSize: 80, color: 'white' }} />
-                )}
-              </Box>
-              <Typography variant="h6" sx={{ marginTop: '10px' }}>
-                Class {classInfo.className}
-              </Typography>
-            </Grid>
-          ))}
-        </Grid>
+      <Typography  align='center' sx={{ color: '',fontWeight:"bolder",fontSize:"45px", }}  >
+        Olympiad Series
+      </Typography>
+     <Card variant="outlined" >
+      <CardContent>
+      <Grid container spacing={10} justifyContent="center" sx={{ mt: 1 , mb: 10 }}>
+   
+   {userClasses.map((classInfo) => (
+     <Grid item key={classInfo.className}>
+       <Box
+         sx={{
+           position: 'relative',
+           width: 250,
+           height: 250,
+           display: 'flex',
+           justifyContent: 'center',
+           alignItems: 'center',
+           borderRadius: '50%',
+           border:'5px solid lightgrey',
+           backgroundColor: classInfo.isUnlocked ? 'green' : 'gray',
+           cursor: classInfo.isUnlocked ? 'pointer' : 'not-allowed',
+           boxShadow: '0px 4px 6px rgba(0,0,0,0.1)',
+           transition: 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.5s cubic-bezier(0.25, 1, 0.5, 1)',
+           '&:hover': {
+             transform: 'scale(1.1)', 
+             boxShadow: '0px 12px 20px rgba(0,0,0,0.3)', 
+           },
+         }}
+         onClick={() => handleClassClick(classInfo.className)}
+       >
+         {classInfo.isUnlocked ? (
+           <img
+             src="img.png"  
+             alt={classInfo.className}
+             style={{
+               width: '250px',
+               height: '250px',
+               borderRadius:'50%',
+               border:'5px solid lightgrey',
+               objectFit: 'cover',
+             }}
+           />
+         ) : (
+           <LockIcon sx={{ fontSize: 80, color: 'white' }} />
+         )}
+       </Box>
+       <Typography variant="h6"  sx={{ marginTop: '10px', }}>
+        <b> For Class {classInfo.className}</b>
+       </Typography>
+     </Grid>
+   ))}
+ </Grid>
+      </CardContent>
+     </Card>
       </Box>
       <Footer />
     </div>

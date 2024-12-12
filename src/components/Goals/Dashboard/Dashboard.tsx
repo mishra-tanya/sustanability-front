@@ -130,12 +130,7 @@ export default function DashboardLayoutBasic(props: any) {
     setSelectedPage(router.pathname.replace('/', ''));
   }, [router.pathname]);
 
-  const classMapping: Record<string, string> = {
-    "4-5": "4-5",
-    "6-8": "6-8",
-    "9-10": "9-10",
-    "11-12": "11-12",
-  };
+  
   return (
     <AppProvider
       navigation={NAVIGATION}
@@ -147,15 +142,20 @@ export default function DashboardLayoutBasic(props: any) {
         title: 'Sustainability Olympiad',
       }}
     >
-      <DashboardLayout>
+      <DashboardLayout  sx={{
+        '& > .MuiBox-root': {
+            overflow: 'hidden'
+        }
+    }}>
    
 
-        <PageContainer>
+        <PageContainer maxWidth="xl" >
           <Link to={'/'} >
           <Typography  >
           Go back to Home Page 
           </Typography>
           </Link>
+          <br />
           
         {selectedPage === 'dashboard' && (
               <>

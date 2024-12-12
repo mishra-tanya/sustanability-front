@@ -5,7 +5,7 @@ import Navbar from '../../Navbar';
 import Footer from '../../Footer';
 import { fetchAuthenticatedUser } from '../../../services/apiService';
 import LoadingSpinner from '../../common/LoadingSpinner';
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Button, Card, CardContent, Grid, Typography } from '@mui/material';
 import { Gauge } from '@mui/x-charts';
 interface Options {
   a: string;
@@ -97,26 +97,33 @@ const Results: React.FC = () => {
         <Navbar />
 
         <Box sx={{textAlign:'center',p:5}}>
-        <Typography variant="h5"><b>Test Results 
-            Class:{classId} <br />
+        <Typography variant="h5"><b>Test Results For <br />
+            Class: {classId} <br />
              Goal: {goalId} <br />
-             Test:{testId}</b></Typography>
+             Test: {testId}</b></Typography>
 
         </Box>
         {resultData && (
           <div>
             {/* <Gauge width={100} height={100} value= {/> %}  /> */}
-            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         
-  <Gauge width={150} height={150} value={resultData.score*10 } valueMin={0} valueMax={100} />
-  <Typography variant="body1" style={{ marginTop: '10px' }}>
-   Total Percentage :  {resultData.score *10}% <br />
-   Total Correct Answers :  {resultData.score} <br />
-   Total Questions : 10
+           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+           <Card sx={{p:3, pl:6 }}>
+           <CardContent >
+        <Gauge width={150} height={150} value={resultData.score*10 } valueMin={0} valueMax={100} />
+        <Typography variant="body1" style={{ marginTop: '10px' }}>
+         <b>Total Percentage : </b> {resultData.score *10}% <br />
+        <b> Correct Answers : </b>  {resultData.score} <br />
+        <b> Incorrect Answers : </b>  {10-resultData.score} <br />
 
-  </Typography>
-</div>
-
+         <b>Total Questions :</b> 10
+      
+        </Typography>
+        
+        </CardContent>
+          </Card>
+      </div>
+      
             {/* <p>Score: {resultData.score} / {resultData.total_questions}</p> */}
             <Box sx={{ padding: { xs: 2, md: 10 } }}>
 

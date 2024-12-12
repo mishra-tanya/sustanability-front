@@ -8,6 +8,8 @@ import { MessageAlert } from '../common/MessageAlert';
 import { TextFieldComponent } from '../common/InputField';
 import { PasswordField } from '../common/PasswordField';
 import LoadingSpinner from '../common/LoadingSpinner';
+import ForgotPasswordModal from './ForgotPasswordModal';
+import Footer from '../Footer';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
@@ -19,7 +21,13 @@ const Login: React.FC = () => {
     const location = useLocation();
     const { message } = location.state || {};
 
+    const [forgotPasswordOpen, setForgotPasswordOpen] = useState(false);
+
+    const handleOpenForgotPassword = () => setForgotPasswordOpen(true);
+    const handleCloseForgotPassword = () => setForgotPasswordOpen(false);
+
     const handleLogin = async (e: React.FormEvent) => {
+
         e.preventDefault();
         setLoading(true);
         setError("");
@@ -34,7 +42,7 @@ const Login: React.FC = () => {
         } catch (e: unknown) {
             if (e instanceof Error) {
                 setError(e.message);
-              }
+            }
         } finally {
             setLoading(false);
         }
@@ -45,11 +53,11 @@ const Login: React.FC = () => {
     return (
         <>
             <Navbar />
-            <Container maxWidth="xs" sx={{ mb: 15 }}>
-                <Card sx={{ mt: 5, p: 3 }}>
+            <Container maxWidth="xs" sx={{ mb: 15 ,mt:2, pb: 3,pt:3, bgcolor: "#e3f2fd" }}>
+                <Card variant="outlined"  sx={{ width: '100%', p: 3 }}>
                     <CardContent>
-                        <Typography variant="h5" align="center" gutterBottom>
-                            Login
+                        <Typography variant="h5" align="center" sx={{ mb: 3, fontWeight: 'bold' }} gutterBottom>
+                            Please  Login
                         </Typography>
 
                         {message && <MessageAlert message={message} severity="success" />}
@@ -58,22 +66,22 @@ const Login: React.FC = () => {
                         <form onSubmit={handleLogin}>
                             <Box mb={2}>
                                 <TextFieldComponent
-                                name="email"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                                label="Email"
-                                error={error}
-                                 /></Box>
+                                    name="email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    label="Email"
+                                    error={error}
+                                /></Box>
 
                             <Box mb={2}>
-                                <PasswordField 
-                                name="password" 
-                                value={password} 
-                                onChange={(e) => setPassword(e.target.value)}
-                                label="Password" 
-                                error={error} 
-                                showPassword={showPassword} 
-                                toggleShowPassword={togglePasswordVisibility} />
+                                <PasswordField
+                                    name="password"
+                                    value={password}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                    label="Password"
+                                    error={error}
+                                    showPassword={showPassword}
+                                    toggleShowPassword={togglePasswordVisibility} />
                             </Box>
 
                             <Box mb={2} sx={{ position: 'relative' }}>
@@ -89,8 +97,21 @@ const Login: React.FC = () => {
                             Register here
                         </Link>
                     </Typography>
+                    <Typography
+                        align="center"
+                        color="primary"
+                        sx={{ cursor: "pointer",mt:1}}
+                        onClick={handleOpenForgotPassword}
+                    >
+                        Forgot Password?
+                    </Typography>
+                    <ForgotPasswordModal
+                        open={forgotPasswordOpen}
+                        onClose={handleCloseForgotPassword}
+                    />
                 </Card>
             </Container>
+            <Footer/>
         </>
     );
 };

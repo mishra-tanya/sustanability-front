@@ -85,13 +85,22 @@ const QTest: React.FC = () => {
       console.error('User ID not available');
       return;
     }
-
+    const completeAnswers = questions.map((question) => {
+      const existingAnswer = answers.find((ans) => ans.question_id === question.id);
+      return {
+        question_id: question.id,
+        correct_answer: question.correct_answer || '', // Include the correct answer if available
+        user_answer: existingAnswer ? existingAnswer.user_answer : '', // Default to empty string if unanswered
+      };
+    });
+    // console.log("dw"+completeAnswers);
+  
     const userData = {
       userId,
       testId: test,
       goalId: goal,
       classId: className,
-      answers,
+      answers: completeAnswers,
     };
     // console.log('Payload:', userData);
 
@@ -109,6 +118,19 @@ const QTest: React.FC = () => {
   if (loading) {
     return <LoadingSpinner size={44}/>;
   }
+  if (!questions.length) {
+    return (
+      <div>
+        <Navbar />
+        <Box sx={{ p: 4, textAlign: 'center' }}>
+          <Typography variant="h6" color="textSecondary">
+            No questions available for this test. Please try again later.
+          </Typography>
+        </Box>
+        <Footer />
+      </div>
+    );
+  }
 
   const answeredQuestionIds = answers.map((answer) => answer.question_id);
 
@@ -116,6 +138,7 @@ const QTest: React.FC = () => {
     <div>
         <Navbar/>
      {/* <Box sx={{p:4}}> */}
+     
       <Box sx={{bgcolor:"#0f2b3c",p:1,textAlign:"center"}}>
       <Typography sx={{color:"white"}} variant="caption"><b> Class :</b> {className} </Typography>
       <Typography sx={{textAlign:"center",mb:3,color:"white"}} variant="caption"> <b>Goal :</b> {goal}  <b>Test : </b> {test}</Typography>

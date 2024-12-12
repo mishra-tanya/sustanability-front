@@ -1,31 +1,47 @@
 import { useState, useEffect, ChangeEvent } from 'react';
-import { Button, Grid, TextField, Typography, Box, FormControl, InputLabel, Select, MenuItem, SelectChangeEvent, } from '@mui/material';
+import {
+  Button,
+  Grid,
+  TextField,
+  Typography,
+  Box,
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  SelectChangeEvent,
+  Alert,
+} from '@mui/material';
 import api from '../../../services/axios';
-// import { SelectFieldComponent } from '../../common/InputField';
 
 function Profile() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    // phone: '',
     address: '',
     school: '',
-    className: '',
+    class: '',
   });
 
   const [message, setMessage] = useState('');
-  const classOptions  = [
-    '4-5', '6-8', '9-10', '11-12'
-  ];
+  const [errors, setErrors] = useState<Record<string, string>>({});  
+
+  const classOptions = {
+    'class_4-5': 'Class 4-5',
+    'class_6-8': 'Class 6-8',
+    'class_9-10': 'Class 9-10',
+    'class_11-12': 'Class 11-12',
+  };
 
   useEffect(() => {
-    api.get('/getuser/profile', {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-      .then(response => setFormData(response.data.user))
-      .catch(error => console.error("Error fetching profile data:", error));
+    api
+      .get('/getuser/profile', {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((response) => setFormData(response.data.user))
+      .catch((error) => console.error('Error fetching profile data:', error));
   }, []);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -34,34 +50,48 @@ function Profile() {
       ...prevData,
       [name]: value,
     }));
+    setErrors((prevErrors) => ({ ...prevErrors, [name]: '' }));  
   };
 
   const selecthandleChange = (e: SelectChangeEvent<string>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData((prevData) => ({
+      ...prevData,
+      class: e.target.value,
+    }));
+    setErrors((prevErrors) => ({ ...prevErrors, class: '' }));  
   };
+
   const handleUpdateProfile = () => {
-    api.put('/api/user/profile', formData, {
-      headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
-    })
-      .then(response => {
+    setErrors({});  
+    setMessage(''); 
+
+    api
+      .put('/user/profile', formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`,
+        },
+      })
+      .then((response) => {
         setMessage(response.data.message);
       })
-      .catch(error => {
-        console.error("Error updating profile:", error);
-        setMessage("Failed to update profile.");
+      .catch((error) => {
+        console.error('Error updating profile:', error);
+        if (error.response && error.response.status === 422) {
+          setErrors(error.response.data.errors); 
+        } else {
+          setMessage('Failed to update profile.');
+        }
       });
   };
 
   return (
     <Box p={2}>
-<br />
-      {message && <Typography sx={{background:'red',mb:3}} variant='h6' textAlign={'center'}>{message}</Typography>}
-      
+      <br />
+      {message && (
+        <Alert severity="success" sx={{ mb: 3 }}>
+          {message}
+        </Alert>
+      )}
       <Grid container spacing={2}>
         <Grid item xs={12}>
           <TextField
@@ -71,6 +101,8 @@ function Profile() {
             value={formData.name}
             onChange={handleChange}
             variant="outlined"
+            error={!!errors.name}
+            helperText={errors.name}
           />
         </Grid>
         <Grid item xs={12}>
@@ -84,18 +116,10 @@ function Profile() {
             InputProps={{
               readOnly: true,
             }}
+            error={!!errors.email}
+            helperText={errors.email}
           />
         </Grid>
-        {/* <Grid item xs={12}>
-          <TextField
-            fullWidth
-            label="Phone"
-            name="phone"
-            value={formData.phone}
-            onChange={handleChange}
-            variant="outlined"
-          />
-        </Grid> */}
         <Grid item xs={12}>
           <TextField
             fullWidth
@@ -104,6 +128,8 @@ function Profile() {
             value={formData.address}
             onChange={handleChange}
             variant="outlined"
+            error={!!errors.address}
+            helperText={errors.address}
           />
         </Grid>
         <Grid item xs={12}>
@@ -114,23 +140,30 @@ function Profile() {
             value={formData.school}
             onChange={handleChange}
             variant="outlined"
+            error={!!errors.school}
+            helperText={errors.school}
           />
         </Grid>
         <Grid item xs={12}>
-          <FormControl fullWidth variant="outlined">
+          <FormControl fullWidth variant="outlined" error={!!errors.class}>
             <InputLabel>Class</InputLabel>
             <Select
-              name="className"
-              value={formData.className}
+              name="class"
+              value={formData.class}
               onChange={selecthandleChange}
               label="Class"
             >
-              {classOptions.map((option) => (
-                <MenuItem key={option} value={option}>
-                  {option}
+              {Object.entries(classOptions).map(([value, label]) => (
+                <MenuItem key={value} value={value}>
+                  {label}
                 </MenuItem>
               ))}
             </Select>
+            {errors.class && (
+              <Typography color="error" variant="caption">
+                {errors.class}
+              </Typography>
+            )}
           </FormControl>
         </Grid>
         <Grid item xs={12}>

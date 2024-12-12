@@ -5,20 +5,20 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
-import Badge from '@mui/material/Badge';
+// import Badge from '@mui/material/Badge';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 // import MenuIcon from '@mui/icons-material/Menu';
 import AccountCircle from '@mui/icons-material/AccountCircle';
-import MailIcon from '@mui/icons-material/Mail';
-import NotificationsIcon from '@mui/icons-material/Notifications';
+// import MailIcon from '@mui/icons-material/Mail';
+// import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import CssBaseline from '@mui/material/CssBaseline';
 import { Global } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import { handleLogout } from '../services/logout';
 import { Button } from '@mui/material';
-import { Home, Login } from '@mui/icons-material';
+import { ExpandMore, Home, Login } from '@mui/icons-material';
 // import { Image } from '@mui/icons-material';
 
 export default function Navbar() {
@@ -77,7 +77,6 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
       <MenuItem onClick={handleMenuClose}>  <Link to="/dashboard" style={{ textDecoration: 'none'  }}>My Account</Link></MenuItem>
       <hr />
       <Box display="flex"justifyContent="center" alignItems="center" >
@@ -111,7 +110,7 @@ export default function Navbar() {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton size="large" aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="error">
             <MailIcon />
@@ -126,8 +125,13 @@ export default function Navbar() {
           </Badge>
         </IconButton>
         <p>Notifications</p>
-      </MenuItem>
-      <MenuItem onClick={handleProfileMenuOpen}>
+      </MenuItem> */}
+      
+     
+      {isLoggedIn?
+          (
+          <>
+           <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -137,12 +141,9 @@ export default function Navbar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <p>Profile   </p><ExpandMore/>
         <br />
       </MenuItem>
-      {isLoggedIn?
-          (
-          <>
             <hr />
             <Box display="flex" justifyContent="center" alignItems="center" >
     
@@ -167,7 +168,7 @@ export default function Navbar() {
         </MenuItem>
                
                 <MenuItem>
-          <IconButton size="large" aria-label="show 17 new notifications" color="inherit">
+          <IconButton size="large" color="inherit">
               <Login />
           </IconButton>
           <Link to="/login" style={{ textDecoration: 'none' }}>Login</Link>
@@ -237,7 +238,7 @@ export default function Navbar() {
                   <Link to="/home" style={{ textDecoration: 'none', color: '#1976d2' }}>Dashboard</Link>
                 </Typography>
                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-                  <IconButton size="large" aria-label="show 4 new mails"  >
+                  {/* <IconButton size="large" aria-label="show 4 new mails"  >
                     <Badge badgeContent={4} color="error">
                       <MailIcon />
                     </Badge>
@@ -249,7 +250,7 @@ export default function Navbar() {
                     <Badge badgeContent={17} color="error">
                       <NotificationsIcon />
                     </Badge>
-                  </IconButton>
+                  </IconButton> */}
 
                   <IconButton
                     size="large"

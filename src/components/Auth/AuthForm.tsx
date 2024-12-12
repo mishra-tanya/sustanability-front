@@ -2,8 +2,9 @@ import React, { useState } from 'react';
 import Navbar from '.././Navbar';
 import Footer from '.././Footer';
 import RegistrationForm from './Registration';
-import { Container, Card, CardContent, Typography ,Link} from '@mui/material';
+import { Container, Card, CardContent, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
+import { TypeAnimation } from 'react-type-animation';
 
 interface FormState {
   name: string;
@@ -34,10 +35,32 @@ const AuthForm: React.FC = () => {
   return (
     <>
       <Navbar />
-      <Container maxWidth="sm" sx={{ mb: 10 ,mt:2}}>
-        <Card variant="outlined" sx={{ width: '100%', padding: 3 }}>
+      <br />
+      <div className="center-container" style={ {'display': 'flex',
+  'justifyContent': 'center',
+ 'alignItems': 'center',
+  'textAlign': 'center'
+
+            }}>
+      <TypeAnimation
+        sequence={[
+          'Welcome to Sustainability Olympiad',
+          2000,
+          'Please Register Yourself!!',
+          2000,
+        ]}
+        wrapper="span"
+        speed={50}
+        style={{ fontSize: '20px', display: 'inline-block',fontWeight:'bold' }}
+        repeat={2}
+      />
+    </div>
+      <Container maxWidth="sm" sx={{ mb: 10, mt: 2, pt: 3, pb: 3, bgcolor: "#e3f2fd" }}>
+        <Card variant="outlined" sx={{ width: '100%', padding: 3, }}>
           <CardContent>
-            <Typography variant="h5" align="center" gutterBottom>Registration Form</Typography>
+
+            <Typography variant="h5" align="center" gutterBottom sx={{ fontWeight: 'bold', mb: 3 }}>Registration Form</Typography>
+           
             <RegistrationForm formState={formState} setFormState={setFormState} isLoading={isLoading} setIsLoading={setIsLoading} />
           </CardContent>
           <Typography align="center" sx={{ mt: 2 }}>

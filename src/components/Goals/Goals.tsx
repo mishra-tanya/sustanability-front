@@ -84,9 +84,7 @@ const Goals: React.FC = () => {
                     <Typography variant="h4" sx={{ textAlign: "center", color: 'white', margin: 2, fontWeight: "bold" }}>
                         For Class {className}th
                     </Typography>
-                    <Typography variant="h6" sx={{ textAlign: "center", color: 'white', margin: 2, fontWeight: "bold" }}>
-                        Total of 17 Goals
-                    </Typography>
+                  
                     <ActionButtons onLeaderboardClick={handleDialogOpen} />
                 </Box>
                 <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 5 }}>

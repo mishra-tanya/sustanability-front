@@ -15,7 +15,7 @@ interface GoalCardProps {
 
 const GoalCard: React.FC<GoalCardProps> = ({ goal, onGoalClick }) => (
 
-  <Card sx={{ marginBottom: 2, border: '1px solid #e0e0e0' }}>
+  <Card   variant="outlined" sx={{ marginBottom: 2, border: '1px solid #e0e0e0'}}>
     <CardContent>
       <Typography variant="h6" sx={{ fontWeight: 'bold' }}>
         {goal.goal_name}

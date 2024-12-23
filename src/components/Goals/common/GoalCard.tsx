@@ -1,11 +1,12 @@
 import React from 'react';
 import { Card, CardContent, Button, Typography, Grid } from '@mui/material';
-import { Assignment } from '@mui/icons-material';
+import { Assignment, Cancel, CheckCircle } from '@mui/icons-material';
 
 interface Goal {
   id: number;
   goal_name: string;
   description: string;
+  status?:string;
 }
 
 interface GoalCardProps {
@@ -28,9 +29,26 @@ const GoalCard: React.FC<GoalCardProps> = ({ goal, onGoalClick }) => (
         <Assignment sx={{ marginRight: 1, color: 'grey.600' }} />
         <Typography variant="caption" color="textSecondary">
           Total 10 Tests/Questions
+        
         </Typography>
+        
+        {goal.status && (
+      <Typography variant="caption" color={goal.status === 'attempted' ? 'green' : 'red'} sx={{ marginLeft: 1, display: 'flex', alignItems: 'center' }}>
+        {goal.status === 'attempted' ? (
+          <>
+            <CheckCircle sx={{ color: 'green', marginRight: 0.5 }} />
+            Completed
+          </>
+        ) : (
+          <>
+            <Cancel sx={{ color: 'red', marginRight: 0.5 }} />
+            Not Completed
+          </>
+        )}
+      </Typography>
+    )}
       </Grid>
-
+     
       <Grid item xs={12} md={6} sx={{ display: 'flex', justifyContent: 'flex-end' }}>
         <Button variant="contained" color="primary" onClick={() => onGoalClick(goal.id)}>
           Start

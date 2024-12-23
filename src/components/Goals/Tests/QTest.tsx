@@ -89,8 +89,8 @@ const QTest: React.FC = () => {
       const existingAnswer = answers.find((ans) => ans.question_id === question.id);
       return {
         question_id: question.id,
-        correct_answer: question.correct_answer || '', // Include the correct answer if available
-        user_answer: existingAnswer ? existingAnswer.user_answer : '', // Default to empty string if unanswered
+        correct_answer: question.correct_answer || '',  
+        user_answer: existingAnswer ? existingAnswer.user_answer : '', 
       };
     });
     // console.log("dw"+completeAnswers);
@@ -115,6 +115,7 @@ const QTest: React.FC = () => {
     }
   };
 
+  // console.log(currentIndex);
   if (loading) {
     return <LoadingSpinner size={44}/>;
   }
@@ -133,7 +134,8 @@ const QTest: React.FC = () => {
   }
 
   const answeredQuestionIds = answers.map((answer) => answer.question_id);
-
+  const allQuestionIds = questions.map((question) => question.id);
+//  console.log(allQuestionIds);
   return (
     <div>
         <Navbar/>
@@ -169,6 +171,7 @@ const QTest: React.FC = () => {
         onNext={() => setCurrentIndex((prev) => Math.min(questions.length - 1, prev + 1))}
         onJumpTo={setCurrentIndex}
         answeredQuestions={answeredQuestionIds}
+        allQuestionIds={allQuestionIds}
       />
        </Box>
      {/* </Box> */}

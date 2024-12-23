@@ -38,7 +38,7 @@ const Login: React.FC = () => {
             const expiryTime = Date.now() + (2 * 60 * 60 * 1000);
             localStorage.setItem('authTokenExpiry', expiryTime.toString());
             localStorage.setItem("authToken", token);
-            navigate("/home");
+            navigate("/class");
         } catch (e: unknown) {
             if (e instanceof Error) {
                 setError(e.message);

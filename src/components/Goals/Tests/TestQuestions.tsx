@@ -39,7 +39,7 @@ const TestQuestion: React.FC<TestQuestionProps> = ({
       }}
     >
       <Typography variant="h6">
-        <b>Question {i + 1}.</b> <br />
+        <b>Question {i + 1}.</b> &nbsp;
         {question}
       </Typography>
     </Box>

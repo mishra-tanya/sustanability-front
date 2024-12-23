@@ -155,7 +155,7 @@ const Dashboard: React.FC = () => {
        >
          {classInfo.isUnlocked ? (
            <img
-             src="img.png"  
+             src="/img.png"  
              alt={classInfo.className}
              style={{
                width: '250px',

@@ -8,6 +8,7 @@ interface QNavigationProps {
   onNext: () => void;
   onJumpTo: (index: number) => void;
   answeredQuestions: number[];
+  allQuestionIds:number[];
 }
 
 const QNavigation: React.FC<QNavigationProps> = ({
@@ -17,6 +18,7 @@ const QNavigation: React.FC<QNavigationProps> = ({
   onNext,
   onJumpTo,
   answeredQuestions,
+  allQuestionIds
 }) => (
   <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', flexDirection: 'column', width: '100%' }}>
     <Box sx={{ display: 'flex', justifyContent: 'space-between', width: '100%', mb: 2 }}>
@@ -41,18 +43,19 @@ const QNavigation: React.FC<QNavigationProps> = ({
         borderRadius: '8px',
       }}
     >
-      {Array.from({ length: totalQuestions }, (_, index) => (
+       {allQuestionIds.map((questionId, index) => (
         <Button
-          key={index}
+          key={questionId}
           onClick={() => onJumpTo(index)}
           sx={{
             minWidth: '36px',
             margin: '5px 0',
-            backgroundColor:   currentIndex === index
-            ? '#1976d2'
-            : answeredQuestions.includes(index + 1) 
-            ? '#438942'
-            : '#e0e0e0',
+            backgroundColor:
+              currentIndex === index
+                ? '#1976d2'
+                : answeredQuestions.includes(questionId)
+                ? '#438942'
+                : '#e0e0e0',
             color: 'white',
             flexShrink: 0,
           }}

@@ -6,6 +6,7 @@ interface Goal {
   id: number;
   goal_name: string;
   description: string;
+  status:string;
 }
 
 interface GoalsPageContentProps {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -18,13 +18,35 @@ import { Global } from '@emotion/react';
 import { useNavigate } from 'react-router-dom';
 import { handleLogout } from '../services/logout';
 import { Button } from '@mui/material';
-import { ExpandMore, Home, Login } from '@mui/icons-material';
+import { Dashboard, Home, Login, Logout, Verified } from '@mui/icons-material';
 // import { Image } from '@mui/icons-material';
+
+import logo from '/download.png';
+import api from '../services/axios';
 
 export default function Navbar() {
   const [isLoggedIn, setIsLoggedIn] = React.useState<boolean>(false);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [classN,setClassN]=useState('');
+  const [loadingClass, setLoadingClass] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+        try {
+            const response = await api.get('/user');
+            const classValue = response.data.class.replace('class_', '');
+            // console.log(classValue);
+            setClassN(classValue);
+            // console.log(response.data.class);
+        } catch (err) {
+            console.error('Error fetching user data:', err);
+        }
+    };
+
+    fetchUserData();
+}, []);
+
   const navigate = useNavigate();
   
   const onLogoutSuccess = () => {
@@ -39,6 +61,24 @@ export default function Navbar() {
     // console.log( localStorage.getItem('authToken'));
     setIsLoggedIn(!!token);
   }, []);
+
+  const handleDashboardClick = async () => {
+    if (!classN && !loadingClass) {
+      setLoadingClass(true); 
+      try {
+        const response = await api.get("/user");
+        const classValue = response.data.class.replace("class_", "");
+        setClassN(classValue);
+        navigate(`/class/${classValue}`);
+      } catch (err) {
+        console.error("Error fetching class:", err);
+      } finally {
+        setLoadingClass(false);
+      }
+    } else if (classN) {
+      navigate(`/class/${classN}`);
+    }
+  };
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -77,7 +117,9 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>  <Link to="/dashboard" style={{ textDecoration: 'none'  }}>My Account</Link></MenuItem>
+      <MenuItem onClick={handleMenuClose}>  <Link to="/dashboard" style={{ textDecoration: 'none'
+        ,color: '#1976d2' 
+        }}>My Account</Link></MenuItem>
       <hr />
       <Box display="flex"justifyContent="center" alignItems="center" >
     
@@ -87,6 +129,8 @@ export default function Navbar() {
     color="primary"
     onClick={() => handleLogout(onLogoutSuccess, onLogoutError)}
   >
+          <Logout/>
+
     Logout
   </Button>
   </Box>
@@ -127,24 +171,43 @@ export default function Navbar() {
         <p>Notifications</p>
       </MenuItem> */}
       
-     
+     {/* Mobile ones */}
       {isLoggedIn?
           (
           <>
-           <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Profile   </p><ExpandMore/>
-        <br />
-      </MenuItem>
-            <hr />
+           <MenuItem>
+          <IconButton size="large"   color="inherit">
+              <Home />
+          </IconButton>
+          <Link to="/dashboard" style={{ textDecoration: 'none',color: '#1976d2'   }}>My Profile</Link>
+        </MenuItem>
+
+        <MenuItem>
+          <IconButton size="large"   color="inherit">
+              <Verified />
+          </IconButton>
+          <Link to="/verification" style={{ textDecoration: 'none',color: '#1976d2'   }}>Verify Certificates</Link>
+        </MenuItem>
+            <MenuItem>
+          <IconButton size="large"color="inherit">
+              <Dashboard />
+          </IconButton>
+          <button
+                    onClick={handleDashboardClick}
+                    style={{
+                      fontSize:'16px',
+                      padding:0,
+                      textDecoration: "none",
+                      color: "#1976d2",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    disabled={loadingClass}  
+                  >
+                    {loadingClass ? "Loading..." : "Dashboard"}
+                  </button>  </MenuItem>
+        <hr />
             <Box display="flex" justifyContent="center" alignItems="center" >
     
            
@@ -153,8 +216,10 @@ export default function Navbar() {
           color="primary"
           onClick={() => handleLogout(onLogoutSuccess, onLogoutError)}
         >
+          <Logout/>
           Logout
         </Button>
+        
         </Box>
           </>
         )
@@ -165,6 +230,13 @@ export default function Navbar() {
               <Home />
           </IconButton>
           <Link to="/" style={{ textDecoration: 'none'  }}>Home</Link>
+        </MenuItem>
+
+        <MenuItem>
+          <IconButton size="large"   color="inherit">
+              <Verified />
+          </IconButton>
+          <Link to="/verification" style={{ textDecoration: 'none'  }}>Verifiy Certificates</Link>
         </MenuItem>
                
                 <MenuItem>
@@ -206,18 +278,36 @@ export default function Navbar() {
             </IconButton> */}
             
             <Box sx={{ width: '70px',marginTop:1, height: 'auto' }}>
-  <img src="download.png" alt="logo" style={{ width: '100%', height: 'auto' }} />
-</Box>
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ display: {  sm: 'block' } }}
-            >
-              
-              <Link to="/" style={{ textDecoration: 'none', color: '#1976d2',fontWeight:'bold' }}> Sustainability Olympiad</Link>
-            </Typography>
+            <img 
+      src={logo} 
+      alt="logo" 
+      style={{ width: '100%', height: 'auto' }} 
+    />
+    </Box>
+    <Typography
+  variant="h6"
+  noWrap
+  component="div"
+  sx={{
+    display: 'flex',
+    alignItems: 'center',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    flexGrow: 1, 
+    fontWeight: 'bold',
+    color: '#1976d2',
+    fontSize: { xs: '1.15rem', sm: '1.25rem', md: '1.25rem' }, 
+    textDecoration: 'none',
+  }}
+>
+  <Link to="/" style={{ textDecoration: 'none', color: '#1976d2' }}>
+    Sustainability Olympiad
+  </Link>
+</Typography>
 
+           
+                
             <Box sx={{ flexGrow: 1 }} />
             <Typography
               variant="subtitle1"
@@ -226,7 +316,18 @@ export default function Navbar() {
               sx={{ display: { xs: 'none', sm: 'block' }, mr: 2 }}
             >
               <Link to="/" style={{ textDecoration: 'none', color: '#1976d2' }}>Home</Link>
+              
             </Typography>
+            <Typography
+                  variant="subtitle1"
+                  noWrap
+                  component="div"
+                  sx={{ display: { xs: 'none', sm: 'block' } }}
+                >
+                  <Link to="/verification" style={{ textDecoration: 'none', color: '#1976d2' }}>Verify Certificates</Link>
+                </Typography>
+                &nbsp;
+                &nbsp;
             {isLoggedIn ? (
               <>
                 <Typography
@@ -235,8 +336,25 @@ export default function Navbar() {
                   component="div"
                   sx={{ display: { xs: 'none', sm: 'block' } }}
                 >
-                  <Link to="/home" style={{ textDecoration: 'none', color: '#1976d2' }}>Dashboard</Link>
+                  
+                  <button
+                    onClick={handleDashboardClick}
+                    style={{
+                      fontSize:'16px',
+                      textDecoration: "none",
+                      color: "#1976d2",
+                      background: "none",
+                      border: "none",
+                      cursor: "pointer",
+                    }}
+                    disabled={loadingClass}  
+                  >
+                    {loadingClass ? "Loading..." : "Dashboard"}
+                  </button>
+                    {/* <Link to="/home" style={{ textDecoration: 'none', color: '#1976d2' }}>Dashboard</Link> */}
                 </Typography>
+                
+               
                 <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
                   {/* <IconButton size="large" aria-label="show 4 new mails"  >
                     <Badge badgeContent={4} color="error">

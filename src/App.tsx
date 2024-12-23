@@ -10,6 +10,7 @@ import Home from './components/Home';
 import QTest from './components/Goals/Tests/QTest';
 import DashboardLayoutBasic from './components/Goals/Dashboard/Dashboard';
 import Results from './components/Goals/Results/Result';
+import Verification from './components/VerifyCertificate/Verification';
 
 const App: React.FC = () => {
     return (
@@ -19,16 +20,21 @@ const App: React.FC = () => {
                 <Route path="/" element={<Home />} />
                 <Route path="/register" element={<AuthForm />} />
                 <Route path="/login" element={<Login />} />
+                <Route path="/verification" element={<Verification />} />
+                <Route path="/verification/:certificateId" element={<Verification />} />
+
 
                 {/* protected  */}
                 <Route element={<PrivateRoutes />}>
-                    <Route path="/home" element={<Dashboard />} />
+                    <Route path="/class" element={<Dashboard />} />
                     <Route path="/class/:className" element={<Goals />} />
                     <Route path="/class/:className/goal/:goal" element={<TestsGoals />} />
                     <Route path="/class/:className/goal/:goal/:test" element={<QTest />} />
                     <Route path="/dashboard" element={<DashboardLayoutBasic />} />
                     <Route path="/results/:classId/:goalId/:testId" element={<Results />} />
                 </Route>
+
+                {/* admin */}
             </Routes>
         </Router>
     );

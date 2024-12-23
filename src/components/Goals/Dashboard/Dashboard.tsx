@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { extendTheme,   } from '@mui/material/styles';
+import { extendTheme, } from '@mui/material/styles';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 // import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 // import BarChartIcon from '@mui/icons-material/BarChart';
@@ -9,13 +9,14 @@ import { AppProvider, Navigation, Router } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 // import Grid from '@mui/material/Grid2';AddHome, Home, Logout,
-import {  Person } from '@mui/icons-material';
+import { Person, Verified } from '@mui/icons-material';
 // import { Button } from '@mui/material';
 import Dash from './Dash';
 import Profile from './Profile';
 import { Link } from 'react-router-dom';
-import {  Typography } from '@mui/material';
+import { Typography } from '@mui/material';
 import Overall from './Overall';
+import Certificate from './Certificate';
 // import Login from '../../Auth/LoginForm';
 
 const NAVIGATION: Navigation = [
@@ -23,7 +24,7 @@ const NAVIGATION: Navigation = [
     kind: 'header',
     title: 'Navigations',
   },
-  
+
   {
     segment: 'dashboard',
     title: 'Dashboard',
@@ -78,7 +79,12 @@ const NAVIGATION: Navigation = [
     title: 'Class 11-12',
     icon: <LayersIcon />,
   },
-  
+  {
+    segment: 'certificates',
+    title: 'Certificates',
+    icon: <Verified />,
+  },
+
 ];
 
 
@@ -130,7 +136,7 @@ export default function DashboardLayoutBasic(props: any) {
     setSelectedPage(router.pathname.replace('/', ''));
   }, [router.pathname]);
 
-  
+
   return (
     <AppProvider
       navigation={NAVIGATION}
@@ -142,51 +148,54 @@ export default function DashboardLayoutBasic(props: any) {
         title: 'Sustainability Olympiad',
       }}
     >
-      <DashboardLayout  sx={{
+      <DashboardLayout sx={{
         '& > .MuiBox-root': {
-            overflow: 'hidden'
+          overflow: 'hidden'
         }
-    }}>
-   
+      }}>
+
 
         <PageContainer maxWidth="xl" >
           <Link to={'/'} >
-          <Typography  >
-          Go back to Home Page 
-          </Typography>
+            <Typography  >
+              Go back to Home Page
+            </Typography>
           </Link>
           <br />
-          
-        {selectedPage === 'dashboard' && (
-              <>
 
-                <Overall/>
-              </>
-            )}
+          {selectedPage === 'dashboard' && (
+            <>
 
-{
-  selectedPage=='4-5' &&(
-    <Dash classId='4-5'/>
-  )
-}
-{
-  selectedPage=='6-8' &&(
-    <Dash classId='6-8'/>
-  )
-}
-{
-  selectedPage=='9-10' &&(
-    <Dash classId='9-10'/>
-  )
-}
-{
-  selectedPage=='11-12' &&(
-    <Dash classId='11-12'/>
-  )
-}
-{selectedPage === 'profile' && (
-             <Profile/>
-            )}
+              <Overall />
+            </>
+          )}
+
+          {
+            selectedPage == '4-5' && (
+              <Dash classId='4-5' />
+            )
+          }
+          {
+            selectedPage == '6-8' && (
+              <Dash classId='6-8' />
+            )
+          }
+          {
+            selectedPage == '9-10' && (
+              <Dash classId='9-10' />
+            )
+          }
+          {
+            selectedPage == '11-12' && (
+              <Dash classId='11-12' />
+            )
+          }
+          {selectedPage === 'profile' && (
+            <Profile />
+          )}
+           {selectedPage === 'certificates' && (
+            <Certificate />
+          )}
           {/* <Grid container spacing={1}>
             <Grid size={5} />
             <Grid size={12}>

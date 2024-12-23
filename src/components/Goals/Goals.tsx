@@ -22,7 +22,7 @@ const Goals: React.FC = () => {
     const [openDialog, setOpenDialog] = useState(false);
     const [user, setUser] = useState<User | null>(null);
     const [leaderboard, setLeaderboard] = useState([]);
-    
+
     useEffect(() => {
         const fetchUserData = async () => {
             try {
@@ -32,10 +32,10 @@ const Goals: React.FC = () => {
                 console.error('Error fetching user data:', err);
             }
         };
-    
+
         fetchUserData();
     }, []);
-    
+
     useEffect(() => {
         const fetchGoals = async () => {
             try {
@@ -84,20 +84,19 @@ const Goals: React.FC = () => {
                     <Typography variant="h4" sx={{ textAlign: "center", color: 'white', margin: 2, fontWeight: "bold" }}>
                         For Class {className}th
                     </Typography>
-                  
-                    <ActionButtons onLeaderboardClick={handleDialogOpen} />
+
+                    <ActionButtons onLeaderboardClick={handleDialogOpen}  classGroupProp={className || ''}  />
                 </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginTop: 5 }}>
-                    <Typography variant="h5" color="textSecondary">
-                        Total Goals 17
-                    </Typography>
-                </Box>
-                <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <Typography variant="caption" color="textSecondary">
-                        Each Contains Total 10 Tests
-                    </Typography>
-                </Box>
-                <GoalsPageContent goals={goals} onGoalClick={handleGoalClick} />
+               
+               
+                {className !== '' && (
+                    <GoalsPageContent
+                        goals={goals}
+                        onGoalClick={handleGoalClick}
+                        classNameUser={className || ''}
+                    />
+                )}
+
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2, backgroundColor: '#f0f0f0' }}>
                 </Box>
             </Box>

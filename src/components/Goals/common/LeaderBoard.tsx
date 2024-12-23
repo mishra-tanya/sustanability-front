@@ -24,7 +24,7 @@ const LeaderboardDialog: React.FC<LeaderboardDialogProps> = ({ open, onClose, le
 
   const currentUserEntry = leaderboardData.find(entry => String(entry.user_id) === String(currentUserId));
 
-console.log(currentUserEntry);
+// console.log(currentUserEntry);
     return (
         <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
             <DialogTitle sx={{ backgroundColor: "#e29114" }}>

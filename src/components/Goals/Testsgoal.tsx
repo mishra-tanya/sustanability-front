@@ -44,7 +44,7 @@ const TestsGoals: React.FC = () => {
             try {
                 const response = await api.get(`/class/${className}/goal/${goal}`);
                 const data = response.data.data;
-                // console.log((data));
+                console.log((data));
                 if (Array.isArray(data.tests)) {
                     setTests(data.tests);
                 } else {
@@ -87,7 +87,7 @@ const TestsGoals: React.FC = () => {
             <Box sx={{ bgcolor:"#0f2b3c",p:2 }}>
                 <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold" ,color:'white'}}>For Class {className}th</Typography>
 
-                <ActionButtons onLeaderboardClick={handleDialogOpen} />
+                <ActionButtons onLeaderboardClick={handleDialogOpen} classGroupProp={className || ''} />
                 </Box>
 
                <TestsGoalsPageContent goals={test} onGoalClick={handleTestClick} />

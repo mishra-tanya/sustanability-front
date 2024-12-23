@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { fetchOverallDashData } from "../../../services/apiService";
 import LoadingSpinner from "../../common/LoadingSpinner";
 import { Box, Button, Stack, Typography } from "@mui/material";
@@ -29,15 +29,15 @@ type Data = {
 const Overall = () => {
   const [data, setData] = useState<Data | null>(null);
   // const [filterText, setFilterText] = useState("");  
-  const [filteredData, setFilteredData] = useState<ClassResult[]>([]); 
+  const [filteredData, setFilteredData] = useState<ClassResult[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
       const res = await fetchOverallDashData();
-    //   console.log("Fetched Data:", res);
+      //   console.log("Fetched Data:", res);
       setData(res);
-      setFilteredData(res.results);  
+      setFilteredData(res.results);
     };
     fetchData();
   }, []);
@@ -59,7 +59,7 @@ const Overall = () => {
   //     setFilteredData(filtered);
   //   }
   // }, [filterText, data]);
-  
+
 
   if (!data) {
     return <LoadingSpinner size={33} />;
@@ -76,9 +76,9 @@ const Overall = () => {
     {
       name: "S.No",
       cell: (_row: ClassResult, index: number) => <span>{index + 1}</span>,
-      selector: (row: ClassResult) =>row.id,
-    //   ignoreRowClick: true,
-    //   allowOverflow: true,
+      selector: (row: ClassResult) => row.id,
+      //   ignoreRowClick: true,
+      //   allowOverflow: true,
       button: true,
       sortable: true,
     },
@@ -118,7 +118,7 @@ const Overall = () => {
       button: true,
     },
   ];
-  
+  const percentage = (totalScore ?? 0) / 6800 * 100;
 
   return (
     <div>
@@ -144,7 +144,7 @@ const Overall = () => {
             p: 3,
           }}
         >
-          <Gauge width={150} height={150} value={totalScore ?? 0} />
+          <Gauge width={150} height={150} value={percentage ?? 0} />
           <Typography sx={{ textAlign: "center", marginTop: 1 }}>
             Overall Percentage
           </Typography>
@@ -161,7 +161,7 @@ const Overall = () => {
             p: 3,
           }}
         >
-          <Gauge width={150} height={150} value={uniqueTestsGiven} valueMax={10} />
+          <Gauge width={150} height={150} value={uniqueTestsGiven} valueMax={680} />
           <Typography sx={{ textAlign: "center", marginTop: 1 }}>
             Total Tests Given
           </Typography>
@@ -178,15 +178,15 @@ const Overall = () => {
             p: 3,
           }}
         >
-          <Gauge width={150} height={150} value={uniqueGoalsCompleted} valueMax={17} />
+          <Gauge width={150} height={150} value={uniqueGoalsCompleted} valueMax={68} />
           <Typography sx={{ textAlign: "center", marginTop: 1 }}>
             Total Goals Attempted
           </Typography>
         </Box>
       </Stack>
 
-      <Typography variant="h4" align="center" sx={{ mt: 5,bgcolor:"#eeeeee", p:1}}>
-        Overall Results 
+      <Typography variant="h4" align="center" sx={{ mt: 5, bgcolor: "#eeeeee", p: 1 }}>
+        Overall Results
       </Typography>
       {/* <Box sx={{ textAlign: "right", mt: 3 }}>
         <TextField
@@ -199,7 +199,7 @@ const Overall = () => {
           sx={{ width: "30%", mb: 3 }}
         />
       </Box> */}
-<br /><br />
+      <br /><br />
       <DataTable
         columns={columns}
         data={filteredData}

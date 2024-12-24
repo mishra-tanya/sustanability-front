@@ -11,6 +11,8 @@ import QTest from './components/Goals/Tests/QTest';
 import DashboardLayoutBasic from './components/Goals/Dashboard/Dashboard';
 import Results from './components/Goals/Results/Result';
 import Verification from './components/VerifyCertificate/Verification';
+import AdminHome from './admin/AdminHome';
+import AdminPrivateRoutes from './components/AdminPrivateRoutes';
 
 const App: React.FC = () => {
     return (
@@ -34,7 +36,10 @@ const App: React.FC = () => {
                     <Route path="/results/:classId/:goalId/:testId" element={<Results />} />
                 </Route>
 
-                {/* admin */}
+                {/* admin protcted paths  */}
+                <Route element={<AdminPrivateRoutes />}>
+                    <Route path="/admin/home" element={<AdminHome/>}/>
+                </Route>
             </Routes>
         </Router>
     );

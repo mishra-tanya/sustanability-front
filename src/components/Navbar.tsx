@@ -297,7 +297,7 @@ export default function Navbar() {
     flexGrow: 1, 
     fontWeight: 'bold',
     color: '#1976d2',
-    fontSize: { xs: '1.15rem', sm: '1.25rem', md: '1.25rem' }, 
+    fontSize: { xs: '1rem', sm: '1.15rem', md: '1.25rem' }, 
     textDecoration: 'none',
   }}
 >

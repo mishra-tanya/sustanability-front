@@ -28,7 +28,7 @@ const GoalCard: React.FC<GoalCardProps> = ({ goal, onGoalClick }) => (
       <Grid item xs={12} md={6} sx={{ display: 'flex', alignItems: 'center' }}>
         <Assignment sx={{ marginRight: 1, color: 'grey.600' }} />
         <Typography variant="caption" color="textSecondary">
-          Total 10 Tests/Questions
+          Total 10 Tests/ 10 Questions
         
         </Typography>
         

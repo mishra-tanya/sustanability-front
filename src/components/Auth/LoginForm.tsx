@@ -34,11 +34,18 @@ const Login: React.FC = () => {
 
         try {
             const response = await loginUser(email, password);
-            const { token } = response;
+            const { token, role } = response;
             const expiryTime = Date.now() + (2 * 60 * 60 * 1000);
             localStorage.setItem('authTokenExpiry', expiryTime.toString());
             localStorage.setItem("authToken", token);
-            navigate("/class");
+            localStorage.setItem("userRole", role);   
+
+            if (role === 'admin') {
+                navigate("/admin/home");   
+            } else {
+                navigate("/class");   
+            }
+            // navigate("/class");
         } catch (e: unknown) {
             if (e instanceof Error) {
                 setError(e.message);

@@ -28,13 +28,19 @@ interface ResultData {
   score: number;
   total_questions: number;
   detailed_results: DetailedResult[];
+  testN: { test_name: string }; 
+  goalN: { goal_name: string }; 
 }
+
+
 const Results: React.FC = () => {
     const [resultData, setResultData] = useState<ResultData | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
     const { classId, goalId, testId } = useParams<{ classId: string; goalId: string; testId: string }>();
     const [userId, setUserId] = useState<string | null>(null);
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState<number>(0);
+    const [goalName, setGoalName] = useState<string | null>(null);
+    const [testName, setTestName] = useState<string | null>(null);
   
     useEffect(() => {
       const getUserId = async () => {
@@ -55,6 +61,9 @@ const Results: React.FC = () => {
         try {
           const response = await api.get<ResultData>(`results/${userId}/${classId}/${goalId}/${testId}`);
           setResultData(response.data);
+          // console.log(response.data.testN.test_name);
+          setTestName(response.data.testN.test_name);
+          setGoalName(response.data.goalN.goal_name);
         } catch (error) {
           console.error('No results found:', error);
         } finally {
@@ -99,8 +108,8 @@ const Results: React.FC = () => {
         <Box sx={{textAlign:'center',p:5}}>
         <Typography variant="h5"><b>Test Results For <br />
             Class: {classId} <br />
-             Goal: {goalId} <br />
-             Test: {testId}</b></Typography>
+             Goal: {goalName} <br />
+             Test: {testName}</b></Typography>
 
         </Box>
         {resultData && (

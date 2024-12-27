@@ -23,6 +23,7 @@ interface Answer {
   correct_answer: string;
   user_answer: string;
 }
+
 const QTest: React.FC = () => {
   const { className, goal, test } = useParams<{ className: string; goal: string; test: string }>();
   const [questions, setQuestions] = useState<Question[]>([]);
@@ -30,6 +31,9 @@ const QTest: React.FC = () => {
   const [answers, setAnswers] = useState<Answer[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [userId, setUserId] = useState<string | null>(null);
+  const [goalName, setGoalName] = useState<string |null>(null);
+  const [testName, setTestName] = useState<string |null>(null);
+
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -46,7 +50,10 @@ const QTest: React.FC = () => {
       try {
         const response = await api.get(`/class/${className}/goal/${goal}/${test}`);
         // console.log(response.data);
-        setQuestions(response.data);
+        setQuestions(response.data.questions);
+        setGoalName(response.data.goal[0].goal_name);
+        // console.log(response.data.testName[0].test_name);
+        setTestName(response.data.testName[0].test_name);
       } catch (error) {
         console.error('Error fetching questions:', error);
       } finally {
@@ -143,7 +150,7 @@ const QTest: React.FC = () => {
      
       <Box sx={{bgcolor:"#0f2b3c",p:1,textAlign:"center"}}>
       <Typography sx={{color:"white"}} variant="caption"><b> Class :</b> {className} </Typography>
-      <Typography sx={{textAlign:"center",mb:3,color:"white"}} variant="caption"> <b>Goal :</b> {goal}  <b>Test : </b> {test}</Typography>
+      <Typography sx={{textAlign:"center",mb:3,color:"white"}} variant="caption"> <b>Goal :</b> {goalName}  <b>Test : </b> {testName}</Typography>
 
       </Box>
         <Box sx={{p:4}}>

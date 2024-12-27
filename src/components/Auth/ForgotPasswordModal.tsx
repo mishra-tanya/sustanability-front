@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import {
   Box,
   Button,
@@ -7,13 +7,26 @@ import {
   TextField,
   Stack,
 } from "@mui/material";
-
+import api from "../../services/axios";
 const ForgotPasswordModal = ({ open, onClose }: { open: boolean; onClose: () => void }) => {
   const [email, setEmail] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
-  const handleSubmit = () => {
-    console.log("Email submitted:", email);
-    onClose(); 
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const response = await api.post("/forgot-password", { email });
+      
+      setSuccessMessage(response.data.message);
+      setErrorMessage("");
+      onClose();
+    } catch (error:any) {
+      setErrorMessage(error.response?.data?.message || "Something went wrong");
+      setSuccessMessage("");
+    }
+    setLoading(false);
   };
 
   return (
@@ -25,21 +38,23 @@ const ForgotPasswordModal = ({ open, onClose }: { open: boolean; onClose: () => 
           left: "50%",
           transform: "translate(-50%, -50%)",
           maxWidth: 800,
-          minWidth:400,
+          minWidth: 400,
           bgcolor: "background.paper",
           boxShadow: 24,
           p: 4,
           borderRadius: 1,
         }}
       >
-        <Typography id="forgot-password-modal" align='center' variant="h6" sx={{ mb: 3, fontWeight:"bold" }}>
+        <Typography id="forgot-password-modal" align="center" variant="h6" sx={{ mb: 3, fontWeight: "bold" }}>
           Forgot Password
         </Typography>
         <Typography variant="caption">
-            ** You will receive your forgot password on your registered email **
-        </Typography><br /><br />
-        <Typography variant="caption" align="center" >
-            Please Enter Your Registered Email Address
+          ** You will receive a reset link on your registered email **
+        </Typography>
+        <br />
+        <br />
+        <Typography variant="caption" align="center">
+          Please Enter Your Registered Email Address
         </Typography>
         <Stack spacing={2}>
           <TextField
@@ -50,20 +65,20 @@ const ForgotPasswordModal = ({ open, onClose }: { open: boolean; onClose: () => 
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             fullWidth
+            error={!!errorMessage}
+            helperText={errorMessage}
           />
+          {successMessage && <Typography color="success.main">{successMessage}</Typography>}
           <Button
             variant="contained"
             color="primary"
             onClick={handleSubmit}
             fullWidth
+            disabled={loading}
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </Button>
-          <Button
-            variant="text"
-            onClick={onClose}
-            fullWidth
-          >
+          <Button variant="text" onClick={onClose} fullWidth>
             Cancel
           </Button>
         </Stack>

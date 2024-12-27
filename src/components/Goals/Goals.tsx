@@ -50,6 +50,7 @@ const Goals: React.FC = () => {
                 }
                 if (Array.isArray(data.leaderboard)) {
                     setLeaderboard(data.leaderboard);
+                    console.log(data.leaderboard);
                 } else {
                     console.error('Unexpected data format for leaderboard:', data);
                 }
@@ -107,6 +108,7 @@ const Goals: React.FC = () => {
                     onClose={handleDialogClose}
                     leaderboardData={leaderboard}
                     currentUserId={user.id}
+                    goals={goals}
                 />
             )}
         </>

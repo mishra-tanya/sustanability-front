@@ -1,10 +1,7 @@
 import React from 'react';
 import { Button, Box } from '@mui/material';
-import { jsPDF } from 'jspdf'; 
 import api from '../../../services/axios';
-import imageURL from '/cp.png';
-import QRCode from "qrcode";
-
+import { generateCertificatePDFs } from './generateCertificate';
 interface ActionButtonsProps {
   onLeaderboardClick: () => void;
   classGroupProp:string;
@@ -18,56 +15,28 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick, class
       const response = await api.post(
         '/generate-certificate',
         {
-          type: "participation",
+          type: "Participation",
           classGr:classGroupProp
         },
         { withCredentials: true }
       );
-      console.log(response.data);
-      const { certificateNumber, date, username ,userSchool,classGroup} = response.data;
-      const doc = new jsPDF('landscape');
-      const pageWidth = doc.internal.pageSize.getWidth();
-      const pageHeight = doc.internal.pageSize.getHeight();
-     
-      const qrCodeData = await QRCode.toDataURL(`${baseUrl}/verification/${certificateNumber}`);
+      // console.log(response.data);
+      const { certificateNumber, date, username, userSchool, classGroup } = response.data;
 
-      // const qrCodeData = await QRCode.toDataURL(`http://localhost:5173/verification/${certificateNumber}`);
-
-      doc.addImage(imageURL, 'JPEG', 0, 0, pageWidth, pageHeight);
-
-      doc.setFont('times', 'italic');
-      doc.setFontSize(28);
-      doc.text(username, 148, 110, { align: 'center' });
-
-      doc.setFont('times', 'normal');
-      doc.setFontSize(16);
-      doc.text(
-        `of School ${userSchool}, Class group ${classGroup}
-         for successfully participating in the Sustainabiliy  Olympiad Event organized by the SCR Team.`,
-        148,
-        124,
-        { align: 'center', maxWidth: 250 }
-      );
-      doc.text('We appreciate your presence and wish you all the best for future endeavours.', 148, 137, {
-        align: 'center',
-        maxWidth: 250,
+      await generateCertificatePDFs({
+        certificateNumber,
+        username,
+        userSchool,
+        classGroup,
+        date,
+        baseUrl,
       });
-      doc.setFont('times', 'italic');
-      doc.setFontSize(12);
-      doc.addImage(qrCodeData, "PNG", 20, 160, 25, 25);
-      const leftX = 20;
-
-      doc.text(`Date of Certification: ${date}`, leftX, 195);
-
-      const rightX = 190;
-      doc.text(`Certificate Number: ${certificateNumber}`, rightX, 195);
-
-      doc.save('participation-certificate.pdf');
     } catch (error) {
       console.error('Error generating certificate:', error);
       alert('Failed to generate certificate. Please try again.');
     }
   };
+
 
   return (
     <>

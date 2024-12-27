@@ -34,7 +34,7 @@ const GoalsTable: React.FC = () => {
     fetchGoals(page, rowsPerPage);
   }, [page, rowsPerPage]);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 

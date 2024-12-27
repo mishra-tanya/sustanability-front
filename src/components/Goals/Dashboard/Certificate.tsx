@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import  { useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, Grid, Box } from '@mui/material';
 import api from '../../../services/axios';
 import LoadingSpinner from '../../common/LoadingSpinner';
@@ -14,12 +14,9 @@ interface Certificate {
   certificate_id: string;
   userSchool: string;
 }
+ 
 
-interface CertificateProps {
-  userId: number;
-}
-
-const Certificate: React.FC<CertificateProps> = ({ userId }) => {
+const Certificate = () => {
   const [certificates, setCertificates] = useState<Certificate[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
@@ -33,7 +30,7 @@ const Certificate: React.FC<CertificateProps> = ({ userId }) => {
       setLoading(true);
       try {
         const response = await api.get(`/getAllCertificates`);
-        console.log(response.data.certificate);
+        // console.log(response.data.certificate);
         setUserName(response.data.userName);
         setCertificates(response.data.certificate);
       } catch (e) {
@@ -45,7 +42,7 @@ const Certificate: React.FC<CertificateProps> = ({ userId }) => {
     };
 
     fetchCertificate();
-  }, [userId]);
+  }, []);
 
   if (loading) return <LoadingSpinner size={33} />;
   if (error) return <Typography color="error">{error}</Typography>;

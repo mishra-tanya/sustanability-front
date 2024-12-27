@@ -35,7 +35,7 @@ const NAVIGATION: Navigation = [
   },
   {
     segment: 'track',
-    title: 'Track Registration of last 7 days',
+    title: 'Track Registration ',
     icon: <BarChart />,
   },
   {

@@ -28,7 +28,7 @@ const TestQuestionsTable: React.FC = () => {
     try {
       const response = await api.get(`/getTestQuestions?page=${page + 1}`);
       setTestQuestions(response.data.testQuestions);  
-      setTotalQuestions(response.data.testQuestions.total);  
+      setTotalQuestions(response.data.totalQuestionsCount)  
       console.log(response);
     } catch (error) {
       console.error("Error fetching test questions:", error);
@@ -41,7 +41,7 @@ const TestQuestionsTable: React.FC = () => {
     fetchTestQuestions(page );
   }, [page]);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 

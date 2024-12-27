@@ -11,6 +11,7 @@ interface User {
 }
 
 interface CertificateData {
+  id:number;
   certificate_content: string;
   certificate_id: string;
   certificate_type: string;

@@ -30,7 +30,7 @@ export default function Navbar() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
   const [classN,setClassN]=useState('');
   const [loadingClass, setLoadingClass] = useState<boolean>(false);
-
+  const userRole = localStorage.getItem("userRole");
   useEffect(() => {
     const fetchUserData = async () => {
         try {
@@ -63,20 +63,25 @@ export default function Navbar() {
   }, []);
 
   const handleDashboardClick = async () => {
-    if (!classN && !loadingClass) {
-      setLoadingClass(true); 
-      try {
-        const response = await api.get("/user");
-        const classValue = response.data.class.replace("class_", "");
-        setClassN(classValue);
-        navigate(`/class/${classValue}`);
-      } catch (err) {
-        console.error("Error fetching class:", err);
-      } finally {
-        setLoadingClass(false);
+    if (userRole === 'admin') {
+      window.location.href = '/admin/home'; 
+    } else {
+  
+      if (!classN && !loadingClass) {
+        setLoadingClass(true); 
+        try {
+          const response = await api.get("/user");
+          const classValue = response.data.class.replace("class_", "");
+          setClassN(classValue);
+          navigate(`/class/${classValue}`);
+        } catch (err) {
+          console.error("Error fetching class:", err);
+        } finally {
+          setLoadingClass(false);
+        }
+      } else if (classN) {
+        navigate(`/class/${classN}`);
       }
-    } else if (classN) {
-      navigate(`/class/${classN}`);
     }
   };
 
@@ -117,10 +122,14 @@ export default function Navbar() {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      {userRole=='user' &&(
+     <>
       <MenuItem onClick={handleMenuClose}>  <Link to="/dashboard" style={{ textDecoration: 'none'
         ,color: '#1976d2' 
         }}>My Account</Link></MenuItem>
       <hr />
+     </>
+      )}
       <Box display="flex"justifyContent="center" alignItems="center" >
     
            
@@ -179,7 +188,9 @@ export default function Navbar() {
           <IconButton size="large"   color="inherit">
               <Home />
           </IconButton>
-          <Link to="/dashboard" style={{ textDecoration: 'none',color: '#1976d2'   }}>My Profile</Link>
+         {userRole=='user' &&(
+           <Link to="/dashboard" style={{ textDecoration: 'none',color: '#1976d2'   }}>My Profile</Link>
+         )}
         </MenuItem>
 
         <MenuItem>
@@ -205,7 +216,11 @@ export default function Navbar() {
                     }}
                     disabled={loadingClass}  
                   >
-                    {loadingClass ? "Loading..." : "Dashboard"}
+                     {loadingClass 
+    ? "Loading..." 
+    : userRole === 'admin' 
+      ? "Admin Dashboard" 
+      : "User Dashboard"}
                   </button>  </MenuItem>
         <hr />
             <Box display="flex" justifyContent="center" alignItems="center" >
@@ -336,21 +351,25 @@ export default function Navbar() {
                   component="div"
                   sx={{ display: { xs: 'none', sm: 'block' } }}
                 >
-                  
-                  <button
-                    onClick={handleDashboardClick}
-                    style={{
-                      fontSize:'16px',
-                      textDecoration: "none",
-                      color: "#1976d2",
-                      background: "none",
-                      border: "none",
-                      cursor: "pointer",
-                    }}
-                    disabled={loadingClass}  
-                  >
-                    {loadingClass ? "Loading..." : "Dashboard"}
-                  </button>
+  <button
+    onClick={handleDashboardClick}
+    style={{
+      fontSize: '16px',
+      textDecoration: "none",
+      color: "#1976d2",
+      background: "none",
+      border: "none",
+      cursor: "pointer",
+    }}
+    disabled={loadingClass}
+  >
+    {loadingClass 
+    ? "Loading..." 
+    : userRole === 'admin' 
+      ? "Admin Dashboard" 
+      : "User Dashboard"}
+  </button>
+
                     {/* <Link to="/home" style={{ textDecoration: 'none', color: '#1976d2' }}>Dashboard</Link> */}
                 </Typography>
                 

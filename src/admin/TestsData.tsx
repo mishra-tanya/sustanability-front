@@ -39,7 +39,7 @@ const TestsData: React.FC = () => {
     fetchTests(page);
   }, [page]);
 
-  const handleChangePage = (event: unknown, newPage: number) => {
+  const handleChangePage = (_: unknown, newPage: number) => {
     setPage(newPage);
   };
 

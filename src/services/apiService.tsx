@@ -42,7 +42,7 @@ export const getGoals = async (className: string) => {
 export const fetchOverallData = async ()  => {
   try {
       const response = await api.get('/getByClass'); 
-      // console.log(response.data); 
+      // console.log(response); 
       return response.data;
   } catch (error) {
       console.error('Error fetching overall data:', error);

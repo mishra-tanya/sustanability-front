@@ -86,7 +86,7 @@ const LeaderboardDialog: React.FC<LeaderboardDialogProps> = ({ open, onClose, le
                       </Button>
                   ))}
                   <Button variant="contained" onClick={handleReset} sx={{ margin: 1, borderRadius: 39 }}>
-                      Reset Filter
+                     Overall Ranking
                   </Button>
                  </>
 
@@ -112,16 +112,16 @@ const LeaderboardDialog: React.FC<LeaderboardDialogProps> = ({ open, onClose, le
                             {currentUserEntry && (
                                 <TableRow sx={{ backgroundColor: "#e5eab68c", color: "black", textTransform: "capitalize" }}>
                                     <TableCell>You</TableCell>
-                                    <TableCell sx={{ fontWeight: "bold" }}>#{currentUserEntry.rank}</TableCell>
+                                    <TableCell sx={{ fontWeight: "bold" }}>#{selectedGoalId ? "#":currentUserEntry.rank}</TableCell>
                                     <TableCell>{currentUserEntry.name}</TableCell>
                                     <TableCell>{currentUserEntry.school}</TableCell>
                                     <TableCell>{currentUserEntry.total_score}</TableCell>
                                 </TableRow>
                             )}
-                            {(selectedGoalId ? filteredLeaderboard : overallLeaderboard).map((entry) => (
+                            {(selectedGoalId ? filteredLeaderboard : overallLeaderboard).map((entry,index) => (
                                 <TableRow key={entry.user_id} sx={{ textTransform: "capitalize" }}>
                                     <TableCell><EmojiEvents /></TableCell>
-                                    <TableCell sx={{ color: '#4caf50', fontWeight: "bold" }}>#{entry.rank}</TableCell>
+                                    <TableCell sx={{ color: '#4caf50', fontWeight: "bold" }}>#{index+1}</TableCell>
                                     <TableCell>{entry.name}</TableCell>
                                     <TableCell>{entry.school}</TableCell>
                                     <TableCell>{entry.total_score}</TableCell>

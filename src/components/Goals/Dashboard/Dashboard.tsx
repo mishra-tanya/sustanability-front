@@ -9,13 +9,12 @@ import { AppProvider, Navigation, Router } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 // import Grid from '@mui/material/Grid2';AddHome, Home, Logout,
-import { Person, Verified } from '@mui/icons-material';
+import {  Verified } from '@mui/icons-material';
 // import { Button } from '@mui/material';
 import Dash from './Dash';
 import Profile from './Profile';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import Overall from './Overall';
 import Certificate from './Certificate';
 // import Login from '../../Auth/LoginForm';
 
@@ -27,14 +26,10 @@ const NAVIGATION: Navigation = [
 
   {
     segment: 'dashboard',
-    title: 'Dashboard',
+    title: 'Profile',
     icon: <DashboardIcon />,
   },
-  {
-    segment: 'profile',
-    title: 'Your Profile',
-    icon: <Person />,
-  },
+  
   {
     kind: 'divider',
   },
@@ -60,23 +55,23 @@ const NAVIGATION: Navigation = [
   //   ],
   // },
   {
-    segment: '4-5',
-    title: 'Class 4-5',
+    segment: '4',
+    title: 'Class 4th',
     icon: <LayersIcon />,
   },
   {
-    segment: '6-8',
-    title: 'Class 6-8',
+    segment: '5',
+    title: 'Class 5th',
     icon: <LayersIcon />,
   },
   {
-    segment: '9-10',
-    title: 'Class 9-10',
+    segment: '6',
+    title: 'Class 6th',
     icon: <LayersIcon />,
   },
   {
-    segment: '11-12',
-    title: 'Class 11-12',
+    segment: '7',
+    title: 'Class 7th',
     icon: <LayersIcon />,
   },
   {
@@ -166,33 +161,31 @@ export default function DashboardLayoutBasic(props: any) {
           {selectedPage === 'dashboard' && (
             <>
 
-              <Overall />
+<Profile />
             </>
           )}
 
           {
-            selectedPage == '4-5' && (
-              <Dash classId='4-5' />
+            selectedPage == '4' && (
+              <Dash classId='4' />
             )
           }
           {
-            selectedPage == '6-8' && (
-              <Dash classId='6-8' />
+            selectedPage == '5' && (
+              <Dash classId='5' />
             )
           }
           {
-            selectedPage == '9-10' && (
-              <Dash classId='9-10' />
+            selectedPage == '6' && (
+              <Dash classId='6' />
             )
           }
           {
-            selectedPage == '11-12' && (
-              <Dash classId='11-12' />
+            selectedPage == '7' && (
+              <Dash classId='7' />
             )
           }
-          {selectedPage === 'profile' && (
-            <Profile />
-          )}
+         
            {selectedPage === 'certificates' && (
             <Certificate />
           )}

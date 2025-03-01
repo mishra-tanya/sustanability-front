@@ -184,14 +184,19 @@ export default function Navbar() {
       {isLoggedIn?
           (
           <>
-           <MenuItem>
-          <IconButton size="large"   color="inherit">
-              <Home />
-          </IconButton>
+        
          {userRole=='user' &&(
+         <>
+           <MenuItem>
+
+           <IconButton size="large"   color="inherit">
+            <Home />
+        </IconButton>
            <Link to="/dashboard" style={{ textDecoration: 'none',color: '#1976d2'   }}>My Profile</Link>
-         )}
-        </MenuItem>
+           </MenuItem>
+       
+         </> 
+          )}
 
         <MenuItem>
           <IconButton size="large"   color="inherit">

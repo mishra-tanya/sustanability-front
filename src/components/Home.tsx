@@ -18,11 +18,10 @@ import React, { useState } from 'react';
 import { TextFieldComponent } from './common/InputField';
 import api from '../services/axios';
 // import VerticalLinearStepper from './Home/Stepper';
-
 import { motion } from 'motion/react';
-import { TypeAnimation } from 'react-type-animation';
 import { useNavigate } from 'react-router-dom';
 import { Book, Dashboard, Quiz, WorkspacePremium } from '@mui/icons-material';
+import CustomBlinkingCursor from './Home/BlinkingEarthAnimation';
 interface FormData {
   name: string;
   contact_no: string;
@@ -187,17 +186,7 @@ function Home() {
         variant={isSmallScreen ? 'h3' : 'h2'}
         style={{ color: '#2e3b55', fontWeight: '700' }}
       >
-              <TypeAnimation
-        sequence={[
-          'Welcome to Sustainability Olympiad',
-          2000,
-         
-        ]}
-        wrapper="span"
-        speed={50}
-        style={{  display: 'inline-block',fontWeight:'bold' }}
-        repeat={Infinity}
-      />
+             <CustomBlinkingCursor/>
       </Typography>
       <br />
           <Typography variant="body1" style={{ color: '#5f6368', lineHeight: '1.8' }}>

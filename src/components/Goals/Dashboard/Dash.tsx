@@ -85,6 +85,7 @@ const Dash = ({ classId }: DashProps) => {
       name: "S.No",
       cell: (_, index) => <span>{index !== undefined ? index + 1 : "-"}</span>, 
       sortable: false,
+
     },
     {
       name: "Class No",
@@ -95,16 +96,21 @@ const Dash = ({ classId }: DashProps) => {
       name: "Goal Name",
       selector: (row: any) => row.goal_name,
       sortable: true,
+      wrap:true,
     },
     {
       name: "Test Name",
       selector: (row: any) => row.test_name,
       sortable: true,
+      wrap:true,
+
     },
     {
       name: "Score",
       selector: (row: any) => row.score,
       sortable: true,
+      wrap:true,
+
     },
     {
       name: "View Results",

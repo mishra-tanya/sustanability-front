@@ -75,6 +75,7 @@ const TestsGoals: React.FC = () => {
     const handleDialogOpen = () => setOpenDialog(true);
     const handleDialogClose = () => setOpenDialog(false);
 
+    const img1='/esdg/img4.png';
     if (loading) {
         return (
             <LoadingSpinner size={44}/>
@@ -85,6 +86,17 @@ const TestsGoals: React.FC = () => {
         <>
             <Navbar />
             <Box sx={{ bgcolor:"#0f2b3c",p:2 }}>
+                 <Box
+                                        sx={{
+                                            mb:1,
+                                            display: 'flex',
+                                            justifyContent: 'center',
+                                            alignItems: 'center',
+                                        }}
+                                    >
+                                        <img src={img1} style={{ width: '80px' }} alt="SDG" />
+                                    </Box>
+                
                 <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold" ,color:'white'}}>For Class {className}th</Typography>
 
                 <ActionButtons onLeaderboardClick={handleDialogOpen} classGroupProp={className || ''} />
@@ -99,6 +111,7 @@ const TestsGoals: React.FC = () => {
                     onClose={handleDialogClose}
                     leaderboardData={leaderboard}
                     currentUserId={user.id} 
+                    goals={[]}
                 />
             ) }
         

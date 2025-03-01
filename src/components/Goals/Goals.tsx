@@ -72,7 +72,7 @@ const Goals: React.FC = () => {
 
     const handleDialogOpen = () => setOpenDialog(true);
     const handleDialogClose = () => setOpenDialog(false);
-
+    const img1 = '/esdg/img4.png';
     if (loading) {
         return <LoadingSpinner size={44} />;
     }
@@ -82,14 +82,25 @@ const Goals: React.FC = () => {
             <Navbar />
             <Box sx={{ padding: 0 }}>
                 <Box sx={{ bgcolor: "#0f2b3c", padding: 1 }}>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <img src={img1} style={{ width: '80px' }} alt="SDG" />
+                    </Box>
+
+
                     <Typography variant="h4" sx={{ textAlign: "center", color: 'white', margin: 2, fontWeight: "bold" }}>
                         For Class {className}th
                     </Typography>
 
-                    <ActionButtons onLeaderboardClick={handleDialogOpen}  classGroupProp={className || ''}  />
+                    <ActionButtons onLeaderboardClick={handleDialogOpen} classGroupProp={className || ''} />
                 </Box>
-               
-               
+
+
                 {className !== '' && (
                     <GoalsPageContent
                         goals={goals}

@@ -36,10 +36,10 @@ export const SelectFieldComponent :React.FC<SelectFieldComponentProps> = ({ name
   <FormControl fullWidth variant="outlined" required error={!!error}>
     <InputLabel size="small" >{label}</InputLabel>
     <Select name={name} value={value} onChange={onChange} size="small"  label={label}>
-      <MenuItem  value="class_4-5">Class 4-5</MenuItem>
-      <MenuItem value="class_6-8">Class 6-8</MenuItem>
-      <MenuItem value="class_9-10">Class 9-10</MenuItem>
-      <MenuItem value="class_11-12">Class 11-12</MenuItem>
+      <MenuItem  value="class_4">Class 4th</MenuItem>
+      <MenuItem value="class_5">Class 5th</MenuItem>
+      <MenuItem value="class_6">Class 6th</MenuItem>
+      <MenuItem value="class_7">Class 7th</MenuItem>
     </Select>
   </FormControl>
 );

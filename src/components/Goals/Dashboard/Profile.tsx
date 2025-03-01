@@ -27,10 +27,10 @@ function Profile() {
   const [errors, setErrors] = useState<Record<string, string>>({});  
 
   const classOptions = {
-    'class_4-5': 'Class 4-5',
-    'class_6-8': 'Class 6-8',
-    'class_9-10': 'Class 9-10',
-    'class_11-12': 'Class 11-12',
+    'class_4': 'Class 4th',
+    'class_5': 'Class 5th',
+    'class_6': 'Class 6th',
+    'class_7': 'Class 7th',
   };
 
   useEffect(() => {

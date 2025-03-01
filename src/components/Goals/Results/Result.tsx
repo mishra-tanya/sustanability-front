@@ -117,9 +117,11 @@ const Results: React.FC = () => {
             {/* <Gauge width={100} height={100} value= {/> %}  /> */}
         
            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-           <Card sx={{p:3, pl:6 }}>
+           <Card sx={{p:6, pl:6,width:"50%"}}>
            <CardContent >
-        <Gauge width={150} height={150} value={resultData.score*10 } valueMin={0} valueMax={100} />
+      <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <Gauge width={180} height={180} value={resultData.score*10 } valueMin={0} valueMax={100} />
+      
         <Typography variant="body1" style={{ marginTop: '10px' }}>
          <b>Total Percentage : </b> {resultData.score *10}% <br />
         <b> Correct Answers : </b>  {resultData.score} <br />
@@ -127,7 +129,7 @@ const Results: React.FC = () => {
 
          <b>Total Questions :</b> 10
       
-        </Typography>
+        </Typography></Box>
         
         </CardContent>
           </Card>
@@ -148,7 +150,7 @@ const Results: React.FC = () => {
                       borderRadius: 1,
                       marginBottom: 1
                     }}>
-                      <strong>Question {currentResult.question_id}: <br /></strong> {currentResult.question}
+                      <strong>Question {currentQuestionIndex+1}: <br /></strong> {currentResult.question}
                     </Box>
                   </Typography>
   

@@ -121,6 +121,7 @@ const QTest: React.FC = () => {
       setLoading(false);
     }
   };
+  const img1="/esdg/img2.png";
 
   // console.log(currentIndex);
   if (loading) {
@@ -149,6 +150,16 @@ const QTest: React.FC = () => {
      {/* <Box sx={{p:4}}> */}
      
       <Box sx={{bgcolor:"#0f2b3c",p:1,textAlign:"center"}}>
+         <Box
+                                                sx={{
+                                                    mb:1,
+                                                    display: 'flex',
+                                                    justifyContent: 'center',
+                                                    alignItems: 'center',
+                                                }}
+                                            >
+                                                <img src={img1} style={{ width: '200px' }} alt="SDG" />
+                                            </Box>
       <Typography sx={{color:"white"}} variant="caption"><b> Class :</b> {className} </Typography>
       <Typography sx={{textAlign:"center",mb:3,color:"white"}} variant="caption"> <b>Goal :</b> {goalName}  <b>Test : </b> {testName}</Typography>
 

@@ -50,10 +50,10 @@ const Dashboard: React.FC = () => {
         try {
           const userClassesFromDb = user.class;
           const classes: ClassInfo[] = [
-            { className: '4-5', isUnlocked: userClassesFromDb.includes('class_4-5') },
-            { className: '6-8', isUnlocked: userClassesFromDb.includes('class_6-8') },
-            { className: '9-10', isUnlocked: userClassesFromDb.includes('class_9-10') },
-            { className: '11-12', isUnlocked: userClassesFromDb.includes('class_11-12') },
+            { className: '4', isUnlocked: userClassesFromDb.includes('class_4') },
+            { className: '5', isUnlocked: userClassesFromDb.includes('class_5') },
+            { className: '6', isUnlocked: userClassesFromDb.includes('class_6') },
+            { className: '7', isUnlocked: userClassesFromDb.includes('class_7') },
           ];
           setUserClasses(classes);
         } catch (error) {

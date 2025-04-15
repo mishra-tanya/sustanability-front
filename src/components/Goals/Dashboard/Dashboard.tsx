@@ -56,24 +56,40 @@ const NAVIGATION: Navigation = [
   // },
   {
     segment: '4',
-    title: 'Class 4th',
+    title: 'Grade 4th',
     icon: <LayersIcon />,
   },
   {
     segment: '5',
-    title: 'Class 5th',
+    title: 'Grade 5th',
     icon: <LayersIcon />,
   },
   {
     segment: '6',
-    title: 'Class 6th',
+    title: 'Grade 6th',
     icon: <LayersIcon />,
   },
   {
     segment: '7',
-    title: 'Class 7th',
+    title: 'Grade 7th',
     icon: <LayersIcon />,
   },
+  {
+    segment: '8',
+    title: 'Grade 8th',
+    icon: <LayersIcon />,
+  },
+  {
+    segment: '9',
+    title: 'Grade 9th',
+    icon: <LayersIcon />,
+  },
+  {
+    segment: '10',
+    title: 'Grade 10th',
+    icon: <LayersIcon />,
+  },
+
   {
     segment: 'certificates',
     title: 'Certificates',
@@ -183,6 +199,21 @@ export default function DashboardLayoutBasic(props: any) {
           {
             selectedPage == '7' && (
               <Dash classId='7' />
+            )
+          }
+           {
+            selectedPage == '8' && (
+              <Dash classId='8' />
+            )
+          }
+           {
+            selectedPage == '9' && (
+              <Dash classId='9' />
+            )
+          }
+           {
+            selectedPage == '10' && (
+              <Dash classId='10' />
             )
           }
          

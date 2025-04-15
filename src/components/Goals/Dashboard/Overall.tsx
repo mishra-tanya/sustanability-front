@@ -7,6 +7,7 @@ import Footer from "../../Footer";
 import { useNavigate } from "react-router-dom";
 import DataTable from "react-data-table-component";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+import CircularGauge from "../../common/GaugeChart";
 
 type ClassResult = {
   id: number;
@@ -144,7 +145,8 @@ const Overall = () => {
             p: 3,
           }}
         >
-          <Gauge width={150} height={150} value={percentage ?? 0} />
+                    <Box sx={{padding:"10px"}}><CircularGauge percentage={percentage??0} size={130} /></Box>
+          
           <Typography sx={{ textAlign: "center", marginTop: 1 }}>
             Overall Percentage
           </Typography>

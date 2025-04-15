@@ -61,7 +61,7 @@ const GoalsPageContent: React.FC<GoalsPageContentProps> = ({ goals, onGoalClick 
       ) : (
       <>
       
-          <Grid container spacing={3}>
+          <Grid container spacing={5}>
       {goals.map((goal,index) => (
         <Grid item xs={12} sm={6} md={3} key={goal.id}>  
           <GoalCard goal={goal} onGoalClick={onGoalClick} img={images[index]}/>

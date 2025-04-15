@@ -94,7 +94,7 @@ const Goals: React.FC = () => {
 
 
                     <Typography variant="h4" sx={{ textAlign: "center", color: 'white', margin: 2, fontWeight: "bold" }}>
-                        For Class {className}th
+                        For Grade {className}th
                     </Typography>
 
                     <ActionButtons onLeaderboardClick={handleDialogOpen} classGroupProp={className || ''} />

@@ -54,6 +54,10 @@ const Dashboard: React.FC = () => {
             { className: '5', isUnlocked: userClassesFromDb.includes('class_5') },
             { className: '6', isUnlocked: userClassesFromDb.includes('class_6') },
             { className: '7', isUnlocked: userClassesFromDb.includes('class_7') },
+            { className: '8', isUnlocked: userClassesFromDb.includes('class_8') },
+            { className: '9', isUnlocked: userClassesFromDb.includes('class_9') },
+            { className: '10', isUnlocked: userClassesFromDb.includes('class_10') },
+
           ];
           setUserClasses(classes);
         } catch (error) {
@@ -115,7 +119,7 @@ const Dashboard: React.FC = () => {
         Sustainability Olympiad 
       </Typography>
       <Typography  sx={{ color: 'grey', pl:{md:5},fontWeight:"bolder",fontSize:"15px" }} gutterBottom>
-        Total Four Class Goals
+        4th - 10th Grade Goals
       </Typography>
     </Grid>
   </Grid>
@@ -124,19 +128,21 @@ const Dashboard: React.FC = () => {
 
       <Box sx={{ textAlign: 'center', p: { xs: 2, md: 3 } }}>
       <Typography  align='center' sx={{ color: '',fontWeight:"bolder",fontSize:"45px", }}  >
-        Olympiad Series
+        Sustainability Olympiad Series
       </Typography>
      <Card variant="outlined" >
       <CardContent>
+        <Typography sx={{textAlign:"center"}}>
+  ** To access other grades, click on the avatar in the top right corner, go to My Account, and update your profile grade. **
+        </Typography>
       <Grid container spacing={10} justifyContent="center" sx={{ mt: 1 , mb: 10 }}>
-   
    {userClasses.map((classInfo) => (
      <Grid item key={classInfo.className}>
        <Box
          sx={{
            position: 'relative',
-           width: 250,
-           height: 250,
+           width: 200,
+           height: 200,
            display: 'flex',
            justifyContent: 'center',
            alignItems: 'center',
@@ -152,14 +158,14 @@ const Dashboard: React.FC = () => {
            },
          }}
          onClick={() => handleClassClick(classInfo.className)}
-       >
+       > 
          {classInfo.isUnlocked ? (
            <img
              src="/img.png"  
              alt={classInfo.className}
              style={{
-               width: '250px',
-               height: '250px',
+               width: '220px',
+               height: '220px',
                borderRadius:'50%',
                border:'5px solid lightgrey',
                objectFit: 'cover',
@@ -170,7 +176,7 @@ const Dashboard: React.FC = () => {
          )}
        </Box>
        <Typography variant="h6"  sx={{ marginTop: '10px', }}>
-        <b> For Class {classInfo.className}</b>
+        <b> For Grade {classInfo.className}</b>
        </Typography>
      </Grid>
    ))}

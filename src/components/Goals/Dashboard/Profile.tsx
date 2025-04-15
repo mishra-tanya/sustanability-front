@@ -27,10 +27,13 @@ function Profile() {
   const [errors, setErrors] = useState<Record<string, string>>({});  
 
   const classOptions = {
-    'class_4': 'Class 4th',
-    'class_5': 'Class 5th',
-    'class_6': 'Class 6th',
-    'class_7': 'Class 7th',
+    'class_4': 'Grade 4th',
+    'class_5': 'Grade 5th',
+    'class_6': 'Grade 6th',
+    'class_7': 'Grade 7th',
+    'class_8': 'Grade 8th',
+    'class_9': 'Grade 9th',
+    'class_10': 'Grade 10th',
   };
 
   useEffect(() => {
@@ -146,7 +149,7 @@ function Profile() {
         </Grid>
         <Grid item xs={12}>
           <FormControl fullWidth variant="outlined" error={!!errors.class}>
-            <InputLabel>Class</InputLabel>
+            <InputLabel>Grade</InputLabel>
             <Select
               name="class"
               value={formData.class}

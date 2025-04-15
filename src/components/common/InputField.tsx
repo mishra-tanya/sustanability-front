@@ -40,6 +40,10 @@ export const SelectFieldComponent :React.FC<SelectFieldComponentProps> = ({ name
       <MenuItem value="class_5">Class 5th</MenuItem>
       <MenuItem value="class_6">Class 6th</MenuItem>
       <MenuItem value="class_7">Class 7th</MenuItem>
+      <MenuItem value="class_8">Class 8th</MenuItem>
+      <MenuItem value="class_9">Class 9th</MenuItem>
+      <MenuItem value="class_10">Class 10th</MenuItem>
+
     </Select>
   </FormControl>
 );

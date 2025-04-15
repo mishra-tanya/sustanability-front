@@ -6,6 +6,7 @@ import { Gauge } from "@mui/x-charts";
 import DataTable, { TableColumn } from "react-data-table-component";
 import { useNavigate } from "react-router-dom";
 import { Search, Visibility } from "@mui/icons-material";
+import CircularGauge from "../../common/GaugeChart";
 
 type ClassResult = {
   total_score: number;
@@ -64,6 +65,7 @@ const Dash = ({ classId }: DashProps) => {
     setFilteredResults(filtered);
   }, [searchQuery, classResults]);
 
+  console.log(classResults)
   if (!data) {
     return <LoadingSpinner size={33} />;
   }
@@ -75,7 +77,6 @@ const Dash = ({ classId }: DashProps) => {
   const res = classResults.total_score;
   const uniqueTestsGiven = new Set(classResults.results.map((result) => result.test_id)).size;
   const uniqueGoalsCompleted = new Set(classResults.results.map((result) => result.goal_id)).size;
-
   const handleButtonClick = (class_id: string, goal_id: string, test_id: string) => {
     navigate(`/results/${class_id}/${goal_id}/${test_id}`);
   };
@@ -88,7 +89,7 @@ const Dash = ({ classId }: DashProps) => {
 
     },
     {
-      name: "Class No",
+      name: "Grade",
       selector: (row: any) => row.class_id,
       sortable: true,
     },
@@ -144,7 +145,8 @@ const Dash = ({ classId }: DashProps) => {
             border: "1px solid lightgrey",
           }}
         >
-          <Gauge width={150} height={150} value={percentage} />
+          <Box sx={{padding:"10px"}}><CircularGauge percentage={percentage??0} size={130} /></Box>
+
           <Typography sx={{ textAlign: "center", marginTop: 1 }}>Overall Percentage</Typography>
         </Grid>
         <Grid
@@ -180,7 +182,7 @@ const Dash = ({ classId }: DashProps) => {
       </Grid>
 
       <Typography variant="h5" align="center" sx={{ mt: 5, bgcolor: "#eeeeee", p: 1 }}>
-        Results for Class {classId}
+        Results for Grade {classId}
       </Typography>
 
       <Box sx={{ mt: 4, mb: 2 }}>

@@ -7,8 +7,6 @@ import {
   Typography,
   Button,
   Grid,
-  Card,
-  CardContent,
   useMediaQuery,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
@@ -17,10 +15,8 @@ import { useTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { TextFieldComponent } from './common/InputField';
 import api from '../services/axios';
-// import VerticalLinearStepper from './Home/Stepper';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
-import { Book, Dashboard, Quiz, WorkspacePremium } from '@mui/icons-material';
 import CustomBlinkingCursor from './Home/BlinkingEarthAnimation';
 interface FormData {
   name: string;
@@ -84,15 +80,6 @@ const SectionTitle = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const ServiceCard = styled(Card)({
-  boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-  transition: 'transform 0.3s ease',
-  ':hover': {
-    transform: 'translateY(-5px)',
-    boxShadow: '0px 6px 12px rgba(0, 0, 0, 0.15)',
-  },
-});
-
 const ContactFormButton = styled(Button)({
   backgroundColor: '#4caf50',
   color: '#fff',
@@ -111,9 +98,9 @@ function Home() {
     error: {},
   });
 
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
-  const handleStart=()=>{
+  const handleStart = () => {
     navigate('/login');
   }
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -124,7 +111,7 @@ function Home() {
       [name]: value,
       error: {
         ...prevFormData.error,
-        [name]: '', 
+        [name]: '',
       },
     }));
   };
@@ -136,16 +123,16 @@ function Home() {
     if (!formData.name) errors.name = 'Name is required';
     if (!formData.contact_no) errors.contact_no = 'Contact number is required';
     if (!formData.email) {
-        errors.email = 'Email is required';
+      errors.email = 'Email is required';
     } else {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
-            errors.email = 'Invalid email format';
-        }
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        errors.email = 'Invalid email format';
+      }
     }
     if (!formData.subject) errors.subject = 'Subject is required';
     if (!formData.message) errors.message = 'Message is required';
-    
+
     if (Object.keys(errors).length > 0) {
       setFormData((prevFormData) => ({
         ...prevFormData,
@@ -172,190 +159,153 @@ function Home() {
   };
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
-  const iconList = [<WorkspacePremium />, <Book />, <Quiz />, <Dashboard />];
   return (
     <div>
       <Navbar />
       <motion.div
-      initial={{ scale: 50 }} animate={{ scale: 1 }}
-    >
-      <HeroSection>
-        <HeroContent  >
-       
-      <Typography
-        variant={isSmallScreen ? 'h3' : 'h2'}
-        style={{ color: '#2e3b55', fontWeight: '700' }}
+        initial={{ scale: 50 }} animate={{ scale: 1 }}
       >
-             <CustomBlinkingCursor/>
-      </Typography>
-      <br />
-          <Typography variant="body1" style={{ color: '#5f6368', lineHeight: '1.8' }}>
-          Web application designed to facilitate structured tests, user rankings, and certification issuance(Participation and merit certificate). The system will serve four classes, each with multiple goals, tests, and questions. The application includes features like participation and ranking certificates, a leaderboard system, and social media sharing capabilities.
- 
+        <HeroSection>
+          <HeroContent  >
 
-          </Typography>
-          <br />
-<Button variant="outlined" size="large" color='primary' onClick={handleStart} >Start Now</Button>
-        </HeroContent>
-        <HeroImage src="im.jpg" alt="Welcome"  className="rotating-image"/>
-        
-      </HeroSection>
-      </motion.div>
-
-      <Section>
-
-      <Typography variant="h4" sx={{fontWeight:"bold"}} gutterBottom>
-        Our Services
-      </Typography>
-      <br />
-      <Grid container spacing={3} justifyContent="center">
-        {['Service 1', 'Service 2', 'Service 3', 'Service 4'].map((service, index) => (
-          <Grid item xs={12} sm={6} md={3} key={index}>
-             <motion.div
-              initial={{ opacity: 0, x: index % 2 === 0 ? '-50%' : '50%' }} 
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: 'easeOut' }}
-              viewport={{ once: true, amount: 0.5 }}
+            <Typography
+              variant={isSmallScreen ? 'h3' : 'h2'}
+              style={{ color: '#2e3b55', fontWeight: '700' }}
             >
-            <ServiceCard elevation={3} style={{ textAlign: 'center', padding: '1rem' }}>
-            {React.cloneElement(iconList[index], {
-                style: { color: '#1976d2', fontSize: '3rem' }, 
-              })}
-              <CardContent>
-                <Typography variant="h6" gutterBottom>
-                  {service}
-                </Typography>
-                <Typography variant="body2" color="textSecondary">
-                  Detailed description of {service}, explaining the benefits and unique value we
-                  offer in this area.
-                </Typography>
-              </CardContent>
-            </ServiceCard>
-            </motion.div>
-          </Grid>
-        ))}
-      </Grid>
-    </Section>
-    <motion.div
-    initial={{ opacity: 0, y: 50 }} 
-    whileInView={{ opacity: 1, y: 0 }} 
-    transition={{ duration: 1, ease: 'easeOut' }} 
-    viewport={{ once: true, amount: 0.5 }} 
-    >
+              <CustomBlinkingCursor />
+            </Typography>
+            <br />
+            <Typography variant="body1" style={{ color: '#5f6368', lineHeight: '1.8' }}>
+              Web application designed to facilitate structured tests, user rankings, and certification issuance(Participation and merit certificate). The system will serve four classes, each with multiple goals, tests, and questions. The application includes features like participation and ranking certificates, a leaderboard system, and social media sharing capabilities.
 
-    <Section sx={{backgroundColor:"#002D62",}}>
+            </Typography>
+            <br />
+            <Button variant="outlined" size="large" color='primary' onClick={handleStart} >Start Now</Button>
+          </HeroContent>
+          <HeroImage src="im.jpg" alt="Welcome" className="rotating-image" />
 
-        <SectionTitle variant="h5" style={{color:"white"}} >About Us</SectionTitle>
-      
-        <Typography variant="body1" style={{ maxWidth: '800px', margin: '0 auto', color: 'white', lineHeight: '1.6' }}>
-          We are a team of professionals dedicated to providing quality services and solutions. Our
-          focus is on customer satisfaction and continuous improvement.
-        </Typography>
-      
-      </Section>
-</motion.div>
+        </HeroSection>
+      </motion.div>
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
 
-      
-<motion.div
-    initial={{ opacity: 0, y: 50 }} 
-    whileInView={{ opacity: 1, y: 0 }} 
-    transition={{ duration: 1, ease: 'easeOut' }} 
-    viewport={{ once: true, amount: 0.5 }} 
-    >
-      <Section style={{ marginTop:"50px",marginBottom:"50px" }}>
-        <SectionTitle variant="h5">Frequently Asked Questions</SectionTitle>
-        {['What is Service 1?', 'How can I get started?', 'D dw'].map((faq, index) => (
-          <Accordion key={index} style={{ maxWidth: '1200px', padding:'10px',margin: '10px auto'  }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-              <Typography>
-                {index+1}. {faq}</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography sx={{textAlign:'left'}}>
-                {index === 0 ? 'Service 1 is designed to help you achieve your goals in a streamlined way.'
-                : index === 1 ? 'Getting started is easy! Just reach out through our contact form below.'
-                : 'Yes, we provide 24/7 support. Contact us anytime!'}
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        ))}
-      </Section>
+        <Section sx={{ backgroundColor: "#002D62", }}>
+
+          <SectionTitle variant="h5" style={{ color: "white" }} >About Us</SectionTitle>
+
+          <Typography variant="body1" style={{ maxWidth: '800px', margin: '0 auto', color: 'white', lineHeight: '1.6' }}>
+            We are a team of professionals dedicated to providing quality services and solutions. Our
+            focus is on customer satisfaction and continuous improvement.
+          </Typography>
+
+        </Section>
       </motion.div>
 
-     
+
       <motion.div
-    initial={{ opacity: 0, y: 50 }} 
-    whileInView={{ opacity: 1, y: 0 }} 
-    transition={{ duration: 1, ease: 'easeOut' }} 
-    viewport={{ once: true, amount: 0.5 }} 
-    >
-      <Section sx={{backgroundColor:"#fafafa",}}>
-        <SectionTitle variant="h5">Contact Us</SectionTitle>
-        <Grid container  style={{ maxWidth: '800px', margin: '0 auto' }}>
-          <form onSubmit={handleSubmit} style={{ width: '100%' }}>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                <TextFieldComponent
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  label="Name"
-                  error={!!formData.error.name}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                <TextFieldComponent
-                  name="contact_no"
-                  value={formData.contact_no}
-                  onChange={handleChange}
-                  label="Contact No."
-                  error={!!formData.error.contact_no}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                <TextFieldComponent
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  label="Email"
-                  error={!!formData.error.email}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                <TextFieldComponent
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  label="Subject"
-                  error={!!formData.error.subject}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <Box mb={2}>
-                <TextFieldComponent
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  label="Message"
-                  error={!!formData.error.message}
-                />
-              </Box>
-            </Grid>
-            <Grid item xs={12}>
-              <ContactFormButton type="submit" variant="contained" fullWidth>
-                Send Message
-              </ContactFormButton>
-            </Grid>
-          </form>
-        </Grid>
-      </Section>
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <Section style={{ marginTop: "50px", marginBottom: "50px" }}>
+          <SectionTitle variant="h5">Frequently Asked Questions</SectionTitle>
+          {['What is Service 1?', 'How can I get started?', 'D dw'].map((faq, index) => (
+            <Accordion key={index} style={{ maxWidth: '1200px', padding: '10px', margin: '10px auto' }}>
+              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                <Typography>
+                  {index + 1}. {faq}</Typography>
+              </AccordionSummary>
+              <AccordionDetails>
+                <Typography sx={{ textAlign: 'left' }}>
+                  {index === 0 ? 'Service 1 is designed to help you achieve your goals in a streamlined way.'
+                    : index === 1 ? 'Getting started is easy! Just reach out through our contact form below.'
+                      : 'Yes, we provide 24/7 support. Contact us anytime!'}
+                </Typography>
+              </AccordionDetails>
+            </Accordion>
+          ))}
+        </Section>
+      </motion.div>
+
+
+      <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <Section sx={{ backgroundColor: "#fafafa", }}>
+          <SectionTitle variant="h5">Contact Us</SectionTitle>
+          <Grid container style={{ maxWidth: '800px', margin: '0 auto' }}>
+            <form onSubmit={handleSubmit} style={{ width: '100%' }}>
+              <Grid item xs={12}>
+                <Box mb={2}>
+                  <TextFieldComponent
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    label="Name"
+                    error={!!formData.error.name}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box mb={2}>
+                  <TextFieldComponent
+                    name="contact_no"
+                    value={formData.contact_no}
+                    onChange={handleChange}
+                    label="Contact No."
+                    error={!!formData.error.contact_no}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box mb={2}>
+                  <TextFieldComponent
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    label="Email"
+                    error={!!formData.error.email}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box mb={2}>
+                  <TextFieldComponent
+                    name="subject"
+                    value={formData.subject}
+                    onChange={handleChange}
+                    label="Subject"
+                    error={!!formData.error.subject}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <Box mb={2}>
+                  <TextFieldComponent
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    label="Message"
+                    error={!!formData.error.message}
+                  />
+                </Box>
+              </Grid>
+              <Grid item xs={12}>
+                <ContactFormButton type="submit" variant="contained" fullWidth>
+                  Send Message
+                </ContactFormButton>
+              </Grid>
+            </form>
+          </Grid>
+        </Section>
 
       </motion.div>
 

@@ -18,6 +18,7 @@ const TestsGoals: React.FC = () => {
     const { goal } = useParams<{ goal: string }>();
     const navigate = useNavigate();
     const [test, setTests] = useState([]);
+    const [goals, setGoal] = useState([]);
     const [leaderboard, setLeaderboard] = useState([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [openDialog, setOpenDialog] = useState(false);
@@ -38,13 +39,28 @@ const TestsGoals: React.FC = () => {
     
         fetchUserData();
       }, []);
-      
+
+      useEffect(() => {
+        const fetchGoalName = async () => {
+          try {
+            const response = await api.get(`/goal/${goal}`);
+            setGoal(response.data.goal);
+          } catch (err) {
+            console.error('Error fetching goals:', err);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchGoalName();
+      }, [goal]);
+
+
     useEffect(() => {
         const fetchGoals = async () => {
             try {
                 const response = await api.get(`/class/${className}/goal/${goal}`);
                 const data = response.data.data;
-                console.log((data));
                 if (Array.isArray(data.tests)) {
                     setTests(data.tests);
                 } else {
@@ -97,7 +113,9 @@ const TestsGoals: React.FC = () => {
                                         <img src={img1} style={{ width: '80px' }} alt="SDG" />
                                     </Box>
                 
-                <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold" ,color:'white'}}>For Class {className}th</Typography>
+                <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold" ,color:'white'}}>For Grade {className}th</Typography>
+                <Typography variant="h4" sx={{ textAlign: "center", fontWeight: "bold" ,color:'white'}}>Goal: {goals}</Typography>
+
 
                 <ActionButtons onLeaderboardClick={handleDialogOpen} classGroupProp={className || ''} />
                 </Box>

@@ -8,7 +8,7 @@ import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
-import { Facebook, Instagram, YouTube } from '@mui/icons-material';
+import { Facebook, YouTube } from '@mui/icons-material';
 // import SitemarkIcon from './SitemarkIcon';
 
 function Copyright() {
@@ -65,19 +65,11 @@ export default function Footer() {
             useFlexGap
             sx={{ justifyContent: 'left', color: 'text.secondary' }}
           >
+          
             <IconButton
               color="inherit"
               size="small"
-              href="https://github.com/mui"
-              aria-label="GitHub"
-              sx={{ alignSelf: 'center' }}
-            >
-              <Instagram />
-            </IconButton>
-            <IconButton
-              color="inherit"
-              size="small"
-              href="https://x.com/MaterialUI"
+              href="https://x.com/IndiaESGorg"
               aria-label="X"
               sx={{ alignSelf: 'center' }}
             >
@@ -86,7 +78,7 @@ export default function Footer() {
             <IconButton
               color="inherit"
               size="small"
-              href="https://www.linkedin.com/company/mui/"
+              href="https://www.linkedin.com/company/indiaesg-org"
               aria-label="LinkedIn"
               sx={{ alignSelf: 'center' }}
             >
@@ -95,8 +87,8 @@ export default function Footer() {
             <IconButton
               color="inherit"
               size="small"
-              href="https://www.linkedin.com/company/mui/"
-              aria-label="LinkedIn"
+              href="https://www.youtube.com/@IndiaESGORG"
+              aria-label="Youtube"
               sx={{ alignSelf: 'center' }}
             >
               <YouTube />
@@ -104,8 +96,8 @@ export default function Footer() {
             <IconButton
               color="inherit"
               size="small"
-              href="https://www.linkedin.com/company/mui/"
-              aria-label="LinkedIn"
+              href="https://www.facebook.com/IndiaESG.org"
+              aria-label="Facebook"
               sx={{ alignSelf: 'center' }}
             >
               <Facebook />

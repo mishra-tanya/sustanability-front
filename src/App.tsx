@@ -13,6 +13,7 @@ import Results from './components/Goals/Results/Result';
 import Verification from './components/VerifyCertificate/Verification';
 import AdminHome from './admin/AdminHome';
 import AdminPrivateRoutes from './components/AdminPrivateRoutes';
+import NotFound from './components/Error/NotFound';
 
 const App: React.FC = () => {
     return (
@@ -40,6 +41,9 @@ const App: React.FC = () => {
                 <Route element={<AdminPrivateRoutes />}>
                     <Route path="/admin/home" element={<AdminHome/>}/>
                 </Route>
+
+                <Route path="*" element={<NotFound/>}/>
+
             </Routes>
         </Router>
     );

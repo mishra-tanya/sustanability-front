@@ -2,7 +2,7 @@ import  { useEffect, useState } from 'react';
 import { Card, CardContent, Typography, Button, Grid, Box } from '@mui/material';
 import api from '../../../services/axios';
 import LoadingSpinner from '../../common/LoadingSpinner';
-import { generateCertificatePDFs } from '../common/generateCertificate';
+import { generateCertificatePDFs } from '../common/generateParticipationCertificate';
 
 interface Certificate {
   certificateNumber: string;

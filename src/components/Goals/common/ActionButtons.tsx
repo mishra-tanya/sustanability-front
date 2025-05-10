@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button, Box } from '@mui/material';
 import api from '../../../services/axios';
-import { generateCertificatePDFs } from './generateCertificate';
+import { generateCertificatePDFs } from './generateParticipationCertificate';
 interface ActionButtonsProps {
   onLeaderboardClick: () => void;
   classGroupProp:string;

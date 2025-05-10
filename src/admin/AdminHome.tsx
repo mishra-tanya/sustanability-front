@@ -5,7 +5,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider, Navigation, Router } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
-import {   BarChart, MessageOutlined, Person, Quiz, School, Task } from '@mui/icons-material';
+import {   Analytics, BarChart, Email, MessageOutlined, Person, Quiz, School, SchoolOutlined, Task } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import Overview from './Overview';
@@ -16,6 +16,10 @@ import Contact from './Contact';
 import GoalsTable from './GoalsTable';
 import TestsData from './TestsData';
 import TestQuestionsTable from './TestQuestionsTable';
+import UserPieAnalytics from './Dashboard/UserPieAnalytics';
+import TestsGivenGraph from './Dashboard/TestData';
+import TopPerformersTable from './Dashboard/TopPerformer';
+import EmailSender from './email/EmailSend';
 
 const NAVIGATION: Navigation = [
   {
@@ -27,6 +31,26 @@ const NAVIGATION: Navigation = [
     segment: 'dashboard',
     title: 'Dashboard',
     icon: <DashboardIcon />,
+  },
+  {
+    segment: 'sendemail',
+    title: 'Send Email',
+    icon: <Email />,
+  },
+  {
+    segment: 'userAnalytics',
+    title: 'User Analytics',
+    icon: <Analytics />,
+  },
+  {
+    segment: 'dailytest',
+    title: 'Daily Tests Tracking',
+    icon: <BarChart />,
+  },
+  {
+    segment: 'topPerformers',
+    title: 'Top Performers',
+    icon: <SchoolOutlined />,
   },
   {
     segment: 'users',
@@ -146,6 +170,29 @@ export default function DashboardLayoutBasic(props: any) {
           {selectedPage === 'dashboard' && (
             <>
               <Overview />
+            </>
+          )}
+
+            {selectedPage === 'userAnalytics' && (
+            <>
+              <UserPieAnalytics />
+            </>
+          )}
+           {selectedPage === 'sendemail' && (
+            <>
+              <EmailSender />
+            </>
+          )}
+
+            {selectedPage === 'dailytest' && (
+            <>
+              <TestsGivenGraph />
+            </>
+          )}
+
+            {selectedPage === 'topPerformers' && (
+            <>
+              <TopPerformersTable />
             </>
           )}
 

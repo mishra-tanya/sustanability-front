@@ -104,14 +104,14 @@ const Login: React.FC = () => {
                             Register here
                         </Link>
                     </Typography>
-                    <Typography
+                     <Typography
                         align="center"
                         color="primary"
                         sx={{ cursor: "pointer",mt:1}}
                         onClick={handleOpenForgotPassword}
                     >
                         Forgot Password?
-                    </Typography>
+                    </Typography> 
                     <ForgotPasswordModal
                         open={forgotPasswordOpen}
                         onClose={handleCloseForgotPassword}

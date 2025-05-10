@@ -161,7 +161,7 @@ const Dash = ({ classId }: DashProps) => {
             border: "1px solid lightgrey",
           }}
         >
-          <Gauge width={150} height={150} value={uniqueTestsGiven} valueMax={170} />
+          <Gauge width={150} height={150} value={uniqueTestsGiven} valueMax={51} />
           <Typography sx={{ textAlign: "center", marginTop: 1 }}>Total Tests Given</Typography>
         </Grid>
         <Grid

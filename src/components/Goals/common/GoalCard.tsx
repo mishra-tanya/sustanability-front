@@ -29,14 +29,16 @@ const GoalCard: React.FC<GoalCardProps> = ({ goal, onGoalClick, img }) => (
     )}
 
     <Grid item xs={12}>
-      <Card variant="outlined" sx={{ border: '1px solid #e0e0e0', paddingTop: '10px', borderRadius: 2 }}>
-        {goal.status && (
-          <CardContent>
-            <Typography variant='h5'  sx={{ textAlign: 'center', marginBottom: 2 }}>
-              {goal.description}
-            </Typography>
-            <hr />
-            <br />
+      <Card variant="outlined" sx={{ border: '1px solid #e0e0e0', borderRadius: 2 }}>
+        <CardContent>
+         
+          {goal.status && (
+             <>
+             <Typography variant='h5' sx={{ textAlign: 'center', marginBottom: 2 }}>
+             {goal.description}
+           </Typography>
+           <hr />
+           <br />
             <Grid container spacing={2} sx={{ marginBottom: 2 }}>
               <Grid item xs={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                 <Typography variant="body2" color="text.secondary" sx={{ display: 'flex', alignItems: 'center' }}>
@@ -63,18 +65,18 @@ const GoalCard: React.FC<GoalCardProps> = ({ goal, onGoalClick, img }) => (
                 </Typography>
               </Grid>
             </Grid>
-            <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2, paddingBottom: 1 }}>
-              <Button
-                variant="contained"
-                color="success"
-                onClick={() => onGoalClick(goal.id)}
-                disabled={goal.status === 'attempted'} 
-              >
-                Start
-              </Button>
-            </Box>
-          </CardContent>
-        )}
+             </>
+          )}
+          <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: 2, paddingBottom: 1 }}>
+            <Button
+              variant="contained"
+              color="success"
+              onClick={() => onGoalClick(goal.id)}
+            >
+              Start
+            </Button>
+          </Box>
+        </CardContent>
       </Card>
     </Grid>
   </Grid>

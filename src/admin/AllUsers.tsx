@@ -27,6 +27,8 @@ interface User {
   address: string;
   country: string;
   created_at: string;
+  testCount:number;
+  goalCount:object;
 }
 
 interface Result {
@@ -66,6 +68,8 @@ const AllUsers: React.FC = () => {
   const [openResults, setOpenResults] = useState(false);
   const [openCertifications, setOpenCertifications] = useState(false);
   const [selectedUser, setSelectedUser] = useState<string | null>(null);
+  const [openGoals, setOpenGoals] = useState(false);
+  const [selectedGoals, setSelectedGoals] = useState<any[]>([]);
 
   const fetchUsers = async () => {
     try {
@@ -82,6 +86,7 @@ const AllUsers: React.FC = () => {
       setLoading(false);
     }
   };
+  console.log(users)
 
   useEffect(() => {
     fetchUsers();
@@ -135,6 +140,27 @@ const AllUsers: React.FC = () => {
      },
     { name: "Address", selector: (row) => row.address, sortable: true, wrap: true,   },
     { name: "Country", selector: (row) => row.country, sortable: true, wrap: true,   },
+    { name: "Test Count", selector: (row) => row.testCount, sortable: true, wrap: true,   },
+   {
+  name: "Goal Count",
+  selector: (row) => row.goalCount?.length || 0,
+  sortable: true,
+  wrap: true,
+  cell: (row: User) => (
+    <Button
+      variant="outlined"
+      size="small"
+      onClick={() => {
+        setSelectedUser(row.id.toString());
+        setSelectedGoals(row.goalCount as any[]);
+        setOpenGoals(true);
+      }}
+    >
+      {Array.isArray(row.goalCount) ? row.goalCount.length : 0}
+    </Button>
+  ),
+},
+
     {
       name: "Created At",
       selector: (row) => new Date(row.created_at).toLocaleDateString(),
@@ -281,6 +307,51 @@ const AllUsers: React.FC = () => {
           </TableContainer>
         </Box>
       </Modal>
+      {/* Goals Modal */}
+<Modal open={openGoals} onClose={() => setOpenGoals(false)}>
+  <Box
+    sx={{
+      position: "absolute",
+      top: "50%",
+      left: "50%",
+      transform: "translate(-50%, -50%)",
+      width: "60%",
+      maxHeight: "80%",
+      bgcolor: "background.paper",
+      boxShadow: 24,
+      p: 4,
+      borderRadius: 2,
+      overflowY: "auto",
+    }}
+  >
+    <Typography variant="h6" align="center">
+      <b>Goals for User ID: {selectedUser}</b>
+    </Typography>
+    <TableContainer component={Paper}>
+      <Table stickyHeader>
+        <TableHead>
+          <TableRow>
+            <TableCell>#</TableCell>
+            <TableCell>Goal ID</TableCell>
+            <TableCell>Goal Name</TableCell>
+            <TableCell>Class ID</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {selectedGoals.map((goal, index) => (
+            <TableRow key={index}>
+              <TableCell>{index + 1}</TableCell>
+              <TableCell>{goal.goal_id}</TableCell>
+              <TableCell>{goal.goal_name}</TableCell>
+              <TableCell>{goal.class_id}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  </Box>
+</Modal>
+
     </div>
   );
 };

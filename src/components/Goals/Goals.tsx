@@ -9,6 +9,7 @@ import LeaderboardDialog from './common/LeaderBoard';
 import LoadingSpinner from '../common/LoadingSpinner';
 import { getGoals } from '../../services/apiService';
 import api from '../../services/axios';
+import HelpfulBanner from './common/Banner';
 
 interface User {
     id: number;
@@ -99,7 +100,10 @@ const Goals: React.FC = () => {
 
                     <ActionButtons onLeaderboardClick={handleDialogOpen} classGroupProp={className || ''} />
                 </Box>
+                <Box sx={{p:3}}>
+                    <HelpfulBanner />
 
+                </Box>
 
                 {className !== '' && (
                     <GoalsPageContent
@@ -112,6 +116,7 @@ const Goals: React.FC = () => {
                 <Box sx={{ display: 'flex', justifyContent: 'center', marginTop: 2, backgroundColor: '#f0f0f0' }}>
                 </Box>
             </Box>
+
             <Footer />
             {user && (
                 <LeaderboardDialog

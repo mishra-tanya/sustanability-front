@@ -14,6 +14,8 @@ import Verification from './components/VerifyCertificate/Verification';
 import AdminHome from './admin/AdminHome';
 import AdminPrivateRoutes from './components/AdminPrivateRoutes';
 import NotFound from './components/Error/NotFound';
+import PaymentDetails from './components/Goals/common/PaymentDetails';
+import PaymentSuccess from './components/Goals/common/PaymentSuccess';
 
 const App: React.FC = () => {
     return (
@@ -27,6 +29,7 @@ const App: React.FC = () => {
                 <Route path="/verification/:certificateId" element={<Verification />} />
 
 
+
                 {/* protected  */}
                 <Route element={<PrivateRoutes />}>
                     <Route path="/class" element={<Dashboard />} />
@@ -35,6 +38,8 @@ const App: React.FC = () => {
                     <Route path="/class/:className/goal/:goal/:test" element={<QTest />} />
                     <Route path="/dashboard" element={<DashboardLayoutBasic />} />
                     <Route path="/results/:classId/:goalId/:testId" element={<Results />} />
+                    <Route path="/payment-details" element={<PaymentDetails/>} />
+                    <Route path="/payment-success" element={<PaymentSuccess />} />
                 </Route>
 
                 {/* admin protcted paths  */}

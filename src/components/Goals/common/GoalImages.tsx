@@ -1,0 +1,19 @@
+export const images = [
+  "/sdg/E_SDG_PRINT-01.jpg",
+  "/sdg/E_SDG_PRINT-02.jpg",
+  "/sdg/E_SDG_PRINT-03.jpg",
+  "/sdg/E_SDG_PRINT-04.jpg",
+  "/sdg/E_SDG_PRINT-05.jpg",
+  "/sdg/E_SDG_PRINT-06.jpg",
+  "/sdg/E_SDG_PRINT-07.jpg",
+  "/sdg/E_SDG_PRINT-08.jpg",
+  "/sdg/E_SDG_PRINT-09.jpg",
+  "/sdg/E_SDG_PRINT-10.jpg",
+  "/sdg/E_SDG_PRINT-11.jpg",
+  "/sdg/E_SDG_PRINT-12.jpg",
+  "/sdg/E_SDG_PRINT-13.jpg",
+  "/sdg/E_SDG_PRINT-14.jpg",
+  "/sdg/E_SDG_PRINT-15.jpg",
+  "/sdg/E_SDG_PRINT-16.jpg",
+  "/sdg/E_SDG_PRINT-17.jpg"
+];

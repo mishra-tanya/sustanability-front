@@ -2,7 +2,7 @@ import React from 'react';
 import { Typography, Box, Grid } from '@mui/material';
 import GoalCard from './common/GoalCard';  
 import Dash from './Dashboard/Dash';
-
+import { images } from './common/GoalImages';
 interface Goal {
   id: number;
   goal_name: string;
@@ -15,25 +15,7 @@ interface GoalsPageContentProps {
   classNameUser:string;
 }
 
-const images = [
-  "/sdg/E_SDG_PRINT-01.jpg",
-  "/sdg/E_SDG_PRINT-02.jpg",
-  "/sdg/E_SDG_PRINT-03.jpg",
-  "/sdg/E_SDG_PRINT-04.jpg",
-  "/sdg/E_SDG_PRINT-05.jpg",
-  "/sdg/E_SDG_PRINT-06.jpg",
-  "/sdg/E_SDG_PRINT-07.jpg",
-  "/sdg/E_SDG_PRINT-08.jpg",
-  "/sdg/E_SDG_PRINT-09.jpg",
-  "/sdg/E_SDG_PRINT-10.jpg",
-  "/sdg/E_SDG_PRINT-11.jpg",
-  "/sdg/E_SDG_PRINT-12.jpg",
-  "/sdg/E_SDG_PRINT-13.jpg",
-  "/sdg/E_SDG_PRINT-14.jpg",
-  "/sdg/E_SDG_PRINT-15.jpg",
-  "/sdg/E_SDG_PRINT-16.jpg",
-  "/sdg/E_SDG_PRINT-17.jpg"
-];
+
 
 const GoalsPageContent: React.FC<GoalsPageContentProps> = ({ goals, onGoalClick ,classNameUser}) => (
  <>

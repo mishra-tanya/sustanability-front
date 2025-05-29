@@ -13,6 +13,7 @@ interface Certificate {
   created_at: string;
   certificate_id: string;
   userSchool: string;
+  userId:number;
 }
  
 
@@ -21,7 +22,7 @@ const Certificate = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
-
+  const [userId, setUserId] = useState<number>(0);
 
   const baseUrl = import.meta.env.VITE_APP_BASE_URL;
 
@@ -33,6 +34,7 @@ const Certificate = () => {
         // console.log(response.data.certificate);
         setUserName(response.data.userName);
         setCertificates(response.data.certificate);
+        setUserId(response.data.userId);
       } catch (e) {
         console.error(e);
         setError('Failed to fetch certificates');
@@ -56,6 +58,7 @@ const Certificate = () => {
         userSchool: certificate.userSchool,
         classGroup: certificate.certificate_content,
         date: new Date(certificate.created_at).toLocaleDateString(),
+        userId: userId,
         baseUrl,
       });
     } catch (error) {

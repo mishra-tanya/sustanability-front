@@ -7,6 +7,7 @@ import { useParams } from "react-router-dom";
 import api from "../../services/axios";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
+import { ASSET_BASE_URL } from "../../services/config";
 
 const Verification = () => {
     const { certificateId: paramCertificateId } = useParams();  
@@ -74,22 +75,37 @@ const Verification = () => {
                 />
             </Box>
 
-            <Box sx={{ display: "flex", mt:3,alignItems: "center", justifyContent: "center", height: "10vh", width: "100vw" }}>
-                <TextField
-                    label="Certification Verification Number"
-                    id="filled-hidden-label-small"
-                    variant="filled"
-                    sx={{ width: "300px" }}
-                    value={certificationId}
-                    onChange={(e) => setCertificationId(e.target.value)}
-                />
-            </Box>
+            <Box
+  sx={{
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    mt: 3,
+    mb: 10,
+    gap: 2,  
+    flexWrap: "wrap"  
+  }}
+>
+  <TextField
+    label="Certification Verification Number"
+    id="filled-hidden-label-small"
+    variant="filled"
+    sx={{ width: "300px" }}
+    value={certificationId}
+    onChange={(e) => setCertificationId(e.target.value.trim())}
+  />
 
-            <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center",mt:3,mb:3 }}>
-                <Button variant="contained" color="primary" onClick={handleButtonClick} disabled={loading}>
-                    {loading ? "Please Wait Verifying..." : "Verify Certificate"}
-                </Button>
-            </Box>
+  <Button
+    variant="contained"
+    color="primary"
+    onClick={handleButtonClick}
+    disabled={loading}
+    sx={{ height: "56px" }} 
+  >
+    {loading ? "Please Wait Verifying..." : "Verify Certificate"}
+  </Button>
+</Box>
+
 
             {showAnimation && (
                 <Box
@@ -126,26 +142,38 @@ const Verification = () => {
             )}
 
             {verificationStatus === "verified" && verificationData && (
-               <>
-                <Box sx={{ mt: 2, textAlign: "center" }}>
-                   
-                      </Box>
-                     <Box sx={{display:"flex",flexDirection:'column',alignItems:"center",justifyContent:"center",p:4}}>
-                     <Card variant="outlined" sx={{p:5}}>
-                     <Typography variant="h5" sx={{ mb: 1, color:'green' ,textAlign:'center'}}>
-                       <b> Certificate Verified!</b>
-                    </Typography>
-                    <hr />
-                      <Typography variant="body1"><b>Name: </b>{verificationData.name}</Typography>
-                      <Typography variant="body1"><b>School: </b>{verificationData.school}</Typography>
+  <>
+    <Box sx={{ mt: 2, textAlign: "center" }}></Box>
 
-                    <Typography variant="body1"><b>Certification Date:</b> {verificationData.date}</Typography>
-                    <Typography variant="body1"><b>Certification Level:</b> Class {verificationData.classGroup}</Typography>
-                    </Card>
-             
-                      </Box>
-               </>
-            )}
+    <Box sx={{ display: "flex", flexDirection: 'column', alignItems: "center", justifyContent: "center", p: 4 }}>
+      <Card variant="outlined" sx={{ p: 5 }}>
+       
+       {!verificationData.imageError ? (
+        <>
+         <Typography variant="h5" sx={{ mb: 1, color: 'green', textAlign: 'center' }}>
+          <b> Certificate Verified!</b>
+        </Typography>
+          <Box sx={{ mt: 4, textAlign: 'center' }}>
+    <img
+      src={`${ASSET_BASE_URL}/certificates/certificate_${certificationId}.png`}
+      alt="Certificate"
+      style={{ width: "90%", maxWidth: "800px", border: "1px solid #ccc", borderRadius: "10px" }}
+      onError={() => setVerificationData({ ...verificationData, imageError: true })}
+    />
+     </Box>
+        </>
+  ) : (
+    <Typography sx={{ color: "red", mt: 2 }}>
+      No certificate image found for this ID.
+    </Typography>
+  )}
+     
+        </Card>
+
+    
+    </Box>
+  </>
+)}
 
             <Footer />
         </div>

@@ -46,7 +46,7 @@ const GoalCard: React.FC<GoalCardProps> = ({ goal, onGoalClick, img }) => (
         image={img}
         alt={goal.goal_name}
         sx={{
-          height: 220,
+          maxHeight:'400px',
           width: '100%',
           objectFit: 'cover',
         }}

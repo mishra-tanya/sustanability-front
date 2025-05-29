@@ -42,7 +42,7 @@ const PaymentSuccess = () => {
         Payment Successful!
       </Typography>
       <Typography variant="subtitle1" color="text.secondary" gutterBottom>
-        Thank you for your payment via Razorpay.
+        Thank you for your payment.
       </Typography>
 <br /><br />
         <Typography variant="body1" gutterBottom>

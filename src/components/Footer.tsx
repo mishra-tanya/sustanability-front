@@ -9,13 +9,12 @@ import Typography from '@mui/material/Typography';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import TwitterIcon from '@mui/icons-material/X';
 import { Facebook, YouTube } from '@mui/icons-material';
-// import SitemarkIcon from './SitemarkIcon';
 
 function Copyright() {
   return (
     <Typography variant="body2" sx={{ color: 'text.secondary', mt: 1 }}>
       {'Copyright © '}
-      <Link color="text.secondary" href="https://mui.com/">
+      <Link color="text.secondary" href="/">
         Sustainability Olympiad
       </Link>
       &nbsp;
@@ -48,15 +47,13 @@ export default function Footer() {
         >
         
           <div>
-            <Link color="text.secondary" variant="body2" href="#">
-              Privacy Policy
+            <Link color="text.secondary" variant="body2" href="/">
+              Home
             </Link>
             <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
               &nbsp;•&nbsp;
             </Typography>
-            <Link color="text.secondary" variant="body2" href="#">
-              Terms of Service
-            </Link>
+            
             <Copyright />
           </div>
           <Stack

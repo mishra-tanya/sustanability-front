@@ -29,7 +29,7 @@ const TestQuestionsTable: React.FC = () => {
       const response = await api.get(`/getTestQuestions?page=${page + 1}`);
       setTestQuestions(response.data.testQuestions);  
       setTotalQuestions(response.data.totalQuestionsCount)  
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.error("Error fetching test questions:", error);
     } finally {

@@ -64,7 +64,7 @@ const Results: React.FC = () => {
         // console.log(response.data.testN.test_name);
         setTestName(response.data.testN.test_name);
         setGoalName(response.data.goalN.description);
-        console.log(response)
+        // console.log(response)
       } catch (error) {
         console.error('No results found:', error);
       } finally {
@@ -102,7 +102,7 @@ const Results: React.FC = () => {
 
   const currentResult = resultData?.detailed_results[currentQuestionIndex];
 
-  console.log(resultData)
+  // console.log(resultData)
   return (
     <div>
       <Navbar />

@@ -26,3 +26,6 @@ dist-ssr
 .env.development
 public/esdg
 public/sdg
+cp.jpg
+complete_bg.jpg
+goal_bg.jpg

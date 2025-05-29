@@ -110,7 +110,7 @@ doc.text(`"${selectedQuote}"`, pageWidth / 2, 150, {
 
     setFont(false, 16);
     wrapText(
-      `of School ${userSchool}, Class group ${classGroup} for successfully participating in the Sustainability Olympiad Event organized by the SCR Team. We appreciate your presence and wish you all the best for future endeavors.`,
+      `of  ${userSchool}, Class group ${classGroup} for successfully participating in the Sustainability Olympiad Event organized by the SCR Team. We appreciate your presence and wish you all the best for future endeavors.`,
       canvas.width/2 ,
       350,
       600,

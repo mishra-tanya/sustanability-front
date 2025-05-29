@@ -37,7 +37,7 @@ export const CompleteGoals = async (data: CertificateData) => {
     doc.setFont('times', 'normal');
     doc.setFontSize(16);
     doc.text(
-      `of School ${userSchool}, Class group ${classGroup} 
+      `of  ${userSchool}, Class group ${classGroup} 
 has successfully completed the Sustainability Olympiad assessment series 
 demonstrating exceptional understanding of global sustainability challenges and solutions.`,
       148,

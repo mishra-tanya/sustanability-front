@@ -25,7 +25,7 @@ const handlePayment = async (amount: number, paymentType: string) => {
             payment_type: paymentType,
         });
 
-        console.log("Create order response:", response);
+        // console.log("Create order response:", response);
 
         if (response.data.status === "success") {
             const { order_id, amount } = response.data;
@@ -47,7 +47,7 @@ const handlePayment = async (amount: number, paymentType: string) => {
                             payment_type: paymentType,
                         });
 
-                        console.log("Verification response:", verifyRes);
+                        // console.log("Verification response:", verifyRes);
                         if (verifyRes.data.payment.status === "completed") {
                             const { razorpay_payment_id, razorpay_order_id } = verifyRes.data.payment;
 

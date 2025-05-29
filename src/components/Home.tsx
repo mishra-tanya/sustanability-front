@@ -1,5 +1,6 @@
 import Footer from './Footer';
 import Navbar from './Navbar';
+import { categorizedFAQs } from './data/faqList';
 import {
   Accordion,
   AccordionSummary,
@@ -8,9 +9,10 @@ import {
   Button,
   Grid,
   useMediaQuery,
+  Divider,
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Box, styled } from '@mui/system';
+import { Box, Container, styled } from '@mui/system';
 import { useTheme } from '@mui/material/styles';
 import React, { useState } from 'react';
 import { TextFieldComponent } from './common/InputField';
@@ -18,6 +20,7 @@ import api from '../services/axios';
 import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import CustomBlinkingCursor from './Home/BlinkingEarthAnimation';
+import VerticalLinearStepper from './Home/Stepper';
 interface FormData {
   name: string;
   contact_no: string;
@@ -81,10 +84,10 @@ const SectionTitle = styled(Typography)(({ theme }) => ({
 }));
 
 const ContactFormButton = styled(Button)({
-  backgroundColor: '#4caf50',
+  backgroundColor: '#002D62',
   color: '#fff',
   ':hover': {
-    backgroundColor: '#388e3c',
+    backgroundColor: '#1a478f',
   },
 });
 
@@ -175,9 +178,11 @@ function Home() {
               <CustomBlinkingCursor />
             </Typography>
             <br />
-            <Typography variant="body1" style={{ color: '#5f6368', lineHeight: '1.8' }}>
-              Web application designed to facilitate structured tests, user rankings, and certification issuance(Participation and merit certificate). The system will serve four classes, each with multiple goals, tests, and questions. The application includes features like participation and ranking certificates, a leaderboard system, and social media sharing capabilities.
-
+            <Typography variant="body1" style={{ color: '#5f6368',textAlign: 'justify' , lineHeight: '1.8' }}>
+              Empowering Young Minds for a Sustainable Future
+              Are you ready to become a Sustainability Champion? Join thousands of students
+              across the world in an exciting journey to understand the United Nation&#39;s Sustainable
+              Development Goals (SDGs) and how you can make a difference in the world!
             </Typography>
             <br />
             <Button variant="outlined" size="large" color='primary' onClick={handleStart} >Start Now</Button>
@@ -186,60 +191,307 @@ function Home() {
 
         </HeroSection>
       </motion.div>
+
+      {/* about  */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
         viewport={{ once: true, amount: 0.5 }}
       >
+        <Section sx={{ backgroundColor: "#002D62",  py: 8 }}>
+          <SectionTitle
+            variant="h3"
+            sx={{
+              fontSize: { xs: '32px', md: '48px' },
+              color: 'white',
+              mb: 4,
+              textAlign: 'center'
+            }}
+          >
+            About the Sustainability Olympiad
+          </SectionTitle>
 
-        <Section sx={{ backgroundColor: "#002D62", }}>
-
-          <SectionTitle variant="h5" style={{ color: "white" }} >About Us</SectionTitle>
-
-          <Typography variant="body1" style={{ maxWidth: '800px', margin: '0 auto', color: 'white', lineHeight: '1.6' }}>
-            We are a team of professionals dedicated to providing quality services and solutions. Our
-            focus is on customer satisfaction and continuous improvement.
-          </Typography>
-
-        </Section>
-      </motion.div>
-
-
-      <motion.div
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1, ease: 'easeOut' }}
-        viewport={{ once: true, amount: 0.5 }}
-      >
-        <Section style={{ marginTop: "50px", marginBottom: "50px" }}>
-          <SectionTitle variant="h5">Frequently Asked Questions</SectionTitle>
-          {['What is Service 1?', 'How can I get started?', 'D dw'].map((faq, index) => (
-            <Accordion key={index} style={{ maxWidth: '1200px', padding: '10px', margin: '10px auto' }}>
-              <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                <Typography>
-                  {index + 1}. {faq}</Typography>
-              </AccordionSummary>
-              <AccordionDetails>
-                <Typography sx={{ textAlign: 'left' }}>
-                  {index === 0 ? 'Service 1 is designed to help you achieve your goals in a streamlined way.'
-                    : index === 1 ? 'Getting started is easy! Just reach out through our contact form below.'
-                      : 'Yes, we provide 24/7 support. Contact us anytime!'}
-                </Typography>
-              </AccordionDetails>
-            </Accordion>
+          {[
+            {
+              title: "Our Vision",
+              text: `To cultivate a generation of environmentally conscious, socially responsible young citizens equipped with the knowledge and passion to create a sustainable future.`
+            },
+            {
+              title: "Our Mission",
+              text: `The Sustainability Olympiad aims to make the UN's 17 Sustainable Development Goals accessible, understandable, and actionable for students across India. By providing engaging assessments and recognition for achievement, we seek to inspire young minds to become sustainability champions in their schools, homes, and communities.`
+            },
+            {
+              title: "Our Story",
+              text: `The Sustainability Olympiad was born from a simple observation: while sustainability is one of the most critical challenges of our time, it remains insufficiently addressed in standard educational curricula. Launched by IndiaESG.org in 2024, the Olympiad bridges this gap by offering a structured, engaging approach to sustainability education that complements classroom learning.
+              Our team of educators, sustainability experts, and educational psychologists has designed an assessment framework that not only tests knowledge but nurtures curiosity and inspires action. We believe that understanding precedes change, and our goal is to help students understand sustainability in ways that are meaningful to their daily lives and future aspirations.
+              `
+            }
+          ].map((section, idx) => (
+            <Box key={idx} sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+              <Typography variant="h6" sx={{ color: '#a5d6ff', textDecoration: 'underline', mb: 1 }}>
+                <b>{section.title}</b>
+              </Typography>
+              <Typography variant="body1" sx={{ color: 'white', textAlign: 'justify' }}>
+                {section.text}
+              </Typography>
+            </Box>
           ))}
         </Section>
       </motion.div>
 
 
+ <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <Section sx={{ backgroundColor: "white",  py: 8 }}>
+          <SectionTitle
+            variant="h3"
+            sx={{
+              fontSize: { xs: '32px', md: '48px' },
+              color: 'black',
+              mb: 4,
+              textAlign: 'center'
+            }}
+          >
+           What is the Sustainability Olympiad?
+          </SectionTitle>
+
+    
+            <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+              <Typography variant="h6" sx={{ color: 'grey',  mb: 1 }}>
+                The Sustainability Olympiad is an innovative <b> FREE</b> educational <br/>
+                initiative by <b>IndiaESG.org </b>
+                <br/>designed to inspire students from 
+                grades 4 to 10 to explore, understand, and engage with global 
+                sustainability challenges through fun, interactive assessments
+                 aligned with the 17 UN Sustainable Development Goals.
+              </Typography>
+             
+            </Box>
+
+        </Section>
+      </motion.div>
+
+      
+<motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <Section sx={{ backgroundColor: "#f2f6fc",  py: 8 }}>
+          <SectionTitle
+            variant="h3"
+            sx={{
+              fontSize: { xs: '32px', md: '48px' },
+              color: 'black',
+              mb: 4,
+              textAlign: 'center',
+              textDecoration:'underline'
+            }}
+          >
+           How It Works
+
+          </SectionTitle>
+
+    
+           <VerticalLinearStepper/>
+            
+        </Section>
+      </motion.div>
+
+
+
+<motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <Section sx={{ backgroundColor: "#fff",  py: 8 }}>
+          <SectionTitle
+            variant="h3"
+            sx={{
+              fontSize: { xs: '32px', md: '48px' },
+              color: 'black',
+              mb: 4,
+              textAlign: 'center'
+            }}
+          >
+           Why Participate?
+          </SectionTitle>
+
+    
+            <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+              <Typography variant="h6" sx={{ color: 'grey',  mb: 1 }}>
+                <li>Learn about critical global challenges and solutions</li>
+                <li>Earn certificates for each completed SDG </li>
+                <li>Share your achievements with friends and family</li>
+                <li>Apply sustainability concepts in your academics and daily life</li>
+                <li>Join a community of young change-makers</li>
+              </Typography>
+             
+            </Box>
+            
+        </Section>
+      </motion.div>
+
+
+<motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <Section sx={{ backgroundColor: "#f2f6fc",  py: 8 }}>
+          <SectionTitle
+            variant="h3"
+            sx={{
+              fontSize: { xs: '32px', md: '48px' },
+              color: 'black',
+              mb: 4,
+              textAlign: 'center',
+              textDecoration:'underline'
+            }}
+          >
+         What Makes Us Different?
+
+
+          </SectionTitle>
+
+      <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+              <Typography variant="h6" sx={{ color: 'grey',textAlign:'justify',  mb: 1 }}>
+                <ul>
+                  <li> <b>Comprehensive Coverage: </b>Tests across all 17 UN Sustainable Development Goals</li>
+                <li><b>Age-Appropriate Content:</b> Tailored assessments for grades 4 through 10</li>
+                <li><b>Application-Focused: </b>Emphasis on practical understanding and real-world relevance</li>
+                <li><b>Recognition System: </b>Certificates for each completed SDG to track and celebrate progress</li>
+                <li><b>Accessibility:</b> Digital platform accessible to schools across India</li>
+              
+                </ul>
+              </Typography>
+             
+            </Box>
+            
+        </Section>
+      </motion.div>
+
+
+ <motion.div
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, ease: 'easeOut' }}
+        viewport={{ once: true, amount: 0.5 }}
+      >
+        <Section sx={{ backgroundColor: "white",  py: 8 }}>
+          <SectionTitle
+            variant="h3"
+            sx={{
+              fontSize: { xs: '32px', md: '48px' },
+              color: 'black',
+              mb: 4,
+              textAlign: 'center'
+            }}
+          >
+           About IndiaESG.org
+
+          </SectionTitle>
+
+    
+            <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+              <Typography variant="h6" sx={{ color: 'grey',  mb: 1 }}>
+              IndiaESG.org is a not-for-profit organization<br/> dedicated to 
+              advancing sustainability awareness and action across India. <br/>
+              Through educational initiatives, community engagement, and 
+              resource development.<br/><br/> We work to make <br/>Environmental, Social,
+               and Governance (ESG) principles understood and implemented
+                by organizations, communities, and individuals throughout
+                 the country.<br/><br/>
+              The Sustainability Olympiad represents our flagship
+              educational initiative, embodying our belief that meaningful
+               change begins with education and awareness among the youngest
+                members of our society.
+
+              </Typography>
+             
+            </Box>
+
+        </Section>
+      </motion.div>
+     
+      <Box sx={{ backgroundColor: "#002D62", py: 8 }}>
+        <Container maxWidth="md">
+          <Typography
+            variant="h4"
+            align="center"
+            gutterBottom
+            sx={{
+              fontWeight: 'bold',
+               color: 'white',
+              mb: 6,
+            }}
+          >
+            Frequently Asked Questions
+          </Typography>
+
+          {categorizedFAQs.map((section, secIndex) => (
+            <Box key={secIndex} sx={{ mb: 6 }}>
+              <Typography
+                variant="h6"
+                sx={{
+                  fontWeight: 'bold',
+                  color: 'white',
+                  mb: 2,
+                  borderLeft: `5px solid ${theme.palette.primary.main}`,
+                  pl: 2,
+                }}
+              >
+                {section.category}
+              </Typography>
+
+              {section.items.map((faq, index) => (
+                <Accordion
+                  key={index}
+                  sx={{
+                    mb: 1.5,
+                    borderRadius: 2,
+                    boxShadow: 1,
+                    bgcolor: 'white',
+                    '&:before': { display: 'none' },
+                  }}
+                >
+                  <AccordionSummary expandIcon={<ExpandMoreIcon color="primary" />}>
+                    <Typography sx={{ fontWeight: 600, color: 'text.primary' }}>
+                      {faq.question}
+                    </Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography sx={{ color: 'text.secondary' }}>
+                      {faq.answer}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              ))}
+
+              {secIndex !== categorizedFAQs.length - 1 && (
+                <Divider sx={{ mt: 4 }} />
+              )}
+            </Box>
+          ))}
+        </Container>
+      </Box>
+
       <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
         viewport={{ once: true, amount: 0.5 }}
       >
-        <Section sx={{ backgroundColor: "#fafafa", }}>
+        <Section >
           <SectionTitle variant="h5">Contact Us</SectionTitle>
           <Grid container style={{ maxWidth: '800px', margin: '0 auto' }}>
             <form onSubmit={handleSubmit} style={{ width: '100%' }}>

@@ -28,7 +28,7 @@ interface User {
   country: string;
   created_at: string;
   testCount:number;
-  goalCount:object;
+  goalCount:any[];
 }
 
 interface Result {
@@ -86,7 +86,7 @@ const AllUsers: React.FC = () => {
       setLoading(false);
     }
   };
-  console.log(users)
+  // console.log(users)
 
   useEffect(() => {
     fetchUsers();
@@ -125,7 +125,6 @@ const AllUsers: React.FC = () => {
       console.error("Error fetching certifications:", error);
     }
   };
-
   const columns: TableColumn<User>[] = [
     { name: "ID", selector: (row) => row.id, sortable: true },
     { name: "Name", selector: (row) => row.name, sortable: true, wrap: true,   },

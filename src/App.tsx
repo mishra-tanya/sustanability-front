@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import AuthForm from './components/Auth/AuthForm';
 import Login from './components/Auth/LoginForm';
 import PrivateRoutes from './components/PrivateRoutes';
@@ -16,10 +16,11 @@ import AdminPrivateRoutes from './components/AdminPrivateRoutes';
 import NotFound from './components/Error/NotFound';
 import PaymentDetails from './components/Goals/common/PaymentDetails';
 import PaymentSuccess from './components/Goals/common/PaymentSuccess';
+import CertificateView from './components/Goals/common/CertificateView';
+import PaymentFailed from './components/Goals/common/PaymentFailed';
 
 const App: React.FC = () => {
     return (
-        <Router>
             <Routes>
                 {/* publicroutes */}
                 <Route path="/" element={<Home />} />
@@ -27,8 +28,6 @@ const App: React.FC = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/verification/:certificateId" element={<Verification />} />
-
-
 
                 {/* protected  */}
                 <Route element={<PrivateRoutes />}>
@@ -40,7 +39,10 @@ const App: React.FC = () => {
                     <Route path="/results/:classId/:goalId/:testId" element={<Results />} />
                     <Route path="/payment-details" element={<PaymentDetails/>} />
                     <Route path="/payment-success" element={<PaymentSuccess />} />
+                    <Route path="/payment-failed" element={<PaymentFailed />} />
                 </Route>
+                
+                <Route path="/certificate-view" element={<CertificateView />} />
 
                 {/* admin protcted paths  */}
                 <Route element={<AdminPrivateRoutes />}>
@@ -50,7 +52,6 @@ const App: React.FC = () => {
                 <Route path="*" element={<NotFound/>}/>
 
             </Routes>
-        </Router>
     );
 };
 

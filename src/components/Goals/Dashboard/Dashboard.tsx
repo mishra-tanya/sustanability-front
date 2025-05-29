@@ -9,13 +9,13 @@ import { AppProvider, Navigation, Router } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
 // import Grid from '@mui/material/Grid2';AddHome, Home, Logout,
-import {  Verified } from '@mui/icons-material';
+// import {  Verified } from '@mui/icons-material';
 // import { Button } from '@mui/material';
 import Dash from './Dash';
 import Profile from './Profile';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
-import Certificate from './Certificate';
+// import Certificate from './Certificate';
 // import Login from '../../Auth/LoginForm';
 
 const NAVIGATION: Navigation = [
@@ -90,11 +90,11 @@ const NAVIGATION: Navigation = [
     icon: <LayersIcon />,
   },
 
-  {
-    segment: 'certificates',
-    title: 'Certificates',
-    icon: <Verified />,
-  },
+  // {
+  //   segment: 'certificates',
+  //   title: 'Certificates',
+  //   icon: <Verified />,
+  // },
 
 ];
 
@@ -217,9 +217,10 @@ export default function DashboardLayoutBasic(props: any) {
             )
           }
          
-           {selectedPage === 'certificates' && (
+           {/* {selectedPage === 'certificates' && (
             <Certificate />
-          )}
+          )} */}
+
           {/* <Grid container spacing={1}>
             <Grid size={5} />
             <Grid size={12}>

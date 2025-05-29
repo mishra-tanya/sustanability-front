@@ -5,7 +5,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider, Navigation, Router } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
-import {   Analytics, BarChart, Email, MessageOutlined, Person, Quiz, School, SchoolOutlined, Task } from '@mui/icons-material';
+import {   Analytics, BarChart, Email, MessageOutlined, Payment, Person, Quiz, School, SchoolOutlined, Task } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import Overview from './Overview';
@@ -20,6 +20,7 @@ import UserPieAnalytics from './Dashboard/UserPieAnalytics';
 import TestsGivenGraph from './Dashboard/TestData';
 import TopPerformersTable from './Dashboard/TopPerformer';
 import EmailSender from './email/EmailSend';
+import PaymentsTable from './Payments';
 
 const NAVIGATION: Navigation = [
   {
@@ -36,6 +37,11 @@ const NAVIGATION: Navigation = [
     segment: 'sendemail',
     title: 'Send Email',
     icon: <Email />,
+  },
+  {
+    segment: 'payments',
+    title: 'All Payments',
+    icon: <Payment />,
   },
   {
     segment: 'userAnalytics',
@@ -176,6 +182,12 @@ export default function DashboardLayoutBasic(props: any) {
             {selectedPage === 'userAnalytics' && (
             <>
               <UserPieAnalytics />
+            </>
+          )}
+
+            {selectedPage === 'payments' && (
+            <>
+              <PaymentsTable />
             </>
           )}
            {selectedPage === 'sendemail' && (

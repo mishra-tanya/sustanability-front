@@ -2,19 +2,19 @@ import { Box, Stepper, Step, StepLabel, Typography,   } from "@mui/material";
 
 const steps = [
   {
-    description: `For each ad campaign that you create, you can control how much
-              you're willing to spend on clicks and conversions, which networks
-              and geographical locations you want your ads to show on, and more.`,
+    description: `Register for the Olympiad`,
   },
   {
-    description:
-      "An ad group contains one or more ads which target a shared set of keywords.",
+    description:"Choose from any of the 17 UN Sustainable Development Goals",
   },
   {
-    description: `Try out different ad text to see what brings in the most customers,
-              and learn how to enhance your ads using features like ad extensions.
-              If you run into any problems with your ads, find out how to tell if
-              they're running and how to resolve approval issues.`,
+    description: `Complete three engaging tests for each SDG`,
+  },
+   {
+    description: `Earn certificates recognizing your knowledge and commitment`,
+  },
+  {
+    description: `Share your achievement and inspire others`,
   },
 ];
 
@@ -24,7 +24,6 @@ export default function VerticalLinearStepper() {
     <Box
       sx={{
         width: "100%",
-        height: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",

@@ -25,7 +25,7 @@ const CustomBlinkingCursor = () => {
         <Box
           component="span"
           sx={{
-            fontSize: '3.5rem',
+            fontSize: '3rem',
             animation: 'blink 1s infinite',
             marginLeft: 0,
             marginTop: 0,  

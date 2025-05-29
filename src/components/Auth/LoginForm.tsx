@@ -34,12 +34,14 @@ const Login: React.FC = () => {
 
         try {
             const response = await loginUser(email, password);
-            const { token, role } = response;
+            const { token, role, user_id } = response;
             const expiryTime = Date.now() + (2 * 60 * 60 * 1000);
             localStorage.setItem('authTokenExpiry', expiryTime.toString());
             localStorage.setItem("authToken", token);
             localStorage.setItem("userRole", role);   
+            localStorage.setItem("user_id", user_id);   
 
+// console.log(user_id);
             if (role === 'admin') {
                 navigate("/admin/home");   
             } else {

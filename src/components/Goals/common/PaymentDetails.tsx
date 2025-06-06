@@ -93,7 +93,7 @@ const initiatePhonePe = async () => {
               <EmojiEventsIcon sx={{ fontSize: 50, color: 'primary.main' }} />
             )}
 
-            <Typography variant="h5" fontWeight="bold">{message} Payment</Typography>
+            <Typography variant="h5" fontWeight="bold"> Payment Summary</Typography>
 
             <Divider sx={{ width: '100%' }} />
 
@@ -103,7 +103,7 @@ const initiatePhonePe = async () => {
             <Typography variant="body1" color="text.secondary" sx={{ textAlign: 'center', mt: 1 }}>
               {message === 'Certification'
                 ? 'This payment is for obtaining a professional certification. Your certificate will be issued upon confirmation.'
-                : 'This payment is a kind donation. Your support directly helps us continue our mission and grow.'}
+                : 'If you wish to pay, you may do so. Otherwise, you can continue using the service without payment.'}
             </Typography>
 
             <Button

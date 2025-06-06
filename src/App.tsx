@@ -18,6 +18,12 @@ import PaymentDetails from './components/Goals/common/PaymentDetails';
 import PaymentSuccess from './components/Goals/common/PaymentSuccess';
 import CertificateView from './components/Goals/common/CertificateView';
 import PaymentFailed from './components/Goals/common/PaymentFailed';
+import RefundPolicy from './components/Home/RefundPolicy';
+import PrivacyPolicy from './components/Home/PrivacyPolicy';
+import TermsAndConditions from './components/Home/TermsAndConditions';
+import Pricing from './components/Home/Pricing';
+import ContactUs from './components/Home/ContactUs';
+import AboutUs from './components/Home/AboutUs';
 
 const App: React.FC = () => {
     return (
@@ -28,6 +34,12 @@ const App: React.FC = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/verification" element={<Verification />} />
                 <Route path="/verification/:certificateId" element={<Verification />} />
+                <Route path="/about" element={<AboutUs />} />
+                <Route path="/contact" element={<ContactUs />} />
+                <Route path="/pricing" element={<Pricing />} />
+                <Route path="/terms" element={<TermsAndConditions />} />
+                <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                <Route path="/refund-policy" element={<RefundPolicy />} />
 
                 {/* protected  */}
                 <Route element={<PrivateRoutes />}>

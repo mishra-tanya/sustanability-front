@@ -26,7 +26,7 @@ const HelpfulBanner: React.FC = () => {
               })
             }
           >
-            Click here to Donate
+            Click here to Pay
           </Button>
           <IconButton
             aria-label="close"
@@ -40,8 +40,9 @@ const HelpfulBanner: React.FC = () => {
       }
       sx={{ mb: 2 }}
     >
-      <AlertTitle>If you found this helpful</AlertTitle>
-      Consider donating to support our mission.
+      <AlertTitle>Payment is Optional</AlertTitle>
+If you wish to pay, you may do so. Otherwise, you can continue using the service without payment.
+
     </Alert>
   );
 };

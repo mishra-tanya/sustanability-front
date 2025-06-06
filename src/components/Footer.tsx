@@ -53,7 +53,39 @@ export default function Footer() {
             <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
               &nbsp;•&nbsp;
             </Typography>
-            
+            <Link color="text.secondary" variant="body2" href="/about">
+              About us
+            </Link>
+            <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
+              &nbsp;•&nbsp;
+            </Typography>
+            <Link color="text.secondary" variant="body2" href="/contact">
+              Contact Us
+            </Link>
+            <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
+              &nbsp;•&nbsp;
+            </Typography>
+            <Link color="text.secondary" variant="body2" href="/pricing">
+              Pricing
+            </Link>
+            <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
+              &nbsp;•&nbsp;
+            </Typography>
+             <Link color="text.secondary" variant="body2" href="/privacy-policy">
+              Privacy Policy
+            </Link>
+            <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
+              &nbsp;•&nbsp;
+            </Typography>
+             <Link color="text.secondary" variant="body2" href="/terms">
+              Terms and Contitions
+            </Link>
+            <Typography sx={{ display: 'inline', mx: 0.5, opacity: 0.5 }}>
+              &nbsp;•&nbsp;
+            </Typography>
+             <Link color="text.secondary" variant="body2" href="/refund-policy">
+              Refund Policy
+            </Link>
             <Copyright />
           </div>
           <Stack

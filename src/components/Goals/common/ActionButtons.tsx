@@ -84,6 +84,20 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick, class
   const handleGoalCertificateFromModal = async (goalIdForCert: number) => {
     try {
       setLoadingButton('goal');
+      const paymentCheck = await api.get('/check-class-payment', {
+          params: { classId },
+          withCredentials: true,
+        });
+
+        if (!paymentCheck.data.paid) {
+          navigate('/payment-details', {
+            state: {
+              message: 'Certificate For Class ' + classId,
+              amount: 100,
+            },
+          });
+          return;
+        }
       const response = await api.post('/generate-certificate', {
         type: `Goal ${goalIdForCert}`,
         classGr: classGroupProp,
@@ -140,26 +154,26 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick, class
         });
 
       } else if (type === 'class') {
-        if (!isClassCertificateEligible) {
-          setModalMessage('Complete all goals in this class to unlock your Class Completion Certificate.');
-          setOpenModal(true);
-          return;
-        }
+        // if (!isClassCertificateEligible) {
+        //   setModalMessage('Complete all goals in this class to unlock your Class Completion Certificate.');
+        //   setOpenModal(true);
+        //   return;
+        // }
 
-        const paymentCheck = await api.get('/check-class-payment', {
-          params: { classId },
-          withCredentials: true,
-        });
+        // const paymentCheck = await api.get('/check-class-payment', {
+        //   params: { classId },
+        //   withCredentials: true,
+        // });
 
-        if (!paymentCheck.data.paid) {
-          navigate('/payment-details', {
-            state: {
-              message: 'Certificate For Class ' + classId,
-              amount: 100,
-            },
-          });
-          return;
-        }
+        // if (!paymentCheck.data.paid) {
+        //   navigate('/payment-details', {
+        //     state: {
+        //       message: 'Certificate For Class ' + classId,
+        //       amount: 100,
+        //     },
+        //   });
+        //   return;
+        // }
 
         const response = await api.post('/generate-certificate', {
           type: 'Completion',
@@ -190,6 +204,20 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick, class
     try {
       setLoadingButton('participation');
 
+      const paymentCheck = await api.get('/check-class-payment', {
+          params: { classId },
+          withCredentials: true,
+        });
+
+        if (!paymentCheck.data.paid) {
+          navigate('/payment-details', {
+            state: {
+              message: 'Certificate For Class ' + classId,
+              amount: 100,
+            },
+          });
+          return;
+        }
       const response = await api.post(
         '/generate-certificate',
         {
@@ -254,7 +282,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick, class
             </Button>
           )}
 
-          {goalId && (
+          {/* {goalId && (
             <Button
               variant="contained"
               color="primary"
@@ -264,7 +292,7 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick, class
             >
               {loadingButton === 'goal' ? <CircularProgress size={24} color="inherit" /> : 'Get Goal Completion Certificate'}
             </Button>
-          )}
+          )} */}
 
           {!goalId && (
             <Button

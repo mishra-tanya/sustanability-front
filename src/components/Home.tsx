@@ -21,6 +21,7 @@ import { motion } from 'motion/react';
 import { useNavigate } from 'react-router-dom';
 import CustomBlinkingCursor from './Home/BlinkingEarthAnimation';
 import VerticalLinearStepper from './Home/Stepper';
+import AchieversGallery from './AcheiversGallery';
 interface FormData {
   name: string;
   contact_no: string;
@@ -192,6 +193,20 @@ function Home() {
         </HeroSection>
       </motion.div>
 
+      <Section sx={{   py: 8 }}>
+          <SectionTitle
+            variant="h3"
+            sx={{
+              fontSize: { xs: '32px', md: '48px' },
+              textAlign: 'center'
+            }}
+          >
+            Acheivers Gallery
+          </SectionTitle>
+
+<AchieversGallery/>
+        </Section>
+
       {/* about  */}
       <motion.div
         initial={{ opacity: 0, y: 50 }}
@@ -339,7 +354,6 @@ function Home() {
             
         </Section>
       </motion.div>
-
 
 <motion.div
         initial={{ opacity: 0, y: 50 }}

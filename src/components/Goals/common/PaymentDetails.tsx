@@ -93,18 +93,33 @@ const initiatePhonePe = async () => {
               <EmojiEventsIcon sx={{ fontSize: 50, color: 'primary.main' }} />
             )}
 
-            <Typography variant="h5" fontWeight="bold"> Payment Summary</Typography>
+            <Typography variant="h5" fontWeight="bold"> Payment For Certification</Typography>
 
             <Divider sx={{ width: '100%' }} />
 
             <Typography variant="h6" color="text.secondary">Amount to Pay</Typography>
             <Typography variant="h4" fontWeight="bold" color="success.main">₹{amount}</Typography>
 
-            <Typography variant="body1" color="text.secondary" sx={{ textAlign: 'center', mt: 1 }}>
-              {message === 'Certification'
+            <Typography variant="body1" color="text.secondary" sx={{  mt: 1 }}>
+              {/* {message === 'Certification'
                 ? 'This payment is for obtaining a professional certification. Your certificate will be issued upon confirmation.'
-                : 'If you wish to pay, you may do so. Otherwise, you can continue using the service without payment.'}
-            </Typography>
+                : 'If you wish to pay, you may do so. Otherwise, you can continue using the service without payment.'} */}
+                To receive certificates, a one-time payment of ₹100 is required. After payment, you’ll be eligible to earn:
+<br/>
+<ul>
+  <li>1 Participation Certificate</li>
+  <li>
+17 Goal Certificates (one for each SDG you complete)
+</li>
+  <li>
+1 Final Certificate after completing all 17 goals
+  </li>
+</ul>
+
+{/* <b>
+That's a total of 19 certificates for just ₹100!
+  </b>     */}       
+   </Typography>
 
             <Button
               variant="contained"

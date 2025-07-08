@@ -119,7 +119,7 @@ const Overall = () => {
       button: true,
     },
   ];
-  const percentage = (totalScore ?? 0) / 6800 * 100;
+  const percentage = (totalScore ?? 0) / 510 * 100;
 
   return (
     <div>
@@ -163,7 +163,7 @@ const Overall = () => {
             p: 3,
           }}
         >
-          <Gauge width={150} height={150} value={uniqueTestsGiven} valueMax={680} />
+          <Gauge width={150} height={150} value={uniqueTestsGiven} valueMax={510} />
           <Typography sx={{ textAlign: "center", marginTop: 1 }}>
             Total Tests Given
           </Typography>
@@ -180,7 +180,7 @@ const Overall = () => {
             p: 3,
           }}
         >
-          <Gauge width={150} height={150} value={uniqueGoalsCompleted} valueMax={68} />
+          <Gauge width={150} height={150} value={uniqueGoalsCompleted} valueMax={51} />
           <Typography sx={{ textAlign: "center", marginTop: 1 }}>
             Total Goals Attempted
           </Typography>

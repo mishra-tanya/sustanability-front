@@ -75,6 +75,8 @@ const Dash = ({ classId }: DashProps) => {
   }
 
   const res = classResults.total_score;
+  // console.log(classResults);
+  // console.log(res);
   const uniqueTestsGiven = new Set(classResults.results.map((result) => result.test_id)).size;
   const uniqueGoalsCompleted = new Set(classResults.results.map((result) => result.goal_id)).size;
   const handleButtonClick = (class_id: string, goal_id: string, test_id: string) => {
@@ -128,7 +130,7 @@ const Dash = ({ classId }: DashProps) => {
       sortable: false,
     },
   ];
-  const percentage = (res ?? 0) / 1700 * 100;
+  const percentage = (res ?? 0) / 510 * 100;
 
   return (
     <div>

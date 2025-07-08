@@ -40,7 +40,7 @@ export const generateGoalCertificatePDF = async (data: GoalCertificateData) => {
     doc.addImage(backgroundData, 'JPEG', 0, 0, pageWidth, pageHeight);
 
     // SDG goal icon
-    doc.addImage(goalImageData, 'JPEG', 87, 156, 41, 36);
+    doc.addImage(goalImageData, 'JPEG', 98, 165, 33, 30);
 
     // Text content
     doc.setFont('times', 'italic');
@@ -50,10 +50,9 @@ export const generateGoalCertificatePDF = async (data: GoalCertificateData) => {
     doc.setFont('times', 'normal');
     doc.setFontSize(16);
     doc.text(
-      `from ${userSchool}, Class group ${classId} has successfully completed the Sustainability Olympiad assessment series for
-       ${sdgtitle} demonstrating exceptional 
-       understanding of global sustainability challenges and solutions
-`,
+      `from ${userSchool}, Class group ${classId} has successfully completed the Sustainability Olympiad assessment series
+       for ${sdgtitle} 
+       demonstrating exceptional understanding of global sustainability challenges and solutions`,
       145,
       124,
       { align: 'center' }
@@ -61,14 +60,14 @@ export const generateGoalCertificatePDF = async (data: GoalCertificateData) => {
 
     const maxTextWidth = 250;
     const wrappedText = doc.splitTextToSize(username + " " + sdglines, maxTextWidth);
-    doc.text(wrappedText, 148, 143, { align: 'center' });
+    doc.text(wrappedText, 148, 145, { align: 'center' });
 
     // QR Code bottom-left
     doc.setFont('times', 'italic');
     doc.setFontSize(12);
     doc.addImage(qrCodeData, "PNG", 20, 20, 25, 25);
 
-    doc.text(`"${selectedQuote}"`, pageWidth / 2, 155, { align: 'center', maxWidth: 280 });
+    doc.text(`"${selectedQuote}"`, pageWidth / 2, 160, { align: 'center', maxWidth: 280 });
 
     // Footer info
     doc.text(`Date of Certification: ${date}`, 20, 13);
@@ -88,7 +87,7 @@ export const generateGoalCertificatePDF = async (data: GoalCertificateData) => {
 
     // Load goal image icon on canvas
     const goalImg = await loadImageAsHTMLImage(goalImage);
-    ctx.drawImage(goalImg, 87 * (canvas.width / pageWidth), 156 * (canvas.height / pageHeight), 41 * (canvas.width / pageWidth), 36 * (canvas.height / pageHeight));
+    ctx.drawImage(goalImg, 99 * (canvas.width / pageWidth), 165 * (canvas.height / pageHeight), 33 * (canvas.width / pageWidth), 30 * (canvas.height / pageHeight));
 
     // Draw text on canvas - You can use similar font styles
     ctx.fillStyle = 'black';
@@ -99,14 +98,13 @@ export const generateGoalCertificatePDF = async (data: GoalCertificateData) => {
     ctx.font = 'normal 16px Times New Roman';
     // Wrap text manually on canvas for sdglines + other text
     wrapTextOnCanvas(ctx,
-      `from ${userSchool}, Class group ${classId} has successfully completed the Sustainability Olympiad assessment series for
-      ${sdgtitle} demonstrating exceptional understanding of global sustainability challenges and solutions`,
+      `from ${userSchool}, Class group ${classId} has successfully completed the Sustainability Olympiad assessment series for ${sdgtitle} demonstrating exceptional understanding of global sustainability challenges and solutions`,
       canvas.width / 2,
       124 * (canvas.height / pageHeight),
       600,
       20);
 
-    wrapTextOnCanvas(ctx, username + " " + sdglines, canvas.width / 2, 143 * (canvas.height / pageHeight), 600, 20);
+    wrapTextOnCanvas(ctx, username + " " + sdglines, canvas.width / 2, 145 * (canvas.height / pageHeight), 600, 20);
 
     // Draw QR code on canvas
     const qrImg = await loadImageAsHTMLImage(qrCodeData);
@@ -117,6 +115,8 @@ export const generateGoalCertificatePDF = async (data: GoalCertificateData) => {
     // ctx.fillText(`"${selectedQuote}"`, canvas.width / 2, 160 * (canvas.height / pageHeight));
 
     // Footer text
+    ctx.font = 'normal 12px Times New Roman';
+
     ctx.textAlign = 'left';
     ctx.fillText(`Date of Certification: ${date}`, 20 * (canvas.width / pageWidth), 13 * (canvas.height / pageHeight));
 

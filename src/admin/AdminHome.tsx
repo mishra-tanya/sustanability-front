@@ -5,7 +5,7 @@ import LayersIcon from '@mui/icons-material/Layers';
 import { AppProvider, Navigation, Router } from '@toolpad/core/AppProvider';
 import { DashboardLayout } from '@toolpad/core/DashboardLayout';
 import { PageContainer } from '@toolpad/core/PageContainer';
-import {   Analytics, BarChart, Email, MessageOutlined, Payment, Person, Quiz, School, SchoolOutlined, Task } from '@mui/icons-material';
+import {   Analytics, BarChart, Email, MessageOutlined, Payment, Person, Quiz, School, SchoolOutlined, SchoolRounded, Task } from '@mui/icons-material';
 import { Link } from 'react-router-dom';
 import { Typography } from '@mui/material';
 import Overview from './Overview';
@@ -21,6 +21,7 @@ import TestsGivenGraph from './Dashboard/TestData';
 import TopPerformersTable from './Dashboard/TopPerformer';
 import EmailSender from './email/EmailSend';
 import PaymentsTable from './Payments';
+import AdminAchievers from './AchieverSection';
 
 const NAVIGATION: Navigation = [
   {
@@ -68,6 +69,12 @@ const NAVIGATION: Navigation = [
     title: 'Track Registration ',
     icon: <BarChart />,
   },
+  {
+    segment: 'achiever',
+    title: 'Add Achievers ',
+    icon: <SchoolRounded />,
+  }
+  ,
   {
     kind: 'divider',
   },
@@ -257,6 +264,14 @@ export default function DashboardLayoutBasic(props: any) {
              </>
             )
           }
+           {
+            selectedPage === 'achiever' && (
+             <>
+             <AdminAchievers/>
+             </>
+            )
+          }
+          
           
         
         </PageContainer>

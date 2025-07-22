@@ -154,26 +154,26 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({ onLeaderboardClick, class
         });
 
       } else if (type === 'class') {
-        // if (!isClassCertificateEligible) {
-        //   setModalMessage('Complete all goals in this class to unlock your Class Completion Certificate.');
-        //   setOpenModal(true);
-        //   return;
-        // }
+        if (!isClassCertificateEligible) {
+          setModalMessage('Complete all goals in this class to unlock your Class Completion Certificate.');
+          setOpenModal(true);
+          return;
+        }
 
-        // const paymentCheck = await api.get('/check-class-payment', {
-        //   params: { classId },
-        //   withCredentials: true,
-        // });
+        const paymentCheck = await api.get('/check-class-payment', {
+          params: { classId },
+          withCredentials: true,
+        });
 
-        // if (!paymentCheck.data.paid) {
-        //   navigate('/payment-details', {
-        //     state: {
-        //       message: 'Certificate For Class ' + classId,
-        //       amount: 100,
-        //     },
-        //   });
-        //   return;
-        // }
+        if (!paymentCheck.data.paid) {
+          navigate('/payment-details', {
+            state: {
+              message: 'Certificate For Class ' + classId,
+              amount: 100,
+            },
+          });
+          return;
+        }
 
         const response = await api.post('/generate-certificate', {
           type: 'Completion',

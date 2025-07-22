@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomBlinkingCursor from './Home/BlinkingEarthAnimation';
 import VerticalLinearStepper from './Home/Stepper';
 import AchieversGallery from './AcheiversGallery';
+import Seo from '../seo/Seo';
 interface FormData {
   name: string;
   contact_no: string;
@@ -166,6 +167,12 @@ function Home() {
   return (
     <div>
       <Navbar />
+       <Seo
+        title="Home - Sustainability Olympiad"
+        description="Learn about the Sustainability Olympiad and how we promote awareness of the 17 UN SDGs among students."
+        canonicalUrl="https://sustainabilityolympiad.org/"
+        image="https://www.sustainabilityolympiad.org/im.jpg"
+      />
       <motion.div
         initial={{ scale: 50 }} animate={{ scale: 1 }}
       >

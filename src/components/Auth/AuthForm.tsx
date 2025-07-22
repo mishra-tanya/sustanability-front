@@ -5,6 +5,7 @@ import RegistrationForm from './Registration';
 import { Container, Card, CardContent, Typography, Link } from '@mui/material';
 import { Link as RouterLink } from 'react-router-dom';
 import { TypeAnimation } from 'react-type-animation';
+import { Helmet } from 'react-helmet-async';
 
 interface FormState {
   name: string;
@@ -36,6 +37,11 @@ const AuthForm: React.FC = () => {
     <>
       <Navbar />
       <br />
+      <Helmet>
+  <title>Register - Sustainability Olympiad</title>
+  <meta name="description" content="Register to take part in the Sustainability Olympiad and become a champion of the 17 SDGs." />
+  <meta name="keywords" content="Sustainability Olympiad, Sustainability Test, SDG, UN Goals, IndiaESG, sustainability education, students, grade 4-10, environment, social responsibility, sustainable future, climate change, free olympiad, SDG quiz, sustainability quiz for students" />
+</Helmet>
       <div className="center-container" style={ {'display': 'flex',
   'justifyContent': 'center',
  'alignItems': 'center',

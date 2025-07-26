@@ -8,6 +8,7 @@ import SearchData from "./Search";
 interface User {
   name: string;
   email: string;
+  school: string;
 }
 
 interface CertificateData {
@@ -83,6 +84,12 @@ const Certifications: React.FC = () => {
     {
       name: "User Name",
       selector: (row: CertificateData) => row.user.name,
+      sortable: true,
+      wrap:true
+    },
+    {
+      name: "User School",
+      selector: (row: CertificateData) => row.user.school,
       sortable: true,
       wrap:true
     },

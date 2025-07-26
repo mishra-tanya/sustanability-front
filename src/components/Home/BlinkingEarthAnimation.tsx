@@ -1,40 +1,47 @@
 import { Box, Typography } from '@mui/material';
 import { TypeAnimation } from 'react-type-animation';
+import { useMemo } from 'react';
 
 const CustomBlinkingCursor = () => {
+  // Use useMemo to avoid unnecessary re-renders of sequence array
+  const animationSequence = useMemo(() => [
+    'Welcome to Sustainability Olympiad',
+    2000,
+  ], []);
+
   return (
-    <Box>
+    <Box component="section" aria-label="Hero Section">
       <Typography
-        variant="h2"
+        component="h2"
         sx={{
-          display: 'inline',   
+          fontSize: { xs: '2rem', md: '3rem' },
           fontWeight: 'bold',
-          whiteSpace: 'normal',  
+          display: 'inline',
+          whiteSpace: 'normal',
         }}
       >
         <TypeAnimation
-          sequence={[
-            'Welcome to Sustainability Olympiad',
-            2000,
-          ]}
+          sequence={animationSequence}
           speed={50}
           repeat={Infinity}
+          wrapper="span"
           style={{ display: 'inline-block', fontWeight: 'bold' }}
           cursor={false}
         />
         <Box
           component="span"
+          aria-hidden="true"
           sx={{
-            fontSize: '3rem',
+            fontSize: { xs: '2rem', md: '3rem' },
             animation: 'blink 1s infinite',
-            marginLeft: 0,
-            marginTop: 0,  
+            ml: 0.5,
           }}
         >
           🌍
         </Box>
       </Typography>
 
+      {/* Move keyframes to global CSS or define once */}
       <style>
         {`
           @keyframes blink {

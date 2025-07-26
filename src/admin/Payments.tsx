@@ -18,6 +18,7 @@ import api from "../services/axios";
 interface User{
     name:string;
     email:string;
+    school:string;
 }
 interface Payment {
   id: number;
@@ -81,6 +82,7 @@ const PaymentsTable: React.FC = () => {
             <TableRow >
               <TableCell>S No.</TableCell>
               <TableCell>User Name</TableCell>
+              <TableCell>User School</TableCell>
               <TableCell>User Email</TableCell>
               <TableCell>Payment Status</TableCell>
               <TableCell>Payment For</TableCell>
@@ -95,6 +97,7 @@ const PaymentsTable: React.FC = () => {
               <TableRow key={payment.id}>
                 <TableCell>{index+1}</TableCell>
                 <TableCell>{payment.user.name}</TableCell>
+                <TableCell>{payment.user.school}</TableCell>
                 <TableCell>{payment.user.email}</TableCell>
                  <TableCell>
                   <Chip

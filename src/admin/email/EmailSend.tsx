@@ -4,6 +4,8 @@ import {
   MenuItem, OutlinedInput, Select, Stack, TextField, Typography, useTheme, useMediaQuery, Checkbox, FormControlLabel
 } from '@mui/material';
 import api from '../../services/axios';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 interface User {
   name: string;
@@ -243,7 +245,7 @@ const EmailSender: React.FC = () => {
             onChange={(e) => setSubject(e.target.value)}
           />
 
-          <TextField
+          {/* <TextField
             label="Message"
             fullWidth
             margin="normal"
@@ -251,7 +253,27 @@ const EmailSender: React.FC = () => {
             rows={4}
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-          />
+          /> */}
+
+        <Typography fontWeight={600} mt={2} mb={1}>Message</Typography>
+        <ReactQuill
+          theme="snow"
+          value={message}
+          onChange={setMessage}
+          style={{ height: '200px', marginBottom: '50px' }}
+           modules={{
+            toolbar: [
+              [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+              ['bold', 'italic', 'underline','strike', 'blockquote'],
+              [{ 'color': [] }, { 'background': [] }],
+              [{ 'script': 'sub' }, { 'script': 'super' }],
+              [{ 'align': [] }],
+              ['link'],
+              [{ 'list': 'ordered' }, { 'list': 'bullet' }],
+              ['clean']
+            ]
+          }}
+        />
 
           <Button
             variant="contained"

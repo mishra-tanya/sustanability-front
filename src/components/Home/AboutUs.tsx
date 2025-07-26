@@ -1,11 +1,18 @@
 import { Box, Typography, Container } from '@mui/material';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import Seo from '../../seo/Seo';
 
 const AboutUs = () => {
     return (
         <>
             <Navbar />
+             <Seo
+                title="About - Sustainability Olympiad"
+                description="Learn about the Sustainability Olympiad and how we promote awareness of the 17 UN SDGs among students."
+                canonicalUrl="https://sustainabilityolympiad.org/about"
+                image="https://www.sustainabilityolympiad.org/im.jpg"
+              />
             <Container maxWidth="md" sx={{ py: 8, maxWidth: 900 }}>
                 {/* Main Title */}
                 <Typography

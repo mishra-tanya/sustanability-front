@@ -10,6 +10,7 @@ import { PasswordField } from '../common/PasswordField';
 import LoadingSpinner from '../common/LoadingSpinner';
 import ForgotPasswordModal from './ForgotPasswordModal';
 import Footer from '../Footer';
+import Seo from '../../seo/Seo';
 
 const Login: React.FC = () => {
     const [email, setEmail] = useState("");
@@ -62,6 +63,12 @@ const Login: React.FC = () => {
     return (
         <>
             <Navbar />
+            <Seo
+                    title="Login - Sustainability Olympiad"
+                    description="Learn about the Sustainability Olympiad and how we promote awareness of the 17 UN SDGs among students."
+                    canonicalUrl="https://sustainabilityolympiad.org/login"
+                    image="https://www.sustainabilityolympiad.org/im.jpg"              
+                  />
             <Container maxWidth="xs" sx={{ mb: 15 ,mt:2, pb: 3,pt:3, bgcolor: "#e3f2fd" }}>
                 <Card variant="outlined"  sx={{ width: '100%', p: 3 }}>
                     <CardContent>

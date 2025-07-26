@@ -1,11 +1,18 @@
 import { Typography, Container } from '@mui/material';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import Seo from '../../seo/Seo';
 
 const RefundPolicy = () => {
   return (
     <>
       <Navbar />
+      <Seo
+        title="Refund Policy - Sustainability Olympiad"
+        description="Learn about the Sustainability Olympiad and how we promote awareness of the 17 UN SDGs among students."
+        canonicalUrl="https://sustainabilityolympiad.org/refund-policy"
+        image="https://www.sustainabilityolympiad.org/im.jpg"              
+      />
       <Container maxWidth="md" sx={{ py: 10, maxWidth: 900 }}>
         <Typography
           variant="h3"

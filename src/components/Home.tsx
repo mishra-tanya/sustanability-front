@@ -22,6 +22,7 @@ import { useNavigate } from 'react-router-dom';
 import CustomBlinkingCursor from './Home/BlinkingEarthAnimation';
 import VerticalLinearStepper from './Home/Stepper';
 import AchieversGallery from './AcheiversGallery';
+import Seo from '../seo/Seo';
 interface FormData {
   name: string;
   contact_no: string;
@@ -57,15 +58,6 @@ const HeroContent = styled('div')(({ theme }) => ({
   [theme.breakpoints.up('md')]: {
     paddingRight: '40px',
     textAlign: 'left',
-  },
-}));
-
-const HeroImage = styled('img')(() => ({
-  width: '100%',
-  maxWidth: '500px',
-  transition: 'transform 0.3s ease',
-  ':hover': {
-    transform: 'scale(1.05)',
   },
 }));
 
@@ -166,46 +158,100 @@ function Home() {
   return (
     <div>
       <Navbar />
+      <Seo
+        title="Sustainability Olympiad"
+        description="Learn about the Sustainability Olympiad and how we promote awareness of the 17 UN SDGs among students."
+        canonicalUrl="https://sustainabilityolympiad.org/"
+        image="https://www.sustainabilityolympiad.org/im.jpg"
+      />
       <motion.div
-        initial={{ scale: 50 }} animate={{ scale: 1 }}
+        initial={{ opacity: 0, scale: 1.1 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 0.6, ease: 'easeOut' }}
       >
-        <HeroSection>
-          <HeroContent  >
-
+        <HeroSection style={{ display: 'flex', flexDirection: isSmallScreen ? 'column' : 'row', alignItems: 'center' }}>
+          <HeroContent style={{ flex: 1, padding: '1rem' }}>
             <Typography
-              variant={isSmallScreen ? 'h3' : 'h2'}
-              style={{ color: '#2e3b55', fontWeight: '700' }}
+              variant={isSmallScreen ? 'h4' : 'h2'}
+              style={{ color: '#2e3b55', fontWeight: 700 }}
             >
               <CustomBlinkingCursor />
             </Typography>
-            <br />
-            <Typography variant="body1" style={{ color: '#5f6368',textAlign: 'justify' , lineHeight: '1.8' }}>
-              Empowering Young Minds for a Sustainable Future
-              Are you ready to become a Sustainability Champion? Join thousands of students
-              across the world in an exciting journey to understand the United Nation&#39;s Sustainable
-              Development Goals (SDGs) and how you can make a difference in the world!
-            </Typography>
-            <br />
-            <Button variant="outlined" size="large" color='primary' onClick={handleStart} >Start Now</Button>
-          </HeroContent>
-          <HeroImage src="im.jpg" alt="Welcome" className="rotating-image" />
 
+            <Typography
+              variant="body1"
+              style={{
+                color: '#5f6368',
+                textAlign: 'justify',
+                lineHeight: 1.8,
+                margin: '1rem 0',
+                minHeight: '120px', // prevents layout shift
+              }}
+            >
+              Empowering Young Minds for a Sustainable Future.
+              Are you ready to become a Sustainability Champion? Join thousands of students
+              across the world in an exciting journey to understand the United Nations'
+              Sustainable Development Goals (SDGs) and how you can make a difference!
+            </Typography>
+
+            <Button
+              variant="outlined"
+              size="large"
+              color="primary"
+              onClick={handleStart}
+              style={{ minWidth: '160px', minHeight: '48px' }} // avoids button shift
+            >
+              Start Now
+            </Button>
+          </HeroContent>
+
+          <div style={{ flex: 1, textAlign: 'center', padding: '1rem' }}>
+            <img
+              src="im.jpg"
+              width="600"
+              height="400"
+              style={{
+                maxWidth: '100%',
+                height: 'auto',
+                display: 'block',
+                margin: '0 auto',
+              }}
+              alt="Welcome"
+            />
+          </div>
         </HeroSection>
       </motion.div>
 
-      <Section sx={{   py: 8 }}>
-          <SectionTitle
-            variant="h3"
-            sx={{
-              fontSize: { xs: '32px', md: '48px' },
-              textAlign: 'center'
-            }}
-          >
-            Acheivers Gallery
-          </SectionTitle>
 
-<AchieversGallery/>
-        </Section>
+      <Section
+  sx={{
+    py: { xs: 6, md: 8 },
+    px: { xs: 2, md: 4 },
+    backgroundColor: '#f9f9f9'
+  }}
+>
+  <SectionTitle
+    variant="h3"
+    sx={{
+      fontSize: { xs: '28px', sm: '36px', md: '48px' },
+      fontWeight: 700,
+      textAlign: 'center',
+      mb: { xs: 4, md: 3 },
+      color: '#2e3b55',
+    }}
+  >
+    Achievers Gallery
+  </SectionTitle>
+
+  <Box
+    sx={{
+      minHeight: '300px', 
+    }}
+  >
+    <AchieversGallery />
+  </Box>
+</Section>
+
 
       {/* about  */}
       <motion.div
@@ -214,7 +260,7 @@ function Home() {
         transition={{ duration: 1, ease: 'easeOut' }}
         viewport={{ once: true, amount: 0.5 }}
       >
-        <Section sx={{ backgroundColor: "#002D62",  py: 8 }}>
+        <Section sx={{ backgroundColor: "#002D62", py: 8 }}>
           <SectionTitle
             variant="h3"
             sx={{
@@ -256,13 +302,13 @@ function Home() {
       </motion.div>
 
 
- <motion.div
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
         viewport={{ once: true, amount: 0.5 }}
       >
-        <Section sx={{ backgroundColor: "white",  py: 8 }}>
+        <Section sx={{ backgroundColor: "white", py: 8 }}>
           <SectionTitle
             variant="h3"
             sx={{
@@ -272,33 +318,33 @@ function Home() {
               textAlign: 'center'
             }}
           >
-           What is the Sustainability Olympiad?
+            What is the Sustainability Olympiad?
           </SectionTitle>
 
-    
-            <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
-              <Typography variant="h6" sx={{ color: 'grey',  mb: 1 }}>
-                The Sustainability Olympiad is an innovative <b> FREE</b> educational <br/>
-                initiative by <b>IndiaESG.org </b>
-                <br/>designed to inspire students from 
-                grades 4 to 10 to explore, understand, and engage with global 
-                sustainability challenges through fun, interactive assessments
-                 aligned with the 17 UN Sustainable Development Goals.
-              </Typography>
-             
-            </Box>
+
+          <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+            <Typography variant="h6" sx={{ color: 'grey', mb: 1 }}>
+              The Sustainability Olympiad is an innovative <b> FREE</b> educational <br />
+              initiative by <b>IndiaESG.org </b>
+              <br />designed to inspire students from
+              grades 4 to 10 to explore, understand, and engage with global
+              sustainability challenges through fun, interactive assessments
+              aligned with the 17 UN Sustainable Development Goals.
+            </Typography>
+
+          </Box>
 
         </Section>
       </motion.div>
 
-      
-<motion.div
+
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
         viewport={{ once: true, amount: 0.5 }}
       >
-        <Section sx={{ backgroundColor: "#f2f6fc",  py: 8 }}>
+        <Section sx={{ backgroundColor: "#f2f6fc", py: 8 }}>
           <SectionTitle
             variant="h3"
             sx={{
@@ -306,28 +352,28 @@ function Home() {
               color: 'black',
               mb: 4,
               textAlign: 'center',
-              textDecoration:'underline'
+              textDecoration: 'underline'
             }}
           >
-           How It Works
+            How It Works
 
           </SectionTitle>
 
-    
-           <VerticalLinearStepper/>
-            
+
+          <VerticalLinearStepper />
+
         </Section>
       </motion.div>
 
 
 
-<motion.div
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
         viewport={{ once: true, amount: 0.5 }}
       >
-        <Section sx={{ backgroundColor: "#fff",  py: 8 }}>
+        <Section sx={{ backgroundColor: "#fff", py: 8 }}>
           <SectionTitle
             variant="h3"
             sx={{
@@ -337,31 +383,32 @@ function Home() {
               textAlign: 'center'
             }}
           >
-           Why Participate?
+            Why Participate?
           </SectionTitle>
 
-    
-            <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
-              <Typography variant="h6" sx={{ color: 'grey',  mb: 1 }}>
-                <li>Learn about critical global challenges and solutions</li>
-                <li>Earn certificates for each completed SDG </li>
-                <li>Share your achievements with friends and family</li>
-                <li>Apply sustainability concepts in your academics and daily life</li>
-                <li>Join a community of young change-makers</li>
-              </Typography>
-             
-            </Box>
-            
+
+          <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+            <Typography variant="h6" sx={{ color: 'grey', mb: 1 }}>
+              <li>Learn about critical global challenges and solutions</li>
+              <li>Earn certificates for each completed SDG </li>
+              <li>Share your achievements with friends and family</li>
+              <li>Apply sustainability concepts in your academics and daily life</li>
+              <li>Join a community of young change-makers</li>
+              <li> Prepare for exams like the TERI Green Olympiad and other sustainability-based competitions with focused learning.</li>
+            </Typography>
+
+          </Box>
+
         </Section>
       </motion.div>
 
-<motion.div
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
         viewport={{ once: true, amount: 0.5 }}
       >
-        <Section sx={{ backgroundColor: "#f2f6fc",  py: 8 }}>
+        <Section sx={{ backgroundColor: "#f2f6fc", py: 8 }}>
           <SectionTitle
             variant="h3"
             sx={{
@@ -369,39 +416,39 @@ function Home() {
               color: 'black',
               mb: 4,
               textAlign: 'center',
-              textDecoration:'underline'
+              textDecoration: 'underline'
             }}
           >
-         What Makes Us Different?
+            What Makes Us Different?
 
 
           </SectionTitle>
 
-      <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
-              <Typography variant="h6" sx={{ color: 'grey',textAlign:'justify',  mb: 1 }}>
-                <ul>
-                  <li> <b>Comprehensive Coverage: </b>Tests across all 17 UN Sustainable Development Goals</li>
+          <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+            <Typography variant="h6" sx={{ color: 'grey', textAlign: 'justify', mb: 1 }}>
+              <ul>
+                <li> <b>Comprehensive Coverage: </b>Tests across all 17 UN Sustainable Development Goals</li>
                 <li><b>Age-Appropriate Content:</b> Tailored assessments for grades 4 through 10</li>
                 <li><b>Application-Focused: </b>Emphasis on practical understanding and real-world relevance</li>
                 <li><b>Recognition System: </b>Certificates for each completed SDG to track and celebrate progress</li>
                 <li><b>Accessibility:</b> Digital platform accessible to schools across India</li>
-              
-                </ul>
-              </Typography>
-             
-            </Box>
-            
+
+              </ul>
+            </Typography>
+
+          </Box>
+
         </Section>
       </motion.div>
 
 
- <motion.div
+      <motion.div
         initial={{ opacity: 0, y: 50 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, ease: 'easeOut' }}
         viewport={{ once: true, amount: 0.5 }}
       >
-        <Section sx={{ backgroundColor: "white",  py: 8 }}>
+        <Section sx={{ backgroundColor: "white", py: 8 }}>
           <SectionTitle
             variant="h3"
             sx={{
@@ -411,32 +458,32 @@ function Home() {
               textAlign: 'center'
             }}
           >
-           About IndiaESG.org
+            About IndiaESG.org
 
           </SectionTitle>
 
-    
-            <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
-              <Typography variant="h6" sx={{ color: 'grey',  mb: 1 }}>
-              IndiaESG.org is a not-for-profit organization<br/> dedicated to 
-              advancing sustainability awareness and action across India. <br/>
-              Through educational initiatives, community engagement, and 
-              resource development.<br/><br/> We work to make <br/>Environmental, Social,
-               and Governance (ESG) principles understood and implemented
-                by organizations, communities, and individuals throughout
-                 the country.<br/><br/>
+
+          <Box sx={{ maxWidth: 800, mx: 'auto', mb: 5, px: 2 }}>
+            <Typography variant="h6" sx={{ color: 'grey', mb: 1 }}>
+              IndiaESG.org is a not-for-profit organization<br /> dedicated to
+              advancing sustainability awareness and action across India. <br />
+              Through educational initiatives, community engagement, and
+              resource development.<br /><br /> We work to make <br />Environmental, Social,
+              and Governance (ESG) principles understood and implemented
+              by organizations, communities, and individuals throughout
+              the country.<br /><br />
               The Sustainability Olympiad represents our flagship
               educational initiative, embodying our belief that meaningful
-               change begins with education and awareness among the youngest
-                members of our society.
+              change begins with education and awareness among the youngest
+              members of our society.
 
-              </Typography>
-             
-            </Box>
+            </Typography>
+
+          </Box>
 
         </Section>
       </motion.div>
-     
+
       <Box sx={{ backgroundColor: "#002D62", py: 8 }}>
         <Container maxWidth="md">
           <Typography
@@ -445,7 +492,7 @@ function Home() {
             gutterBottom
             sx={{
               fontWeight: 'bold',
-               color: 'white',
+              color: 'white',
               mb: 6,
             }}
           >

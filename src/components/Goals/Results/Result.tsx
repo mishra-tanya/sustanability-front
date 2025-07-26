@@ -119,7 +119,7 @@ const Results: React.FC = () => {
           {/* <Gauge width={100} height={100} value= {/> %}  /> */}
 
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <Card sx={{ p: 6, pl: 6, width: "50%" }}>
+            <Card sx={{ p: 6, pl: 6, width: {sm:'100%',md:'50%'} }}>
               <CardContent >
                 <Box sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                   <Gauge width={180} height={180} value={resultData.score * 10} valueMin={0} valueMax={100} />

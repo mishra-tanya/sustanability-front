@@ -8,6 +8,7 @@ import api from "../../services/axios";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import CancelOutlinedIcon from "@mui/icons-material/CancelOutlined";
 import { ASSET_BASE_URL } from "../../services/config";
+import Seo from "../../seo/Seo";
 
 const Verification = () => {
     const { certificateId: paramCertificateId } = useParams();  
@@ -58,7 +59,12 @@ const Verification = () => {
     return (
         <div>
             <Navbar />
-
+        <Seo
+                title="Verify Certificate - Sustainability Olympiad"
+                description="Learn about the Sustainability Olympiad and how we promote awareness of the 17 UN SDGs among students."
+                canonicalUrl="https://sustainabilityolympiad.org/verification"
+                image="https://www.sustainabilityolympiad.org/im.jpg"              
+              />
             <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", mt: 6 }}>
                 <TypeAnimation
                     sequence={[

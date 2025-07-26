@@ -131,7 +131,7 @@ export default function AchieversGallery() {
             <Card
               sx={{
                 flex: 1,
-                width: { xs: '100%', sm: 300, md: 350 },
+                width: { xs: 300, sm: 300, md: 350 },
                 height: 320,
                 p: 3,
                 textAlign: 'center',
@@ -229,7 +229,7 @@ export default function AchieversGallery() {
             <Card
               sx={{
                 flex: 1,
-                width: { xs: '100%', sm: 300, md: 350 },
+                width: { xs: 300, sm: 300, md: 350 },
                 height: 320,
                 p: 3,
                 textAlign: 'center',

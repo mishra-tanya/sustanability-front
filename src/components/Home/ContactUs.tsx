@@ -10,6 +10,7 @@ import {
 import api from '../../services/axios';
 import Navbar from '../Navbar';
 import Footer from '../Footer';
+import Seo from '../../seo/Seo';
 
 const ContactUs = () => {
     const [formData, setFormData] = useState({
@@ -55,6 +56,12 @@ const ContactUs = () => {
     return (
         <>
             <Navbar />
+            <Seo
+                title="Contact Us - Sustainability Olympiad"
+                description="Learn about the Sustainability Olympiad and how we promote awareness of the 17 UN SDGs among students."
+                canonicalUrl="https://sustainabilityolympiad.org/contact"
+                image="https://www.sustainabilityolympiad.org/im.jpg"
+              />
             <Box maxWidth="lg" mx="auto" px={2} py={5}>
                 <Typography
                     variant="h3"
